@@ -59,10 +59,8 @@ return new class extends Migration {
 			$table->timestamps();
 			// Foreign Keys
 			$table->foreign('idCoQuan')->references('id')->on('coquan');
-			$table->foreign('idLoaiCongVan')->references('id')->on('loaicongvan');
 			$table->foreign('nguoi_tao')->references('id')->on('users');
 			$table->foreign('nguoi_xu_ly')->references('id')->on('users');
-			$table->foreign('nguoi_phe_duyet')->references('id')->on('users');
 		});
 		// 
 	}
