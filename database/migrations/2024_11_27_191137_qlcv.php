@@ -31,7 +31,7 @@ return new class extends Migration {
 			$table->string('so_dien_thoai', 10);
 			$table->timestamps();
 			// Foreign Keys
-			$table->foreign('nguoi_quan_ly')->references('id')->on('users');
+			$table->foreign('nguoi_quan_ly')->references('id')->on('nguoidung');
 			$table->foreign('idCoQuan')->references('id')->on('coquan');
 		});
 		// Loại công văn
@@ -59,8 +59,8 @@ return new class extends Migration {
 			$table->timestamps();
 			// Foreign Keys
 			$table->foreign('idCoQuan')->references('id')->on('coquan');
-			$table->foreign('nguoi_tao')->references('id')->on('users');
-			$table->foreign('nguoi_xu_ly')->references('id')->on('users');
+			$table->foreign('nguoi_tao')->references('id')->on('nguoidung');
+			$table->foreign('nguoi_xu_ly')->references('id')->on('nguoidung');
 		});
 		// 
 	}

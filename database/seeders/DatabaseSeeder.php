@@ -17,27 +17,17 @@ class DatabaseSeeder extends Seeder
 	public function run(): void
 	{
 		// Tạo role
-		DB::table('role')->insert([
+		DB::table('phanquyen')->insert([
 			[
-				'name_role' => 'Quản Trị Viên',
-				'short_role' => 'admin',
-				'description' => 'Toàn quyền tương tác với hệ thống'
+				'ten_quyen' => 'Quản Trị Viên',
+				'ten_ghi_tat' => 'admin',
+				'mo_ta' => 'Toàn quyền tương tác với hệ thống'
 			],
 			[
-				'name_role' => 'Nhân viên',
-				'short_role' => 'mq2',
-				'description' => 'Thêm, sửa, xóa công văn'
+				'ten_quyen' => 'Nhân viên',
+				'ten_ghi_tat' => 'mq2',
+				'mo_ta' => 'Thêm, sửa, xóa công văn'
 			],
-			[
-				'name_role' => 'Nhân viên phê duyệt',
-				'short_role' => 'mq3',
-				'description' => 'Phê duyệt công văn'
-			],
-			[
-				'name_role' => 'Nhân viên phê duyệt, nhân viên',
-				'short_role' => 'mq4',
-				'description' => 'Thêm, sửa, xóa công văn, Phê duyệt công văn'
-			]
 		]);
 	}
 }

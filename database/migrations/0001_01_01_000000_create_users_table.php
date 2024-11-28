@@ -11,29 +11,23 @@ return new class extends Migration {
 	public function up(): void
 	{
 		// Tạo table role
-		Schema::create('role', function (Blueprint $table) {
+		Schema::create('phanquyen', function (Blueprint $table) {
 			$table->increments('id');
-			$table->string('name_role');
-			$table->string('short_role')->unique();
-			$table->string('description')->nullable();
+			$table->string('ten_quyen');
+			$table->string('ten_ghi_tat')->unique();
+			$table->string('mo_ta')->nullable();
 		});
 		// 
-		Schema::create('users', function (Blueprint $table) {
+		Schema::create('nguoidung', function (Blueprint $table) {
 			$table->bigIncrements('id');
-			$table->string('name');
+			$table->string('ho_ten');
 			$table->string('email')->unique();
-			$table->dateTime('email_verified_at')->nullable();
-			$table->string('password')->nullable();
-			$table->integer('id_role')->unsigned()->default(2);
-			// $table->string('provider')->nullable();
-			// $table->string('provider_id')->nullable();
-			// $table->string('provider_token')->nullable();
-			$table->string('avatar')->nullable();
-			$table->string('slug')->nullable()->unique();
+			$table->string('mat_khau')->nullable();
+			$table->integer('id_ma_quyen')->unsigned()->default(2);
 			$table->rememberToken();
 			$table->timestamps();
 			// Foreign Keys
-			$table->foreign('id_role')->references('id')->on('role');
+			$table->foreign('id_ma_quyen')->references('id')->on('phanquyen');
 		});
 		//
 		Schema::create('password_reset_tokens', function (Blueprint $table) {
