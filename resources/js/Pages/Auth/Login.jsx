@@ -87,6 +87,16 @@ export default function Login({ status, canResetPassword }) {
 					</PrimaryButton>
 				</div>
 			</form>
+			<div className='justify-center mt-2 items-center flex gap-2'> 
+				{/* muốn dùng class gap-2 phải khai báo flex(xếp khối) */}
+				Nếu bạn chưa có tài khoản?
+				<Link
+                        href={route('register')}
+                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                    >
+                        Đăng ký
+                    </Link>
+			</div>
 		</GuestLayout>
 	);
 }
