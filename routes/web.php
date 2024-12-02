@@ -3,6 +3,7 @@
 use App\Http\Controllers\CongVanController;
 use App\Http\Controllers\LoaiCongVanController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuanlyController;
 use Illuminate\Foundation\Application;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
@@ -22,8 +23,9 @@ Route::get('/', function () {
 	return redirect()->route('login');
 });
 
-// Công văn
+//duong dan
 Route::middleware(['auth'])->group(function () {
+	Route::get('/trang-chu', [QuanlyController::class,'trangChu'])->name('trang-chu');
 	Route::get('/loai-cong-van', [LoaiCongVanController::class, 'loaiCongVan'])->name('loai-cong-van');
 	Route::get('/them-cong-van', [CongVanController::class, 'themCongVan'])->name('them-cong-van');
 });

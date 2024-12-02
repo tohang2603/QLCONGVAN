@@ -6,15 +6,13 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\Inertia;
-
-class CongVanController extends Controller
+class QuanlyController extends Controller
 {
-
-	// Thêm công văn
-	public function themCongVan(Request $request): Response
+    public function trangChu(Request $request): Response
 	{
-		return Inertia::render('CongVan', [
+		return Inertia::render('TrangChu', [
 			'status' => session('status'),
 		]);
 	}
+    //
 }

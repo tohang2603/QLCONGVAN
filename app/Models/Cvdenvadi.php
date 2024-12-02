@@ -4,15 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Noinhan extends Model
+class Cvdenvadi extends Model
 {
-    //
-    protected $table = 'noinhan';
+    protected $table = 'cvdenvadi';
 
     protected $fillable = [
         'id',
         'id_cong_van',
+        'id_co_quan',
         'id_phong_ban',
+        'trang_thai'
     ];
 
     public function congvan()
@@ -24,5 +25,8 @@ class Noinhan extends Model
     {
         return $this->belongsTo(Phongban::class, 'id_phong_ban', 'id');
     }
-
+    public function coquan()
+    {
+        return $this->belongsTo(Coquan::class,'id_co_quan', 'id');
+    }
 }

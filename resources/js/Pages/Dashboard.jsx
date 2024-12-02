@@ -5,7 +5,7 @@ import { Head } from '@inertiajs/react';
 export default function Dashboard() {
 	return (
 		<AuthenticatedLayout
-			header={<h2 className='text-xl font-semibold leading-tight text-gray-800'>Quản lý</h2>}
+			header={<h2 className='text-xl font-semibold leading-tight text-gray-800'>Quản lý công văn</h2>}
 		>
 			<Head title='Dashboard' />
 
@@ -15,12 +15,24 @@ export default function Dashboard() {
 						<div className='p-6 text-gray-900'>You're logged in!</div>
 					</div> */}
 					<div>
-						<NavLink href={route('them-cong-van')} active={route().current('dashboard')}>
-							Thêm công văn
+						{/* <NavLink href={route('cong-van')} active={route().current('cong-van')}>
+							Công văn
 						</NavLink>
-						<NavLink href={route('loai-cong-van')} active={route().current('loai-cong-van')}>
-							Thêm công văn
+						<NavLink href={route('danh-sach-co-quan')} active={route().current('dashboard')}>
+							Danh sách cơ quan
 						</NavLink>
+						<NavLink href={route('danh-sach-phong-ban')} active={route().current('dashboard')}>
+							Danh sách phòng ban
+						</NavLink>
+						<NavLink href={route('danh-sach-nhan-vien')} active={route().current('dashboard')}>
+							Danh sách nhân viên
+						</NavLink>
+						<NavLink href={route('lich-su-chinh-sua')} active={route().current('dashboard')}>
+							Lịch sử chỉnh sửa
+						</NavLink>
+						<NavLink href={route('tim-kiem-nang-cao')} active={route().current('dashboard')}>
+							Tìm kiếm nâng cao
+						</NavLink> */}
 					</div>
 				</div>
 			</div>

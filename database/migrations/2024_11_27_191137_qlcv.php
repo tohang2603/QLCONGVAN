@@ -10,6 +10,13 @@ return new class extends Migration {
 	 */
 	public function up(): void
 	{
+		// Cơ quan
+		Schema::create("coquan", function (Blueprint $table) {
+			$table->bigIncrements("id");
+			$table->string('ten_co_quan', 255);
+			$table->string('dia_chi',255);
+			$table->string('so_dt',10);
+		});
 		// Phòng ban
 		Schema::create('phongban', function (Blueprint $table) {
 			$table->bigIncrements('id');
@@ -20,34 +27,25 @@ return new class extends Migration {
 			$table->string('so_dien_thoai', 10);
 			$table->timestamps();
 		});
-		// Loại công văn
-		Schema::create('loaicongvan', function (Blueprint $table) {
-			$table->increments('id');
-			$table->string('ten_loai_cong_van');
-			$table->string('mo_ta', 255);
-			$table->timestamps();
-		});
 		// Công văn
 		Schema::create('congvan', function (Blueprint $table) {
 			$table->bigIncrements('id');
-			$table->unsignedInteger('id_loai_cong_van')->nullable(); // to - send
+			$table->string('so_cong_van', 255);
 			$table->string('tieu_de', 255);
 			$table->string('mo_ta', 255);
-			$table->string('trang_thai', 255);
 			$table->unsignedBigInteger('nguoi_tao');
-			// $table->string('noi_nhan')->nullable();
-			// [1, 5, 7]
 			$table->string('file');
 			$table->timestamps();
 			// Foreign Keys
 			$table->foreign('nguoi_tao')->references('id')->on('nguoidung');
-			$table->foreign('id_loai_cong_van')->references('id')->on('loaicongvan');
 		});
 		// Nơi Nhận
-		Schema::create('noinhan', function (Blueprint $table) {
+		Schema::create('cvdenvadi', function (Blueprint $table) {
 			$table->bigIncrements('id');
 			$table->unsignedBigInteger('id_cong_van');
+			$table->unsignedBigInteger('id_co_quan')->nullable();
 			$table->unsignedBigInteger('id_phong_ban');
+			$table->string('trang_thai',5);
 			$table->timestamps();
 		});
 		// 
@@ -68,10 +66,10 @@ return new class extends Migration {
 	 */
 	public function down(): void
 	{
+		Schema::dropIfExists('coquan');
 		Schema::dropIfExists('phongban');
-		Schema::dropIfExists('loaicongvan');
 		Schema::dropIfExists('congvan');
-		Schema::dropIfExists('noi_nhan');
+		Schema::dropIfExists('cvdenvadi');
 		Schema::dropIfExists('lichsucongvan');
 	}
 };

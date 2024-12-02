@@ -10,10 +10,9 @@ class Congvan extends Model
 
 	protected $fillable = [
 		'id',
-		'id_loai_cong_van',
+		'so_cong_van',
 		'tieu_de',
 		'mo_ta',
-		'trang_thai',
 		'nguoi_tao',
 		'file',
 	];
@@ -26,15 +25,5 @@ class Congvan extends Model
 	public function nguoidung()
 	{
 		return $this->belongsTo(User::class, 'nguoi_tao', 'id');
-	}
-
-	/**
-	 * Get the LoaiCongVan that owns the Congvan
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function loaicongvan()
-	{
-		return $this->belongsTo(Loaicongvan::class, 'id_loai_cong_van', 'id');
 	}
 }
