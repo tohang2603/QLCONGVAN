@@ -3,6 +3,7 @@
 use App\Http\Controllers\CongVanController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuanlyController;
+use App\Models\Congvan;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -18,10 +19,12 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/trang-chu', [QuanlyController::class, 'trangChu'])->name('trang-chu');
 
 	// Thêm công văn
+	Route::post('/tao-cong-van',[CongVanController::class,'taoCongVan'])->name('tao-cong-van');
 	Route::get('/them-cong-van', [CongVanController::class, 'themCongVan'])->name('them-cong-van');
 });
 Route::get('/dashboard', function () {
-	return Inertia::render('Dashboard');
+	$dsCongVan = Congvan::all();
+	return Inertia::render('Dashboard', ['dscongvan' =>  $dsCongVan,]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 

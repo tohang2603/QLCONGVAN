@@ -35,7 +35,7 @@ return new class extends Migration {
 			$table->string('mo_ta', 255);
 			$table->unsignedBigInteger('nguoi_tao');
 			$table->string('file');
-			$table->string('slug', 255);
+			$table->string('slug', 255)->nullable()->unique();
 			$table->timestamps();
 			// Foreign Keys
 			$table->foreign('nguoi_tao')->references('id')->on('users');

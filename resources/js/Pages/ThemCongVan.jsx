@@ -3,14 +3,16 @@ import { Head } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
 
 export default function ThemCongVan() {
-	const { maCongVan, maPhongBan, post, progress } = useForm({
-		name: null,
-		avatar: null,
+	const { data, setData, post, progress, errors } = useForm({
+		socongvan:'',
+		tieude:'',
+		mota:'',
+		file: null,
 	});
 
 	function submit(e) {
 		e.preventDefault();
-		post('/users');
+		post('/tao-cong-van');
 	}
 	return (
 		<AuthenticatedLayout
@@ -26,14 +28,16 @@ export default function ThemCongVan() {
 					<div>Thêm Công Văn</div>
 					{/*  */}
 					<form onSubmit={submit}>
-						<input type='text' value={data.name} onChange={(e) => setData('name', e.target.value)} />
-						<input type='file' value={data.avatar} onChange={(e) => setData('avatar', e.target.files[0])} />
+						<input type='text' value={data.socongvan} onChange={(e) => setData('socongvan', e.target.value)} />
+						<input type='text' value={data.tieude} onChange={(e) => setData('tieude', e.target.value)} />
+						<input type='text' value={data.mota} onChange={(e) => setData('mota', e.target.value)} />
+						{/* <input type='file' value={data.file} onChange={(e) => setData('file', e.target.files[0])} />  */}
 						{progress && (
 							<progress value={progress.percentage} max='100'>
 								{progress.percentage}%
 							</progress>
 						)}
-						<button type='submit'>Submit</button>
+						<button type='submit'>Tải tệp lên</button>
 					</form>
 				</div>
 			</div>

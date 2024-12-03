@@ -1,8 +1,8 @@
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import NavLink from '@/Components/NavLink';
-import { Head } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 
-export default function Dashboard() {
+export default function Dashboard({dscongvan}) {
+	console.log(dscongvan)
 	return (
 		<AuthenticatedLayout
 			header={<h2 className='text-xl font-semibold leading-tight text-gray-800'>Quản lý công văn</h2>}
@@ -15,24 +15,9 @@ export default function Dashboard() {
 						<div className='p-6 text-gray-900'>You're logged in!</div>
 					</div> */}
 					<div>
-						{/* <NavLink href={route('cong-van')} active={route().current('cong-van')}>
-							Công văn
-						</NavLink>
-						<NavLink href={route('danh-sach-co-quan')} active={route().current('dashboard')}>
-							Danh sách cơ quan
-						</NavLink>
-						<NavLink href={route('danh-sach-phong-ban')} active={route().current('dashboard')}>
-							Danh sách phòng ban
-						</NavLink>
-						<NavLink href={route('danh-sach-nhan-vien')} active={route().current('dashboard')}>
-							Danh sách nhân viên
-						</NavLink>
-						<NavLink href={route('lich-su-chinh-sua')} active={route().current('dashboard')}>
-							Lịch sử chỉnh sửa
-						</NavLink>
-						<NavLink href={route('tim-kiem-nang-cao')} active={route().current('dashboard')}>
-							Tìm kiếm nâng cao
-						</NavLink> */}
+					<Link href={route('them-cong-van')}>
+					Thêm công văn
+					</Link>
 					</div>
 				</div>
 			</div>
