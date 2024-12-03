@@ -25,14 +25,16 @@ Route::get('/', function () {
 
 //duong dan
 Route::middleware(['auth'])->group(function () {
-	Route::get('/trang-chu', [QuanlyController::class,'trangChu'])->name('trang-chu');
-	Route::get('/loai-cong-van', [LoaiCongVanController::class, 'loaiCongVan'])->name('loai-cong-van');
-	Route::get('/them-cong-van', [CongVanController::class, 'themCongVan'])->name('them-cong-van');
-});
+    // Trang chủ
+    Route::get('/trang-chu', [QuanlyController::class, 'trangChu'])->name('trang-chu');
 
+    // Thêm công văn
+    Route::get('/them-cong-van', [CongVanController::class, 'themCongVan'])->name('them-cong-van');
+});
 Route::get('/dashboard', function () {
 	return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
+
 
 Route::middleware('auth')->group(function () {
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
