@@ -14,8 +14,8 @@ return new class extends Migration {
 		Schema::create("coquan", function (Blueprint $table) {
 			$table->bigIncrements("id");
 			$table->string('ten_co_quan', 255);
-			$table->string('dia_chi',255);
-			$table->string('so_dt',10);
+			$table->string('dia_chi', 255);
+			$table->string('so_dt', 10);
 		});
 		// Phòng ban
 		Schema::create('phongban', function (Blueprint $table) {
@@ -35,9 +35,9 @@ return new class extends Migration {
 			$table->string('mo_ta', 255);
 			$table->unsignedBigInteger('nguoi_tao');
 			$table->string('file');
-			$table->string('slug',255);
+			$table->string('slug', 255);
 			$table->timestamps();
-		// Foreign Keys
+			// Foreign Keys
 			$table->foreign('nguoi_tao')->references('id')->on('nguoidung');
 		});
 		// Nơi Nhận
@@ -46,7 +46,7 @@ return new class extends Migration {
 			$table->unsignedBigInteger('id_cong_van');
 			$table->unsignedBigInteger('id_co_quan')->nullable();
 			$table->unsignedBigInteger('id_phong_ban');
-			$table->string('trang_thai',5);
+			$table->string('trang_thai', 5);
 			$table->timestamps();
 		});
 		// 
@@ -69,8 +69,8 @@ return new class extends Migration {
 	{
 		Schema::dropIfExists('coquan');
 		Schema::dropIfExists('phongban');
-		Schema::dropIfExists('congvan');
 		Schema::dropIfExists('cvdenvadi');
 		Schema::dropIfExists('lichsucongvan');
+		Schema::dropIfExists('congvan');
 	}
 };

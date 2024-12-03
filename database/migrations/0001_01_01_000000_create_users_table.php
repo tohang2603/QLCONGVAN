@@ -23,7 +23,7 @@ return new class extends Migration {
 			$table->string('ho_ten');
 			$table->string('email')->unique();
 			$table->string('mat_khau')->nullable();
-			$table->integer('id_ma_quyen')->unsigned()->default(2);
+			$table->unsignedInteger('id_ma_quyen')->default(2);
 			$table->rememberToken();
 			$table->timestamps();
 			// Foreign Keys
@@ -51,8 +51,8 @@ return new class extends Migration {
 	 */
 	public function down(): void
 	{
-		Schema::dropIfExists('roles');
-		Schema::dropIfExists('users');
+		Schema::dropIfExists('nguoidung');
+		Schema::dropIfExists('phanquyen');
 		Schema::dropIfExists('password_reset_tokens');
 		Schema::dropIfExists('sessions');
 	}
