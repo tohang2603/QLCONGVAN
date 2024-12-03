@@ -38,7 +38,7 @@ return new class extends Migration {
 			$table->string('slug', 255);
 			$table->timestamps();
 			// Foreign Keys
-			$table->foreign('nguoi_tao')->references('id')->on('nguoidung');
+			$table->foreign('nguoi_tao')->references('id')->on('users');
 		});
 		// Nơi Nhận
 		Schema::create('cvdenvadi', function (Blueprint $table) {
@@ -58,10 +58,10 @@ return new class extends Migration {
 			$table->timestamps();
 			// Foreign Keys
 			$table->foreign('id_cong_van')->references('id')->on('congvan');
-			$table->foreign('id_nguoi_thao_tac')->references('id')->on('nguoidung');
+			$table->foreign('id_nguoi_thao_tac')->references('id')->on('users');
 		});
 	}
-	// Thùng rác
+
 	/**
 	 * Reverse the migrations.
 	 */
