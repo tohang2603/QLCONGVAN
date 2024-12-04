@@ -44,7 +44,7 @@ class CongVanController extends Controller
 		]);
 
 		$newSlug = $congvan->id . '-'. Str::of($congvan->tieu_de)->slug('-');
-		dd($newSlug);
+		// dd($newSlug);
 		$congvan->slug = $newSlug;
 		$congvan->save();
 

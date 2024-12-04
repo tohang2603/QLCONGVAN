@@ -23,7 +23,7 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/them-cong-van', [CongVanController::class, 'themCongVan'])->name('them-cong-van');
 });
 Route::get('/dashboard', function () {
-	$dsCongVan = Congvan::all();
+	$dsCongVan = Congvan::with('nguoidung')->get();
 	return Inertia::render('Dashboard', ['dscongvan' =>  $dsCongVan,]);
 })->middleware(['auth', 'verified'])->name('dashboard');
 
