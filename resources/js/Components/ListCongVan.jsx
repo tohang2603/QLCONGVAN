@@ -1,3 +1,4 @@
+import DialogDlt from '@/Components/DialogDlt';
 import ButtonIcon from './ButtonIcon';
 
 export default function ListCongVan({ className = '', cv, index }) {
@@ -24,10 +25,12 @@ export default function ListCongVan({ className = '', cv, index }) {
 				<ButtonIcon className='hover:bg-green-500'>
 					<ion-icon name='create-outline'></ion-icon>
 				</ButtonIcon>
-				<ButtonIcon className='hover:bg-red-500'>
-					<ion-icon name='trash-outline'></ion-icon>
+				<ButtonIcon onClick={()=>{document.getElementById(`btn_delete_${index}`).showModal()}} className='hover:bg-red-500 '>
+					<ion-icon name='trash-outline'></ion-icon>					
 				</ButtonIcon>
 			</div>
+			{/* Dialog Xoá*/}
+			<DialogDlt index={index} cv={cv} />
 		</div>
 	);
 }

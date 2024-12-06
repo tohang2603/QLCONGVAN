@@ -1,10 +1,9 @@
-import Button from '@/Components/Button';
+import ButtonLink from '@/Components/ButtonLink';
 import ListCongVan from '@/Components/ListCongVan';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link } from '@inertiajs/react';
 
 export default function Dashboard({ dscongvan }) {
-	// console.log(dscongvan);
 	return (
 		<AuthenticatedLayout
 			header={<h2 className='text-xl font-semibold leading-tight text-gray-800'>Quản lý công văn</h2>}
@@ -17,9 +16,9 @@ export default function Dashboard({ dscongvan }) {
 						<div className='p-6 text-gray-900'>You're logged in!</div>
 					</div> */}
 					<div>
-						<Button className='mb-4 bg-green-500'>
-							<Link href={route('them-cong-van')}>Thêm công văn</Link>
-						</Button>
+						<ButtonLink className='mb-4 bg-green-500' href={route('them-cong-van')}>
+							Thêm công văn
+						</ButtonLink>
 						<div>
 							<div className='grid grid-cols-5 content-center justify-items-center rounded-t-lg bg-sky-400 py-1 text-white'>
 								<div>
