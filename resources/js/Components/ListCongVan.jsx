@@ -1,0 +1,33 @@
+import ButtonIcon from './ButtonIcon';
+
+export default function ListCongVan({ className = '', cv, index }) {
+	return (
+		<div
+			className={
+				`${index % 2 === 0 ? 'bg-slate-200 ' : 'bg-slate-100'} grid grid-cols-5 content-center justify-items-center divide-orange-500 py-2` +
+				className
+			}
+		>
+			<div className='grid content-center justify-items-center'>
+				<p>{cv.so_cong_van}</p>
+			</div>
+			<div className='grid content-center justify-items-center'>
+				<p className='hover:text-red-500'>{cv.tieu_de}</p>
+			</div>
+			<div className='grid content-center justify-items-center'>
+				<p>{cv.mo_ta}</p>
+			</div>
+			<div className='grid content-center justify-items-center'>
+				<p>{cv.nguoidung.name}</p>
+			</div>
+			<div className='grid grid-cols-2 content-center justify-items-center gap-2'>
+				<ButtonIcon className='hover:bg-green-500'>
+					<ion-icon name='create-outline'></ion-icon>
+				</ButtonIcon>
+				<ButtonIcon className='hover:bg-red-500'>
+					<ion-icon name='trash-outline'></ion-icon>
+				</ButtonIcon>
+			</div>
+		</div>
+	);
+}
