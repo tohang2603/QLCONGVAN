@@ -27,11 +27,29 @@ class CongVanController extends Controller
 			'socongvan' => ['required', 'string'],
 			'tieude' => ['required', 'string', 'max: 255'],
 			'mota' => ['required', 'string', 'max: 255'],
-			'file' => ['required'],
+			'file' => ['required', 'mimes:pdf,doc,docx'],
 		], [
-			'socongvan.required' => 'Không được bỏ trống dòng này.',
-			'socongvan.string' => 'Số công văn phải là một chuỗi.'
+			'socongvan.required' => 'Không được bỏ trống số công văn.',
+			'socongvan.string' => 'Số công văn phải là một chuỗi.',
+			'tieude.required' => 'Không được bỏ trống tiêu đề.',
+			'tieude.string' => 'Tiêu đề phải là một chuỗi.',
+			'tieude.max' => 'Tiêu đề không được vượt quá 255 ký tự.',
+			'mota.required' => 'Không được bỏ trống mô tả.',
+			'mota.string' => 'Mô tả phải là một chuỗi.',
+			'mota.max' => 'Mô tả không được vượt quá 255 ký tự.',
+			'file.required' => 'Không được bỏ trống file.',
+			'file.mimes' => 'File phải là định dạng pdf, doc hoặc docx.',
 		]);
+
+		// Đường dẫn lưu file
+		$file = $request->file('file');
+		$ext = $file->getClientOriginalExtension();
+		// Xử lý tên file, không dấu, không khoảng cách
+		$filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
+		$filename_db = time() . '-' . $filename . '.' . $ext;
+		$path = $file->storeAs('public/files', $filename_db);
+
+		// dd($path);
 
 		//thao tac CSDL tao congvan
 		$congvan = Congvan::create([
@@ -39,7 +57,7 @@ class CongVanController extends Controller
 			'tieu_de' => $request->tieude,
 			'mo_ta' => $request->mota,
 			'nguoi_tao' => auth()->user()->id,
-			'file' => 'string',
+			'file' => $path,
 			// 'file' => $request->file('file'),
 		]);
 
