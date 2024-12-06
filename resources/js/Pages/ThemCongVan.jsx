@@ -1,15 +1,16 @@
+import InputLabelV1 from '@/Components/InputLabelV1';
+import TextInputV1 from '@/Components/TextInputV1';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head } from '@inertiajs/react';
 import { useForm } from '@inertiajs/react';
 
 export default function ThemCongVan() {
 	const { data, setData, post, progress, errors } = useForm({
-		socongvan:'',
-		tieude:'',
-		mota:'',
+		socongvan: '',
+		tieude: '',
+		mota: '',
 		file: null,
 	});
-
 	function submit(e) {
 		e.preventDefault();
 		post('/tao-cong-van');
@@ -26,12 +27,27 @@ export default function ThemCongVan() {
             <div className='p-6 text-gray-900'>You're logged in!</div>
           </div> */}
 					<div>Thêm Công Văn</div>
-					{/*  */}
+					{/* Số công văn */}
 					<form onSubmit={submit}>
-						<input type='text' value={data.socongvan} onChange={(e) => setData('socongvan', e.target.value)} />
-						<input type='text' value={data.tieude} onChange={(e) => setData('tieude', e.target.value)} />
-						<input type='text' value={data.mota} onChange={(e) => setData('mota', e.target.value)} />
-						{/* <input type='file' value={data.file} onChange={(e) => setData('file', e.target.files[0])} />  */}
+						<InputLabelV1 value={'Số công văn'} />
+						<TextInputV1
+							type='text'
+							value={data.socongvan}
+							onChange={(e) => setData('socongvan', e.target.value)}
+						/>
+						{/* Tiêu đề */}
+						<InputLabelV1 value={'Tiêu đề'} />
+						<TextInputV1
+							type='text'
+							value={data.tieude}
+							onChange={(e) => setData('tieude', e.target.value)}
+						/>
+						{/* Mô tả */}
+						<InputLabelV1 value={'Mô tả'} />
+						<TextInputV1 type='text' value={data.mota} onChange={(e) => setData('mota', e.target.value)} />
+						{/* Tệp */}
+						<InputLabelV1 value={'Tệp'} />
+						<input type='file' value={data.file} onChange={(e) => setData('file', e.target.files[0])} />
 						{progress && (
 							<progress value={progress.percentage} max='100'>
 								{progress.percentage}%
