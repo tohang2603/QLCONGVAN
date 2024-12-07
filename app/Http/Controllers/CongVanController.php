@@ -76,9 +76,21 @@ class CongVanController extends Controller
 		$congvan = Congvan::all();
 		return $congvan;
 	}
-
+// trả về giao diện
+	public function suaCongVan($id): Response
+	{
+		return Inertia::render('SuaCongVan', [
+			'cv'=> $this->LayThongTinCongVan($id),			
+		]);
+	}
+	public function LayThongTinCongVan($id)
+	{
+		$congvan= Congvan::find($id);
+		return $congvan;
+	}
+// làm việc với dữ liệu
 	// Sửa công văn
-	public function suaCongVan($id, Request $request)
+	public function capNhatCongVan($id, Request $request)
 	{
 		$congvan = Congvan::findOrFail($id); // Tìm công văn theo ID
 

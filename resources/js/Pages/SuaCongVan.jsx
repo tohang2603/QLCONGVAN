@@ -1,24 +1,10 @@
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head } from '@inertiajs/react';
-import { useForm } from '@inertiajs/react';
-
-export default function LoaiCongVan() {
-	const { data, setData, post, progress } = useForm({
-		name: null,
-		avatar: null,
-		maCongVan: null,
-		maPhongBan: null,
-	});
-// trạng thái kdl
-	function submit(e) {
-		e.preventDefault();
-		post('/users');
-	}
-	return (
-		<AuthenticatedLayout
+export default function SuaCongVan({cv}){
+    console.log(cv)
+    return (
+        <AuthenticatedLayout
 			header={<h2 className='text-xl font-semibold leading-tight text-gray-800'>Quản lý</h2>}
 		>
-			<Head title='Thêm công văn' />
+			<Head title='Sửa công văn' />
 
 			<div className='py-12'>
 				<div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>
@@ -30,11 +16,6 @@ export default function LoaiCongVan() {
 					<form onSubmit={submit}>
 						<input type='text' value={data.name} onChange={(e) => setData('name', e.target.value)} />
 						<input type='file' value={data.avatar} onChange={(e) => setData('avatar', e.target.files[0])} />
-						{progress && (
-							<progress value={progress.percentage} max='100'>
-								{progress.percentage}%
-							</progress>
-						)}
 						<button type='submit'>Submit</button>
 					</form>
 				</div>

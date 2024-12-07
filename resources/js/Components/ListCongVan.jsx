@@ -1,5 +1,6 @@
 import DialogDlt from '@/Components/DialogDlt';
 import ButtonIcon from './ButtonIcon';
+import { router } from '@inertiajs/react';
 
 export default function ListCongVan({ className = '', cv, index }) {
 	return (
@@ -22,7 +23,7 @@ export default function ListCongVan({ className = '', cv, index }) {
 				<p>{cv.nguoidung.name}</p>
 			</div>
 			<div className='grid grid-cols-2 content-center justify-items-center gap-2'>
-				<ButtonIcon className='hover:bg-green-500'>
+				<ButtonIcon onClick={()=>router.get(`/sua-cong-van/${cv.id}`)} className='hover:bg-green-500'>
 					<ion-icon name='create-outline'></ion-icon>
 				</ButtonIcon>
 				<ButtonIcon onClick={()=>{document.getElementById(`btn_delete_${index}`).showModal()}} className='hover:bg-red-500 '>
