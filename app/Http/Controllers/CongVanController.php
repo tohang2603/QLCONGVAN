@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Congvan;
+use File;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
-use Storage;
 
 class CongVanController extends Controller
 {
@@ -28,7 +28,7 @@ class CongVanController extends Controller
 			'socongvan' => ['required', 'string'],
 			'tieude' => ['required', 'string', 'max: 255'],
 			'mota' => ['required', 'string', 'max: 255'],
-			'file' => ['required', 'mimes:pdf,doc,docx'],
+			'file' => ['required', 'mimes:pdf'],
 		], [
 			'socongvan.required' => 'Không được bỏ trống số công văn.',
 			'socongvan.string' => 'Số công văn phải là một chuỗi.',
@@ -39,7 +39,7 @@ class CongVanController extends Controller
 			'mota.string' => 'Mô tả phải là một chuỗi.',
 			'mota.max' => 'Mô tả không được vượt quá 255 ký tự.',
 			'file.required' => 'Không được bỏ trống file.',
-			'file.mimes' => 'File phải là định dạng pdf, doc hoặc docx.',
+			'file.mimes' => 'File phải là định dạng pdf.',
 		]);
 
 		// Đường dẫn lưu file
@@ -48,7 +48,8 @@ class CongVanController extends Controller
 		// Xử lý tên file, không dấu, không khoảng cách
 		$filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
 		$filename_db = time() . '-' . $filename . '.' . $ext;
-		$path = $file->storeAs('public/files', $filename_db);
+		$file->move(public_path('files'), $filename_db);
+		$path = 'files/' . $filename_db;
 
 		// dd($path);
 
@@ -76,19 +77,19 @@ class CongVanController extends Controller
 		$congvan = Congvan::all();
 		return $congvan;
 	}
-// trả về giao diện
+	// trả về giao diện
 	public function suaCongVan($id): Response
 	{
 		return Inertia::render('SuaCongVan', [
-			'cv'=> $this->LayThongTinCongVan($id),			
+			'cv' => $this->LayThongTinCongVan($id),
 		]);
 	}
 	public function LayThongTinCongVan($id)
 	{
-		$congvan= Congvan::find($id);
+		$congvan = Congvan::find($id);
 		return $congvan;
 	}
-// làm việc với dữ liệu
+	// làm việc với dữ liệu
 	// Sửa công văn
 	public function capNhatCongVan($id, Request $request)
 	{
@@ -127,10 +128,11 @@ class CongVanController extends Controller
 	public function xoaCongVan($id)
 	{
 		$congvan = Congvan::findOrFail($id); // Tìm công văn theo ID
-		// Xoá file 
-		Storage::delete($congvan->file);
-		// Xóa công văn
-		if ($congvan->delete()) {
+		// Xoá file trong thư mục public/files
+		$file_path = public_path($congvan->file);
+		if (File::exists($file_path)) {
+			File::delete($file_path);
+			$congvan->delete();
 			return redirect()->route('dashboard')->with('success', 'Xóa công văn thành công.');
 		}
 		return redirect()->route('dashboard')->with('error', 'Xóa công văn không thành công.');
