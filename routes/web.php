@@ -21,11 +21,23 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
 	// Trang chủ
 	Route::get('/trang-chu', [QuanlyController::class, 'trangChu'])->name('trang-chu');
-
+	// Xem công văn
+	Route::get('/xem-cv/{path}', function ($path) {
+		$file = storage_path($path);
+		dd($file);
+		// if (!file_exists($file)) {
+		// 	abort(404);
+		// }
+		return response()->file($file, [
+			'Content-Type' => 'application/pdf',
+			'Content-Disposition' => 'inline; filename="' . basename($file) . '"',
+		]);
+	})->name('xem-cv');
+	// 
 	// Thêm công văn
 	Route::post('/tao-cong-van', [CongVanController::class, 'taoCongVan'])->name('tao-cong-van');
 	Route::get('/them-cong-van', [CongVanController::class, 'themCongVan'])->name('them-cong-van');
-	Route::get('/sua-cong-van/{id}', [CongVanController::class,'suaCongVan'])->name('sua-cong-van');
+	Route::get('/sua-cong-van/{id}', [CongVanController::class, 'suaCongVan'])->name('sua-cong-van');
 	Route::patch('/cap-nhat-cong-van/{id}', [CongVanController::class, 'capNhatCongVan'])->name('cap-nhat-cong-van'); // Để cập nhật
 	Route::delete('/xoa-cong-van/{id}', [CongVanController::class, 'xoaCongVan'])->name('xoa-cong-van');
 	//thêm phòng ban
