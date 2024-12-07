@@ -1,9 +1,39 @@
 import ButtonLink from '@/Components/ButtonLink';
 import ListCongVan from '@/Components/ListCongVan';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link } from '@inertiajs/react';
+import { Head, Link, usePage } from '@inertiajs/react';
+import { toast } from 'react-toastify';
+import { useEffect } from 'react';
 
 export default function Dashboard({ dscongvan }) {
+	const { errors, flash } = usePage().props;
+	//	Toast
+	useEffect(() => {
+		// Success
+		if (flash.success) {
+			toast.success(flash.success, {
+				position: 'top-right',
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+		}
+		// Error
+		if (flash.error) {
+			toast.error(flash.error, {
+				position: 'top-right',
+				autoClose: 2000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+			});
+		}
+	}, [flash]);
 	return (
 		<AuthenticatedLayout
 			header={<h2 className='text-xl font-semibold leading-tight text-gray-800'>Quản lý công văn</h2>}
@@ -37,9 +67,13 @@ export default function Dashboard({ dscongvan }) {
 									<p>Thao tác</p>
 								</div>
 							</div>
-							{dscongvan.map((cv, index) => (
-								<ListCongVan index={index} key={cv.id} cv={cv} />
-							))}
+							{dscongvan.length === 0 ? (
+								<div className='text-center mt-3'>Không có công văn nào</div>
+							) : (
+								dscongvan.map((cv, index) => (
+									<ListCongVan index={index} key={cv.id} cv={cv} />
+								))
+							)}
 						</div>
 					</div>
 				</div>

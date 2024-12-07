@@ -1,3 +1,4 @@
+import { router } from "@inertiajs/react";
 export default function DialogDlt({ className, cv, index, ...props }) {
   return (
     			<dialog {...props} id={`btn_delete_${index}`} className="modal">
@@ -8,7 +9,9 @@ export default function DialogDlt({ className, cv, index, ...props }) {
 								<form method="dialog">
 									{/* if there is a button in form, it will close the modal */}
 									<div className="grid gap-1 grid-cols-2">
-									<button className="btn bg-red-400 hover:bg-red-500 text-white">Xoá</button>
+									<button onClick={() => {
+																router.delete(`xoa-cong-van/${cv.id}`);
+															}} className="btn bg-red-400 hover:bg-red-500 text-white">Xoá</button>
 									<button className="btn">Không</button>
 									</div>
 								</form>

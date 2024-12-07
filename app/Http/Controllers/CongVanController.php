@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\Inertia;
 use Illuminate\Support\Str;
+use Storage;
 
 class CongVanController extends Controller
 {
@@ -114,11 +115,13 @@ class CongVanController extends Controller
 	public function xoaCongVan($id)
 	{
 		$congvan = Congvan::findOrFail($id); // Tìm công văn theo ID
-
+		// Xoá file 
+		Storage::delete($congvan->file);
 		// Xóa công văn
-		$congvan->delete();
-
-		return redirect()->route('dashboard')->with('success', 'Xóa công văn thành công.');
+		if ($congvan->delete()) {
+			return redirect()->route('dashboard')->with('success', 'Xóa công văn thành công.');
+		}
+		return redirect()->route('dashboard')->with('error', 'Xóa công văn không thành công.');
 	}
 
 
