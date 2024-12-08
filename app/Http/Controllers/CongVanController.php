@@ -95,6 +95,17 @@ class CongVanController extends Controller
 			'socongvan' => ['required', 'string'],
 			'tieude' => ['required', 'string', 'max: 255'],
 			'mota' => ['required', 'string', 'max: 255'],
+			'file' => ['mimes:pdf'],
+		], [
+			'socongvan.required' => 'Không được bỏ trống số công văn.',
+			'socongvan.string' => 'Số công văn phải là một chuỗi.',
+			'tieude.required' => 'Không được bỏ trống tiêu đề.',
+			'tieude.string' => 'Tiêu đề phải là một chuỗi.',
+			'tieude.max' => 'Tiêu đề không được vượt quá 255 ký tự.',
+			'mota.required' => 'Không được bỏ trống mô tả.',
+			'mota.string' => 'Mô tả phải là một chuỗi.',
+			'mota.max' => 'Mô tả không được vượt quá 255 ký tự.',
+			'file.mimes' => 'File phải là định dạng pdf.',
 		]);
 
 		// Cập nhật công văn
@@ -105,11 +116,25 @@ class CongVanController extends Controller
 			// 'file' => $request->file('file'), // Nếu có file thì xử lý thêm
 		]);
 
-		// Cập nhật slug nếu tiêu đề thay đổi
-		$newSlug = $congvan->id . '-' . Str::of($congvan->tieu_de)->slug('-');
-		$congvan->slug = $newSlug;
-		$congvan->save();
+		// Nếu có file mới thì xử lý
+		if ($request->hasFile('file')) {
+			// Xoá file cũ
+			// Storage::delete('public/' . $congvan->file);
+			// Đường dẫn lưu file
+			$file = $request->file('file');
+			$ext = $file->getClientOriginalExtension();
+			// Xử lý tên file, không dấu, không khoảng cách
+			$filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
+			$filename_db = time() . '-' . $filename . '.' . $ext;
+			// Lưu file vào thư mục storage/app/public/files
+			$file = Storage::disk(name: 'public')->putFileAs('/files', $file, $filename_db);
+			// Cập nhật file mới
+			$congvan->file = $file;
 
+			$newSlug = $congvan->id . '-' . Str::of($congvan->tieu_de)->slug('-');
+			$congvan->slug = $newSlug;
+			$congvan->save();
+		}
 		return redirect()->route('dashboard')->with('success', 'Cập nhật công văn thành công.');
 	}
 	// Xóa công văn
