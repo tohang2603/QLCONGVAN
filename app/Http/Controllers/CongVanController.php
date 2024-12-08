@@ -87,10 +87,9 @@ class CongVanController extends Controller
 	}
 	// làm việc với dữ liệu
 	// Sửa công văn
-	public function capNhatCongVan($id, Request $request)
+	public function capNhatCongVan(Request $request, $id)
 	{
 		$congvan = Congvan::findOrFail($id); // Tìm công văn theo ID
-
 		// Validate dữ liệu
 		$request->validate([
 			'socongvan' => ['required', 'string'],
@@ -99,19 +98,12 @@ class CongVanController extends Controller
 		]);
 
 		// Cập nhật công văn
-		$congvan->update(
-			[
-				'so_cong_van' => $request->socongvan,
-				'tieu_de' => $request->tieude,
-				'mo_ta' => $request->mota,
-				'nguoi_tao' => auth()->user()->id,
-				// 'file' => $request->file('file'), // Nếu có file thì xử lý thêm
-			],
-			[
-				'socongvan.required' => 'Không được bỏ trống dòng này.',
-				'socongvan.string' => 'Số công văn phải là một chuỗi.'
-			]
-		);
+		$congvan->update([
+			'so_cong_van' => $request->socongvan,
+			'tieu_de' => $request->tieude,
+			'mo_ta' => $request->mota,
+			// 'file' => $request->file('file'), // Nếu có file thì xử lý thêm
+		]);
 
 		// Cập nhật slug nếu tiêu đề thay đổi
 		$newSlug = $congvan->id . '-' . Str::of($congvan->tieu_de)->slug('-');
