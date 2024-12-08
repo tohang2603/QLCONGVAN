@@ -22,9 +22,12 @@ export default function ListCongVan({ className = '', cv, index }) {
 			<div className='grid content-center justify-items-center'>
 				<p>{cv.nguoidung.name}</p>
 			</div>
-			<div className='grid grid-cols-2 content-center justify-items-center gap-2'>
+			<div className='grid grid-cols-3 content-center justify-items-center gap-2'>
 				<ButtonIcon onClick={()=>router.get(`/sua-cong-van/${cv.id}`)} className='hover:bg-green-500'>
 					<ion-icon name='create-outline'></ion-icon>
+				</ButtonIcon>
+				<ButtonIcon onClick={()=>{router.get(`/xem-cv/${cv.file}`)}} className='hover:bg-slate-300	 '>
+					<ion-icon name="eye-outline"></ion-icon>					
 				</ButtonIcon>
 				<ButtonIcon onClick={()=>{document.getElementById(`btn_delete_${index}`).showModal()}} className='hover:bg-red-500 '>
 					<ion-icon name='trash-outline'></ion-icon>					
