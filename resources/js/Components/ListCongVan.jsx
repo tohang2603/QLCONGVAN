@@ -26,7 +26,7 @@ export default function ListCongVan({ className = '', cv, index }) {
 				<ButtonIcon onClick={()=>router.get(`/sua-cong-van/${cv.id}`)} className='hover:bg-green-500'>
 					<ion-icon name='create-outline'></ion-icon>
 				</ButtonIcon>
-				<ButtonIcon onClick={()=>{router.get(`/pubic/files/${cv.file}`)}} className='hover:bg-slate-300	 '>
+				<ButtonIcon onClick={()=>{router.get(`/xem-cv/${cv.file}`)}} className='hover:bg-slate-300	 '>
 					<ion-icon name="eye-outline"></ion-icon>					
 				</ButtonIcon>
 				<ButtonIcon onClick={()=>{document.getElementById(`btn_delete_${index}`).showModal()}} className='hover:bg-red-500 '>

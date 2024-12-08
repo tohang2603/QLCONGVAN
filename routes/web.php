@@ -22,16 +22,9 @@ Route::middleware(['auth'])->group(function () {
 	// Trang chủ
 	Route::get('/trang-chu', [QuanlyController::class, 'trangChu'])->name('trang-chu');
 	// Xem công văn
+
 	Route::get('/xem-cv/{path}', function ($path) {
-		$file = storage_path($path);
-		dd($file);
-		// if (!file_exists($file)) {
-		// 	abort(404);
-		// }
-		return response()->file($file, [
-			'Content-Type' => 'application/pdf',
-			'Content-Disposition' => 'inline; filename="' . basename($file) . '"',
-		]);
+		return redirect('storage/' . $path);
 	})->name('xem-cv');
 	// 
 	// Thêm công văn

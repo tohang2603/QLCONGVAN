@@ -48,15 +48,15 @@ class CongVanController extends Controller
 		// Xử lý tên file, không dấu, không khoảng cách
 		$filename = Str::slug(pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME));
 		$filename_db = time() . '-' . $filename . '.' . $ext;
-		$path = $file->storeAs('public/files', $filename_db);
-
+		// Lưu file vào thư mục storage/app/public/files
+		$file = Storage::disk(name: 'public')->putFileAs('/files', $file, $filename_db);
 		//thao tac CSDL tao congvan
 		$congvan = Congvan::create([
 			'so_cong_van' => $request->socongvan,
 			'tieu_de' => $request->tieude,
 			'mo_ta' => $request->mota,
 			'nguoi_tao' => auth()->user()->id,
-			'file' => $path,
+			'file' => $file,
 		]);
 
 		$newSlug = $congvan->id . '-' . Str::of($congvan->tieu_de)->slug('-');
