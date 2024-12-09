@@ -7,7 +7,9 @@ use App\Http\Controllers\PhongBanController;
 use App\Http\Controllers\NguoiDungController;
 use App\Http\Controllers\CoQuanController;
 use App\Http\Controllers\PhanQuyenController;
+use App\Http\Controllers\QuanLyCQController;
 use App\Models\Congvan;
+use App\Models\Coquan;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -42,6 +44,7 @@ Route::middleware(['auth'])->group(function () {
 
 });
 //thêm cơ quan
+Route::get('/them-co-quan', [CoQuanController::class, 'create'])->name('them-co-quan');
 Route::post('/tao-co-quan', [CoQuanController::class, 'taoCoQuan'])->name('tao-co-quan');
 Route::get('/them-co-quan', [CoQuanController::class, 'themCoQuan'])->name('them-co-quan');
 Route::post('/sua-co-quan/{id}', [CoQuanController::class, 'suaCoQuan'])->name('sua-co-quan');
@@ -61,6 +64,14 @@ Route::get('/dashboard', function () {
 	$dsCongVan = Congvan::with('nguoidung')->orderBy('created_at', 'desc')->get();
 	return Inertia::render('Dashboard', ['dscongvan' => $dsCongVan,]);
 })->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::get('/coquan', function () {
+    $dsCoQuan = CoQuan::all(); // Retrieve all records from the CoQuan model
+    return Inertia::render('coquan', ['dscoquan' => $dsCoQuan]);
+})->middleware(['auth', 'verified'])->name('coquan');
+
+Route::get('/coquan', 'CoQuanController@index');
+Route::get('/coquan', [CoQuanController::class, 'index'])->middleware(['auth', 'verified'])->name('coquan');
 
 
 Route::middleware('auth')->group(function () {

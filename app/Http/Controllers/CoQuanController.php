@@ -16,6 +16,8 @@ class CoQuanController extends Controller
         'status' => session('status'),
     ]);
     }
+
+
     public function taoCoQuan(Request $request)
 {
     $request->validate([
@@ -37,27 +39,32 @@ class CoQuanController extends Controller
         'so_dt' => $request->so_dt,
     ]);
 
-    return redirect()->route('dashboard')->with('success', 'Thêm cơ quan thành công.');
+    return redirect()->route('coquan')->with('success', 'Thêm cơ quan thành công.');
 }
     public function layTatCaCoQuan()
 {
     $coquan = CoQuan::all(); // Lấy tất cả các bản ghi trong bảng coquan
-    return $coquan;
-}
-    
-
-    //Sửa cơ quan
-    public function suaCoQuan($id)
-{
-    $coquan = CoQuan::findOrFail($id);  // Tìm cơ quan theo ID
-    return Inertia::render('SuaCoQuan', [
-        'coquan' => $coquan,  // Truyền thông tin cơ quan vào view
+    return Inertia::render('CoQuan', [
+        'dsCoQuan' => $coquan
     ]);
 }
-    // Cập nhật thông tin cơ quan
-public function capNhatCoQuan(Request $request, $id)
+    public function suaCoQuan($id): Response
 {
-    $request->validate([
+    return Inertia::render('SuaCoQuan', [
+        'cv' => $this->LayThongTinCoQuan($id),
+    ]);
+}
+
+    public function LayThongTinCoQuan($id)
+	{
+		$coquan = Coquan::find($id);
+		return $coquan;
+    }
+    // Cập nhật thông tin cơ quan
+    //sua co quan
+    public function capNhatCoQuan(Request $request, $id)
+    {
+        $request->validate([
         'ten_co_quan' => ['required', 'string', 'max:255'],
         'dia_chi' => ['required', 'string', 'max:255'],
         'so_dt' => ['required', 'string', 'max:10'],
@@ -85,7 +92,7 @@ public function capNhatCoQuan(Request $request, $id)
     $coquan = CoQuan::findOrFail($id);  // Tìm cơ quan theo ID
     $coquan->delete();  // Xóa cơ quan
 
-    return redirect()->route('dashboard')->with('success', 'Xóa cơ quan thành công.');
+    return redirect()->route('coquan')->with('success', 'Xóa cơ quan thành công.');
 }
 
 }

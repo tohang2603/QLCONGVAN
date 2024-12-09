@@ -63,7 +63,6 @@ class CongVanController extends Controller
 		// dd($newSlug);
 		$congvan->slug = $newSlug;
 		$congvan->save();
-
 		return redirect()->route('dashboard')->with('success', 'Thêm công văn thành công.');
 	}
 

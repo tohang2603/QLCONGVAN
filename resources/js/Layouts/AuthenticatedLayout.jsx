@@ -26,19 +26,22 @@ export default function AuthenticatedLayout({ header, children }) {
 
 							<div className='hidden space-x-8 sm:-my-px sm:ms-10 sm:flex'>
 								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
-									TRANG CHỦ
-								</NavLink>
-								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
 									CÔNG VĂN
 								</NavLink>
 								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
 									NHÂN SỰ
 								</NavLink>
 								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
-									CÁC BỘ PHẬN
+									CƠ QUAN
+								</NavLink>
+								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
+									PHÒNG BAN
 								</NavLink>
 								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
 									LỊCH SỬ 
+								</NavLink>
+								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
+									PHÂN LOẠI
 								</NavLink>
 							</div>
 						</div>
