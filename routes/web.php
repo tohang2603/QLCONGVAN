@@ -8,12 +8,7 @@ use App\Http\Controllers\PhongBanController;
 use App\Http\Controllers\NguoiDungController;
 use App\Http\Controllers\CoQuanController;
 use App\Http\Controllers\PhanQuyenController;
-use App\Http\Controllers\QuanLyCQController;
-use App\Models\Congvan;
-use App\Models\Coquan;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 // Home
 Route::get('/', function () {
