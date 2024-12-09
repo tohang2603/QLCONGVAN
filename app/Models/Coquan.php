@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Coquan extends Model
 {
-    protected $table = 'coquan';
+	protected $table = 'coquan';
 
 	protected $fillable = [
 		'id',
@@ -14,5 +14,7 @@ class Coquan extends Model
 		'dia_chi',
 		'so_dt',
 	];
-    //
+
+	// Không lấy thời gian tạo, sửa
+	public $timestamps = false;
 }

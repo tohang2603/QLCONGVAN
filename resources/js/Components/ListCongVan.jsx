@@ -3,7 +3,6 @@ import ButtonIcon from './ButtonIcon';
 import { router } from '@inertiajs/react';
 
 export default function ListCongVan({ className = '', cv, index }) {
-	console.log(cv)
 	return (
 		<div
 			className={

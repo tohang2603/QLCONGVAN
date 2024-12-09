@@ -62,9 +62,8 @@ Route::get('/coquan', function () {
 	return Inertia::render('coquan', ['dscoquan' => $dsCoQuan]);
 })->middleware(['auth', 'verified'])->name('coquan');
 
-Route::get('/coquan', 'CoQuanController@index');
-Route::get('/coquan', [CoQuanController::class, 'index'])->middleware(['auth', 'verified'])->name('coquan');
-
+// Cơ quan
+Route::get('/coquan', [CoQuanController::class, 'themCoQuan'])->middleware(['auth', 'verified'])->name('coquan');
 
 Route::middleware('auth')->group(function () {
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
