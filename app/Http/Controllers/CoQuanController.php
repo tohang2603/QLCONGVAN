@@ -16,7 +16,12 @@ class CoQuanController extends Controller
 			// 
 		]);
 	}
-
+// index
+	public function giaoDienCoQuan(): Response
+	{
+		$dscoquan = $this->layTatCaCoQuan(); //gan ds co quan
+		return Inertia::render('CoQuan', ['dscoquan'=>$dscoquan]);
+	}
 
 	public function taoCoQuan(Request $request)
 	{
@@ -39,19 +44,18 @@ class CoQuanController extends Controller
 			'so_dt' => $request->so_dt,
 		]);
 
-		return redirect()->route('dashboard')->with('success', 'Thêm cơ quan thành công.');
+		return redirect()->route('coquan')->with('success', 'Thêm cơ quan thành công.');
 	}
+	
 	public function layTatCaCoQuan()
 	{
 		$coquan = CoQuan::all(); // Lấy tất cả các bản ghi trong bảng coquan
-		return Inertia::render('CoQuan', [
-			'dsCoQuan' => $coquan
-		]);
+		return $coquan;
 	}
 	public function suaCoQuan($id): Response
 	{
 		return Inertia::render('SuaCoQuan', [
-			'cv' => $this->LayThongTinCoQuan($id),
+			'coquan' => $this->LayThongTinCoQuan($id),
 		]);
 	}
 
@@ -64,16 +68,17 @@ class CoQuanController extends Controller
 	//sua co quan
 	public function capNhatCoQuan(Request $request, $id)
 	{
+		dd($request->all());
 		$request->validate([
 			'ten_co_quan' => ['required', 'string', 'max:255'],
 			'dia_chi' => ['required', 'string', 'max:255'],
-			'so_dt' => ['required', 'string', 'max:10'],
+			'so_dt' => ['required', 'string', 'size:10'],
 		], [
 			'ten_co_quan.required' => 'Tên cơ quan không được để trống.',
 			'ten_co_quan.string' => 'Tên cơ quan phải là một chuỗi.',
 			'dia_chi.required' => 'Địa chỉ không được để trống.',
 			'so_dt.required' => 'Số điện thoại không được để trống.',
-			'so_dt.max' => 'Số điện thoại không được vượt quá 10 ký tự.',
+			'so_dt.size' => 'Số điện thoại không được vượt quá 10 ký tự.',
 		]);
 
 		// Tìm cơ quan theo ID và cập nhật thông tin
@@ -84,7 +89,7 @@ class CoQuanController extends Controller
 			'so_dt' => $request->so_dt,
 		]);
 
-		return redirect()->route('dashboard')->with('success', 'Cập nhật cơ quan thành công.');
+		return redirect()->route('coquan')->with('success', 'Cập nhật cơ quan thành công.');
 	}
 	// Xóa cơ quan
 	public function xoaCoQuan($id)

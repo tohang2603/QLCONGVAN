@@ -1,4 +1,4 @@
-import DialogDlt from '@/Components/DialogDlt';
+import DialogDltCQ from '@/Components/DialogDltCQ';
 import ButtonIcon from './ButtonIcon';
 import { router } from '@inertiajs/react';
 
@@ -19,7 +19,7 @@ export default function ListCoQuan({ className = '', cq, index }) {
 			<div className='grid content-center justify-items-center'>
 				<p>{cq.so_dt}</p>
 			</div>
-			<div className='grid grid-cols-3 content-center justify-items-center gap-2'>
+			<div className='grid grid-cols-2 content-center justify-items-center gap-2'>
 				<ButtonIcon onClick={()=>router.get(`/sua-co-quan/${cq.id}`)} className='hover:bg-green-500'>
 					<ion-icon name='create-outline'></ion-icon>
 				</ButtonIcon>
@@ -28,7 +28,7 @@ export default function ListCoQuan({ className = '', cq, index }) {
 				</ButtonIcon>
 			</div>
 			{/* Dialog Xoá */}
-			<DialogDlt index={index} cq={cq} />
+			<DialogDltCQ index={index} cq={cq} />
 		</div>
 	);
 }

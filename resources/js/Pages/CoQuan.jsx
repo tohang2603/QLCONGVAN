@@ -1,11 +1,12 @@
 import ButtonLink from '@/Components/ButtonLink';
-import ListCoQuan from '@/Components/ListCoQuan';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
+import ListCoQuan from '@/Components/ListCoQuan';
 
-export default function NewPageCơQuan({ dscoquan }) {
+export default function CoQuan({ dscoquan }) {
+    // console.log(dscoquan) //trave đúng dữ liệu mong muốn hay không
 	const { errors, flash } = usePage().props;
 	//	Toast
 	useEffect(() => {
@@ -47,10 +48,7 @@ export default function NewPageCơQuan({ dscoquan }) {
 							Thêm cơ quan
 						</ButtonLink>
 						<div>
-							<div className='grid grid-cols-5 content-center justify-items-center rounded-t-lg bg-sky-400 py-1 text-white'>
-								<div>
-									<p>Mã cơ quan</p>
-								</div>
+							<div className='grid grid-cols-4 content-center justify-items-center rounded-t-lg bg-sky-400 py-1 text-white'>
 								<div>
 									<p>Tên cơ quan</p>
 								</div>
@@ -65,7 +63,7 @@ export default function NewPageCơQuan({ dscoquan }) {
 								</div>
 							</div>
 							{dscoquan.length === 0 ? (
-								<div className='text-center mt-3'>Không có cơ quan nào</div>
+								<div className='text-center mt-3'>Không có cơ quan nào.</div>
 							) : (
 								dscoquan.map((cq, index) => (
 									<ListCoQuan index={index} key={cq.id} cq={cq} />

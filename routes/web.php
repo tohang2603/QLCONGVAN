@@ -40,10 +40,10 @@ Route::middleware(['auth'])->group(function () {
 
 });
 //thêm cơ quan
-Route::get('/them-co-quan', [CoQuanController::class, 'create'])->name('them-co-quan');
+Route::get('/coquan', [CoQuanController::class, 'giaoDienCoQuan'])->middleware(['auth', 'verified'])->name('coquan');
+Route::get('/them-co-quan', [CoQuanController::class, 'themCoQuan'])->middleware(['auth', 'verified'])->name('them-co-quan');
 Route::post('/tao-co-quan', [CoQuanController::class, 'taoCoQuan'])->name('tao-co-quan');
-Route::get('/them-co-quan', [CoQuanController::class, 'themCoQuan'])->name('them-co-quan');
-Route::post('/sua-co-quan/{id}', [CoQuanController::class, 'suaCoQuan'])->name('sua-co-quan');
+Route::get('/sua-co-quan/{id}', [CoQuanController::class, 'suaCoQuan'])->name('sua-co-quan');
 Route::patch('/cap-nhat-co-quan/{id}', [CoQuanController::class, 'capNhatCoQuan'])->name('cap-nhat-co-quan');
 Route::delete('/xoa-co-quan/{id}', [CoQuanController::class, 'xoaCoQuan'])->name('xoa-co-quan');
 
@@ -57,13 +57,8 @@ Route::delete('/xoa-nguoi-dung/{id}', [NguoiDungController::class, 'xoaNguoiDung
 // dashboard
 Route::get('/dashboard', [PageController::class, 'dashBoard'])->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/coquan', function () {
-	$dsCoQuan = CoQuan::all(); // Retrieve all records from the CoQuan model
-	return Inertia::render('coquan', ['dscoquan' => $dsCoQuan]);
-})->middleware(['auth', 'verified'])->name('coquan');
-
 // Cơ quan
-Route::get('/coquan', [CoQuanController::class, 'themCoQuan'])->middleware(['auth', 'verified'])->name('coquan');
+
 
 Route::middleware('auth')->group(function () {
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
