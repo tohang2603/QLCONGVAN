@@ -13,6 +13,7 @@ use Storage;
 class CongVanController extends Controller
 {
 
+
 	// Giao dien them cong van
 	public function themCongVan(Request $request): Response
 	{
@@ -69,8 +70,11 @@ class CongVanController extends Controller
 	// Hiện dữ liệu công văn
 	public function layTatCaCongVan()
 	{
-		$congvan = Congvan::all();
-		return $congvan;
+		$dsCongVan = Congvan::with('nguoidung')->orderBy('created_at', 'desc')->get()->map(function ($congvan) {
+			$congvan->file = Storage::url($congvan->file);
+			return $congvan;
+		});
+		return $dsCongVan;
 	}
 	// trả về giao diện
 	public function suaCongVan($id): Response

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CongVanController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuanlyController;
 use App\Http\Controllers\PhongBanController;
@@ -23,12 +24,7 @@ Route::get('/', function () {
 Route::middleware(['auth'])->group(function () {
 	// Trang chủ
 	Route::get('/trang-chu', [QuanlyController::class, 'trangChu'])->name('trang-chu');
-	// Xem công văn
 
-	Route::get('/xem-cv/{path}', function ($path) {
-		return redirect('storage/' . $path);
-	})->name('xem-cv');
-	// 
 	// Thêm công văn
 	Route::post('/tao-cong-van', [CongVanController::class, 'taoCongVan'])->name('tao-cong-van');
 	Route::get('/them-cong-van', [CongVanController::class, 'themCongVan'])->name('them-cong-van');
@@ -58,16 +54,12 @@ Route::post('/sua-nguoi-dung/{id}', [NguoiDungController::class, 'suaNguoiDung']
 Route::patch('/cap-nhat-nguoi-dung/{id}', [NguoiDungController::class, 'capNhatNguoiDung'])->name('cap-nhat-nguoi-dung');
 Route::delete('/xoa-nguoi-dung/{id}', [NguoiDungController::class, 'xoaNguoiDung'])->name('xoa-nguoi-dung');
 
-
-Route::get('/dashboard', function () {
-	// $dsCongVan = Congvan::with('nguoidung')->get();
-	$dsCongVan = Congvan::with('nguoidung')->orderBy('created_at', 'desc')->get();
-	return Inertia::render('Dashboard', ['dscongvan' => $dsCongVan,]);
-})->middleware(['auth', 'verified'])->name('dashboard');
+// dashboard
+Route::get('/dashboard', [PageController::class, 'dashBoard'])->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/coquan', function () {
-    $dsCoQuan = CoQuan::all(); // Retrieve all records from the CoQuan model
-    return Inertia::render('coquan', ['dscoquan' => $dsCoQuan]);
+	$dsCoQuan = CoQuan::all(); // Retrieve all records from the CoQuan model
+	return Inertia::render('coquan', ['dscoquan' => $dsCoQuan]);
 })->middleware(['auth', 'verified'])->name('coquan');
 
 Route::get('/coquan', 'CoQuanController@index');

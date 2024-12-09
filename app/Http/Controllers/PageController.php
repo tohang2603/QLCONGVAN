@@ -4,22 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Inertia\Response;
 use Inertia\Inertia;
-class QuanlyController extends Controller
+
+class PageController extends Controller
 {
-	// Khai báo
 	protected $CongvanController;
 	public function __construct(CongvanController $CongvanController)
 	{
 		$this->CongvanController = $CongvanController;
 	}
-	public function trangChu(): Response
+	// Dashboard
+	public function dashBoard()
 	{
 		$dsCongVan = $this->CongvanController->layTatCaCongVan();
-		return Inertia::render('TrangChu', [
-			'dscongvan' => $dsCongVan,
-		]);
+		return Inertia::render('Dashboard', ['dscongvan' => $dsCongVan,]);
 	}
-	//
 }
