@@ -16,11 +16,11 @@ class CoQuanController extends Controller
 			// 
 		]);
 	}
-// index
+	// index
 	public function giaoDienCoQuan(): Response
 	{
 		$dscoquan = $this->layTatCaCoQuan(); //gan ds co quan
-		return Inertia::render('CoQuan', ['dscoquan'=>$dscoquan]);
+		return Inertia::render('CoQuan', ['dscoquan' => $dscoquan]);
 	}
 
 	public function taoCoQuan(Request $request)
@@ -46,7 +46,7 @@ class CoQuanController extends Controller
 
 		return redirect()->route('coquan')->with('success', 'Thêm cơ quan thành công.');
 	}
-	
+
 	public function layTatCaCoQuan()
 	{
 		$coquan = CoQuan::all(); // Lấy tất cả các bản ghi trong bảng coquan
@@ -78,7 +78,7 @@ class CoQuanController extends Controller
 			'ten_co_quan.string' => 'Tên cơ quan phải là một chuỗi.',
 			'dia_chi.required' => 'Địa chỉ không được để trống.',
 			'so_dt.required' => 'Số điện thoại không được để trống.',
-			'so_dt.size' => 'Số điện thoại không được vượt quá 10 ký tự.',
+			'so_dt.size' => 'Số điện thoại phải có 10 ký tự.',
 		]);
 
 		// Tìm cơ quan theo ID và cập nhật thông tin
