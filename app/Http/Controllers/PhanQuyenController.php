@@ -18,6 +18,11 @@ class PhanQuyenController extends Controller
         ]);
     }
 
+    public function giaoDienPhanQuyen(): Response
+	{
+		$dsphanquyen = $this->layTatCaPhanQuyen(); //gan ds co quan
+		return Inertia::render('PhanQuyen', ['dsphanquyen'=>$dsphanquyen]);
+	}
     // Thêm quyền
      // Thêm phân quyền
      public function taoPhanQuyen(Request $request)
@@ -42,7 +47,7 @@ class PhanQuyenController extends Controller
              'mo_ta' => $request->mo_ta,
          ]);
  
-         return redirect()->route('phanquyen.index')->with('success', 'Thêm phân quyền thành công.');
+         return redirect()->route('phanquyen')->with('success', 'Thêm phân quyền thành công.');
      }
  
      // Lấy tất cả phân quyền
@@ -55,15 +60,19 @@ class PhanQuyenController extends Controller
      // Sửa phân quyền
      public function suaPhanQuyen($id)
      {
-         $phanquyen = PhanQuyen::findOrFail($id);  // Tìm phân quyền theo ID
-         return view('suaPhanQuyen', [
-             'phanquyen' => $phanquyen,  // Truyền thông tin phân quyền vào view
-         ]);
+        return Inertia::render('SuaPhanQuyen', [
+			'phanquyen' => $this->LayThongTinPhanQuyen($id),
+        ]);
      }
- 
+     public function LayThongTinPhanQuyen($id)
+     {
+         $phanquyen = Phanquyen::find($id);
+         return $phanquyen;
+     }
      // Cập nhật phân quyền
      public function capNhatPhanQuyen(Request $request, $id)
      {
+        dd($request->all());
          $request->validate([
              'ten_quyen' => ['required', 'string', 'max:255'],
              'ten_ghi_tat' => ['required', 'string', 'max:50'],
@@ -85,7 +94,7 @@ class PhanQuyenController extends Controller
              'mo_ta' => $request->mo_ta,
          ]);
  
-         return redirect()->route('phanquyen.index')->with('success', 'Cập nhật phân quyền thành công.');
+         return redirect()->route('phanquyen')->with('success', 'Cập nhật phân quyền thành công.');
      }
  
      // Xóa phân quyền
@@ -94,6 +103,6 @@ class PhanQuyenController extends Controller
          $phanquyen = PhanQuyen::findOrFail($id);  // Tìm phân quyền theo ID
          $phanquyen->delete();  // Xóa phân quyền
  
-         return redirect()->route('phanquyen.index')->with('success', 'Xóa phân quyền thành công.');
+         return redirect()->route('phanquyen')->with('success', 'Xóa phân quyền thành công.');
      }
 }

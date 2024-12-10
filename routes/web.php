@@ -8,9 +8,9 @@ use App\Http\Controllers\PhongBanController;
 use App\Http\Controllers\NguoiDungController;
 use App\Http\Controllers\CoQuanController;
 use App\Http\Controllers\PhanQuyenController;
-use App\Http\Controllers\QuanLyCQController;
 use App\Models\Congvan;
 use App\Models\Coquan;
+use App\Models\Phongban;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -31,12 +31,14 @@ Route::middleware(['auth'])->group(function () {
 	Route::get('/sua-cong-van/{id}', [CongVanController::class, 'suaCongVan'])->name('sua-cong-van');
 	Route::post('/cap-nhat-cong-van/{id}', [CongVanController::class, 'capNhatCongVan'])->name('cap-nhat-cong-van'); // Để cập nhật
 	Route::delete('/xoa-cong-van/{id}', [CongVanController::class, 'xoaCongVan'])->name('xoa-cong-van');
-	//thêm phòng ban
-	Route::post('/tao-phong-ban', [PhongBanController::class, 'taoPhongBan'])->name('tao-phong-ban');
-	Route::get('them-phong-ban', [PhongBanController::class, 'themPhongBan'])->name('them-phong-ban');
-	Route::post('sua-phong-ban/{id}', [PhongBanController::class, 'suaPhongBan'])->name('sua-phong-ban');
-	Route::patch('/cap-nhat-phong-ban/{id}', [PhongBanController::class, 'capNhatPhongBan'])->name('cap-nhat-phong-ban');
-	Route::delete('/xoa-phong-ban/{id}', [PhongBanController::class, 'xoaPhongBan'])->name('xoa-phong-ban');
+
+//thêm phòng ban
+Route::get('/phongban', [PhongBanController::class, 'giaoDienPhongBan'])->middleware(['auth', 'verified'])->name('phongban');
+Route::get('/them-phong-quan', [PhongBanController::class, 'themPhongBan'])->middleware(['auth', 'verified'])->name('them-phong-ban');
+Route::post('/tao-phong-ban', [PhongBanController::class, 'taoPhongBan'])->name('tao-phong-ban');
+Route::get('/sua-phong-ban/{id}', [PhongBanController::class, 'suaPhongBan'])->name('sua-phong-ban');
+Route::patch('/cap-nhat-phong-ban/{id}', [PhongBanController::class, 'capNhatPhongBan'])->name('cap-nhat-phong-ban');
+Route::delete('/xoa-phong-ban/{id}', [PhongBanController::class, 'xoaPhongBan'])->name('xoa-phong-ban');
 
 });
 //thêm cơ quan
@@ -54,6 +56,13 @@ Route::post('/sua-nguoi-dung/{id}', [NguoiDungController::class, 'suaNguoiDung']
 Route::patch('/cap-nhat-nguoi-dung/{id}', [NguoiDungController::class, 'capNhatNguoiDung'])->name('cap-nhat-nguoi-dung');
 Route::delete('/xoa-nguoi-dung/{id}', [NguoiDungController::class, 'xoaNguoiDung'])->name('xoa-nguoi-dung');
 
+Route::get('/phanquyen', [PhanQuyenController::class, 'giaoDienPhanQuyen'])->middleware(['auth', 'verified'])->name('phanquyen');
+	Route::get('/them-phan-quyen', [PhanQuyenController::class, 'themPhanQuyen'])->middleware(['auth', 'verified'])->name('them-phan-quyen');
+	Route::post('/tao-phan-quyen', [PhanQuyenController::class, 'taoPhanQuyen'])->name('tao-phan-quyen');
+	Route::get('/sua-phan-quyen/{id}', [PhanQuyenController::class, 'suaPhanQuyen'])->name('sua-phan-quyen');
+	Route::put('/cap-nhat-phan-quyen/{id}', [PhanQuyenController::class, 'capNhatPhanQuyen'])->name('cap-nhat-phan-quyen');
+	Route::delete('/xoa-phan-quyen/{id}', [PhanQuyenController::class, 'xoaPhanQuyen'])->name('xoa-phan-quyen');
+
 // dashboard
 Route::get('/dashboard', [PageController::class, 'dashBoard'])->middleware(['auth', 'verified'])->name('dashboard');
 
@@ -65,11 +74,9 @@ Route::middleware('auth')->group(function () {
 	Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
 	Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-	Route::get('them-phan-quyen', [PhanQuyenController::class, 'themPhanQuyen'])->name('them-phan-quyen');
-	Route::post('tao-phan-quyen', [PhanQuyenController::class, 'taoPhanQuyen'])->name('tao-phan-quyen');
-	Route::get('/sua-phan-quyen/{id}', [PhanQuyenController::class, 'suaPhanQuyen'])->name('sua-phan-quyen');
-	Route::put('/cap-nhat-phan-quyen/{id}', [PhanQuyenController::class, 'capNhatPhanQuyen'])->name('cap-nhat-phan-quyen');
-	Route::delete('/xoa-phan-quyen/{id}', [PhanQuyenController::class, 'xoaPhanQuyen'])->name('xoa-phan-quyen');
+	
+
+	
 });
 
 require __DIR__ . '/auth.php';

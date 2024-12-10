@@ -31,10 +31,13 @@ export default function AuthenticatedLayout({ header, children }) {
 								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
 									NHÂN SỰ
 								</NavLink>
+								<NavLink href={route('phanquyen')} active={route().current('phanquyen')}>
+									PHÂN QUYỀN
+								</NavLink>
 								<NavLink href={route('coquan')} active={route().current('coquan')}>
 									CƠ QUAN
 								</NavLink>
-								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
+								<NavLink href={route('phongban')} active={route().current('phongban')}>
 									PHÒNG BAN
 								</NavLink>
 								<NavLink href={route('dashboard')} active={route().current('dashboard')}>

@@ -68,7 +68,7 @@ class CoQuanController extends Controller
 	//sua co quan
 	public function capNhatCoQuan(Request $request, $id)
 	{
-		dd($request->all());
+		// dd($request->all());
 		$request->validate([
 			'ten_co_quan' => ['required', 'string', 'max:255'],
 			'dia_chi' => ['required', 'string', 'max:255'],

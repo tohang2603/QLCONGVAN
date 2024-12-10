@@ -23,8 +23,8 @@ return new class extends Migration {
 			$table->string('ten_phong_ban');
 			$table->string('mo_ta');
 			$table->string('nguoi_quan_ly', 255);
-			$table->string('dia_chi');
-			$table->string('so_dien_thoai', 10);
+			$table->string('dia_chi', 255);
+			$table->string('so_dt', 10);
 			$table->timestamps();
 		});
 		// Công văn

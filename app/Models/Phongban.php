@@ -15,6 +15,7 @@ class Phongban extends Model
         'mo_ta',
         'nguoi_quan_ly',
         'dia_chi',
-        'so_dien_thoai',
+        'so_dt',
     ];
+    public $timestamps = false;
 }
