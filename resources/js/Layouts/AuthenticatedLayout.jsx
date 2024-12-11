@@ -28,12 +28,9 @@ export default function AuthenticatedLayout({ header, children }) {
 								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
 									CÔNG VĂN
 								</NavLink>
-								<NavLink href={route('nhansu')} active={route().current('nhansu')}>
+								{user.id_ma_quyen === 1 && (<NavLink href={route('nhansu')} active={route().current('nhansu')}>
 									NHÂN SỰ
-								</NavLink>
-								<NavLink href={route('phanquyen')} active={route().current('phanquyen')}>
-									PHÂN QUYỀN
-								</NavLink>
+								</NavLink>)}
 								<NavLink href={route('coquan')} active={route().current('coquan')}>
 									CƠ QUAN
 								</NavLink>
