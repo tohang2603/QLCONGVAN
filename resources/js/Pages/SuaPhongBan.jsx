@@ -3,40 +3,23 @@ import TextInputV1 from "@/Components/TextInputV1";
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import Button from "@/Components/Button";
 import { Head } from "@inertiajs/react";
-import { router, usePage } from "@inertiajs/react";
-import { useState } from "react";
+import { usePage, useForm } from "@inertiajs/react";
 
 export default function SuaPhongBan({ phongban }) {
-  const { errors } = usePage().props;
-  const [values, setValues] = useState({
-    tenphongban: phongban.ten_phong_ban,
-    mota: phongban.mo_ta,
-    nguoiquanly: phongban.nguoi_quan_ly,
-    diachi: phongban.dia_chi,
-    sodt: phongban.so_dt,
+  console.log(phongban);
+  const { data, setData, patch, errors } = useForm({
+    //day len du lieu cua giao dien 
+    ten_phong_ban: phongban.ten_phong_ban,
+    mo_ta: phongban.mo_ta,
+    nguoi_quan_ly: phongban.nguoi_quan_ly,
+    dia_chi: phongban.dia_chi,
+    so_dt: phongban.so_dt,
   });
-
-  // Handle change input
-  const handleChange = (e) => {
-    const key = e.target.id;
-    const value = e.target.value;
-    setValues((values) => ({
-      ...values,
-      [key]: value,
-    }));
-  };
-
-  // Handle submit
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const formData = new FormData();
-    formData.append("tenphongban", values.tenphongban);
-    formData.append("mota", values.mota);
-    formData.append("nguoiquanly", values.nguoiquanly);
-    formData.append("diachi", values.diachi);
-    formData.append("sodt", values.sodt);
-    router.patch(`/cap-nhat-phong-ban/${phongban.id}`, formData);
-  };
+    // Handle submit
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      patch(`/cap-nhat-phong-ban/${phongban.id}`);
+    };
 
   return (
     <AuthenticatedLayout
@@ -50,7 +33,7 @@ export default function SuaPhongBan({ phongban }) {
       <div className="py-12">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
           <div>Sửa Phòng Ban</div>
-          <form onSubmit={handleSubmit} encType="multipart/form-data">
+          <form onSubmit={handleSubmit}>
             <div className="grid gap-2">
               {/* Tên phòng ban */}
               <div>
@@ -58,12 +41,11 @@ export default function SuaPhongBan({ phongban }) {
                 <TextInputV1
                   id="tenphongban"
                   type="text"
-                  value={values.tenphongban}
-                  onChange={handleChange}
-                />
-                {errors && errors.tenphongban && (
+                  value={data.ten_phong_ban}
+                  onChange={e => setData('ten_phong_ban', e.target.value)}/>
+                {errors && errors.ten_phong_ban && (
                   <p className="text-sm italic text-red-500">
-                    {errors.tenphongban}
+                    {errors.ten_phong_ban}
                   </p>
                 )}
               </div>
@@ -73,11 +55,10 @@ export default function SuaPhongBan({ phongban }) {
                 <TextInputV1
                   id="mota"
                   type="text"
-                  value={values.mota}
-                  onChange={handleChange}
-                />
-                {errors && errors.mota && (
-                  <p className="text-sm italic text-red-500">{errors.mota}</p>
+                  value={data.mo_ta}
+                  onChange={e => setData('mo_ta', e.target.value)}/>
+                {errors && errors.mo_ta && (
+                  <p className="text-sm italic text-red-500">{errors.mo_ta}</p>
                 )}
               </div>
               {/* Người quản lý */}
@@ -86,12 +67,12 @@ export default function SuaPhongBan({ phongban }) {
                 <TextInputV1
                   id="nguoiquanly"
                   type="text"
-                  value={values.nguoiquanly}
-                  onChange={handleChange}
+                  value={data.nguoi_quan_ly}
+                  onChange={e => setData('nguoi_quan_ly', e.target.value)}
                 />
-                {errors && errors.nguoiquanly && (
+                {errors && errors.nguoi_quan_ly && (
                   <p className="text-sm italic text-red-500">
-                    {errors.nguoiquanly}
+                    {errors.nguoi_quan_ly}
                   </p>
                 )}
               </div>
@@ -101,11 +82,11 @@ export default function SuaPhongBan({ phongban }) {
                 <TextInputV1
                   id="diachi"
                   type="text"
-                  value={values.diachi}
-                  onChange={handleChange}
+                  value={data.dia_chi}
+                  onChange={e => setData('dia_chi', e.target.value)}
                 />
-                {errors && errors.diachi && (
-                  <p className="text-sm italic text-red-500">{errors.diachi}</p>
+                {errors && errors.dia_chi && (
+                  <p className="text-sm italic text-red-500">{errors.dia_chi}</p>
                 )}
               </div>
               {/* Số điện thoại */}
@@ -114,12 +95,12 @@ export default function SuaPhongBan({ phongban }) {
                 <TextInputV1
                   id="sodt"
                   type="text"
-                  value={values.sodt}
-                  onChange={handleChange}
+                  value={data.so_dt}
+                  onChange={e => setData('so_dt', e.target.value)}
                 />
-                {errors && errors.sodt && (
+                {errors && errors.so_dt && (
                   <p className="text-sm italic text-red-500">
-                    {errors.sodt}
+                    {errors.so_dt}
                   </p>
                 )}
               </div>

@@ -6,7 +6,7 @@ export default function ListPhongBan({ className = '', pb, index }) {
   return (
     <div
       className={
-        `${index % 2 === 0 ? 'bg-slate-200 ' : 'bg-slate-100'} grid grid-cols-5 content-center justify-items-center divide-orange-500 py-2` +
+        `${index % 2 === 0 ? 'bg-slate-200 ' : 'bg-slate-100'} grid grid-cols-6 content-center justify-items-center divide-orange-500 py-2` +
         className
       }
     >

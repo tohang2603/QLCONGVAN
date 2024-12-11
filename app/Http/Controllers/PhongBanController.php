@@ -5,10 +5,8 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Phongban;
-// use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\Inertia;
-use Illuminate\Support\Str;
 
 class PhongBanController extends Controller
 {
@@ -44,7 +42,7 @@ class PhongBanController extends Controller
         'ten_phong_ban' => $request->ten_phong_ban,
         'mo_ta' => $request->mo_ta,
         'nguoi_quan_ly' => $request->nguoi_quan_ly,
-        'dia_chi' => $request->diachi,
+        'dia_chi' => $request->dia_chi,
         'so_dt' => $request->so_dt,
     ]);
 
@@ -71,7 +69,7 @@ class PhongBanController extends Controller
 	}// Phương thức sửa phòng ban
     public function capNhatPhongBan(Request $request, $id)
 {
-    dd($request->all());
+    // dd($request->all());
     // Xác thực dữ liệu
     $request->validate([
         'ten_phong_ban' => ['required', 'string', 'max:255'],

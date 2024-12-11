@@ -47,7 +47,7 @@ export default function PhongBan({ dsphongban }) {
                             Thêm phòng ban
                         </ButtonLink>
                         <div>
-                            <div className="grid grid-cols-5 content-center justify-items-center rounded-t-lg bg-sky-400 py-1 text-white">
+                            <div className="grid grid-cols-6 content-center justify-items-center rounded-t-lg bg-sky-400 py-1 text-white">
                                 <div>
                                     <p>Tên phòng ban</p>
                                 </div>

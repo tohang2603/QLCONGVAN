@@ -20,18 +20,20 @@ export default function SuaCoQuan({ coquan }) {
 
   return (
     <AuthenticatedLayout
-      header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Quản lý</h2>}
+      header={<h2 className="text-xl font-semibold leading-tight text-gray-800">
+        Quản lý cơ quan</h2>}
     >
       <Head title="Sửa cơ quan" />
       <div className="py-12">
         <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-          <div>SỬa Cơ Quan</div>
+          <div>Sửa Cơ Quan</div>
           <form onSubmit={handleSubmit}>
             <div className="grid gap-2">
               {/* Tên cơ quan */}
               <div>
                 <InputLabelV1 className="mb-1" value={"Tên cơ quan"} />
-                <TextInputV1 id="tencoquan" type="text" value={data.ten_co_quan} onChange={e => setData('ten_co_quan', e.target.value)} />
+                <TextInputV1 id="tencoquan" type="text" value={data.ten_co_quan} 
+                onChange={e => setData('ten_co_quan', e.target.value)} />
                 {errors && errors.ten_co_quan && (
                   <p className="text-sm italic text-red-500">{errors.ten_co_quan}</p>
                 )}
