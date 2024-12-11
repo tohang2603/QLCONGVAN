@@ -22,11 +22,12 @@ return new class extends Migration {
 			$table->id();
 			$table->string('name');
 			$table->string('email')->unique();
-			$table->string('address',255);
-			$table->string('phone',10);
+			$table->string('address', 255);
+			$table->string('phone', 10);
+			$table->string('actived')->default('false');
 			$table->timestamp('email_verified_at')->nullable();
-			$table->string('password');
-			$table->unsignedBigInteger('id_ma_quyen')->default(4);
+			$table->string(column: 'password');
+			$table->unsignedBigInteger('id_ma_quyen')->default(2);
 			$table->rememberToken();
 			$table->timestamps();
 			// Foreign Keys

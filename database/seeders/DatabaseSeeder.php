@@ -2,8 +2,6 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -24,7 +22,7 @@ class DatabaseSeeder extends Seeder
 			[
 				'ten_quyen' => 'Nhân viên',
 				'ten_ghi_tat' => 'mq2',
-				'mo_ta' => 'Thêm, sửa, xóa công văn'
+				'mo_ta' => 'Thêm, sửa công văn'
 			],
 		]);
 	}

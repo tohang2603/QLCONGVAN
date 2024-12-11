@@ -28,7 +28,7 @@ export default function AuthenticatedLayout({ header, children }) {
 								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
 									CÔNG VĂN
 								</NavLink>
-								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
+								<NavLink href={route('nhansu')} active={route().current('nhansu')}>
 									NHÂN SỰ
 								</NavLink>
 								<NavLink href={route('phanquyen')} active={route().current('phanquyen')}>

@@ -19,4 +19,14 @@ class PageController extends Controller
 		$dsCongVan = $this->CongvanController->layTatCaCongVan();
 		return Inertia::render('Dashboard', ['dscongvan' => $dsCongVan,]);
 	}
+
+	public function activedPage()
+	{
+		return Inertia::render('Actived');
+	}
+
+	public function noneRole()
+	{
+		return Inertia::render('NoneRole');
+	}
 }

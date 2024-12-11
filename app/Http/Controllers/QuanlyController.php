@@ -14,12 +14,10 @@ class QuanlyController extends Controller
 	{
 		$this->CongvanController = $CongvanController;
 	}
-	public function trangChu(): Response
+
+	// Quản lý nhân sự
+	public function nhanSu(): Response
 	{
-		$dsCongVan = $this->CongvanController->layTatCaCongVan();
-		return Inertia::render('TrangChu', [
-			'dscongvan' => $dsCongVan,
-		]);
+		return Inertia::render('NhanSu');
 	}
-	//
 }

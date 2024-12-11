@@ -37,16 +37,17 @@ class User extends Authenticatable
 		'remember_token',
 	];
 
-	/**
-	 * Get the attributes that should be cast.
-	 *
-	 * @return array<string, string>
-	 */
 	protected function casts(): array
 	{
 		return [
 			'email_verified_at' => 'datetime',
 			'password' => 'hashed',
 		];
+	}
+
+	// Khai báo mối quan hệ với bảng PhanQuyen
+	public function phanQuyen()
+	{
+		return $this->belongsTo(PhanQuyen::class, 'id_ma_quyen', 'id');
 	}
 }
