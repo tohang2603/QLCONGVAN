@@ -51,7 +51,7 @@ Route::middleware(['auth', 'actived'])->group(function () {
 	Route::delete('/xoa-phan-quyen/{id}', [PhanQuyenController::class, 'xoaPhanQuyen'])->name('xoa-phan-quyen');
 
 	// Nhân sự
-	Route::get('/nhan-su', [QuanlyController::class, 'nhanSu'])->middleware(['admin'])->name('nhansu');
+	Route::get('/nhansu', [QuanlyController::class, 'nhanSu'])->middleware(['admin'])->name('nhansu');
 });
 
 // dashboard
