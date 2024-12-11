@@ -12,10 +12,11 @@ return new class extends Migration {
 	{
 		// Tạo table role
 		Schema::create('phanquyen', function (Blueprint $table) {
-			$table->increments('id');
+			$table->bigIncrements('id');
 			$table->string('ten_quyen');
 			$table->string('ten_ghi_tat')->unique();
 			$table->string('mo_ta')->nullable();
+			// $table->timestamps();
 		});
 		Schema::create('users', function (Blueprint $table) {
 			$table->id();
@@ -25,7 +26,7 @@ return new class extends Migration {
 			$table->string('phone',10);
 			$table->timestamp('email_verified_at')->nullable();
 			$table->string('password');
-			$table->unsignedInteger('id_ma_quyen')->default(2);
+			$table->unsignedBigInteger('id_ma_quyen')->default(4);
 			$table->rememberToken();
 			$table->timestamps();
 			// Foreign Keys

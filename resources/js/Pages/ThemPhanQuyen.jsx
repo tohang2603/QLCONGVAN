@@ -5,7 +5,7 @@ import Button from '@/Components/Button';
 import { Head, router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
-export default function ThemCoQuan() {
+export default function ThemPhanQuyen() {
 	// Error
 	const { errors } = usePage().props;
 	// console.log(errors);
@@ -29,9 +29,9 @@ export default function ThemCoQuan() {
 	const handleSubmit = (e) => {
 		e.preventDefault();
 		const formData = new FormData();
-		formData.append('ten_quyen', values.ten_co_quan);
-		formData.append('ten_ghi_tat', values.dia_chi);
-		formData.append('mo_ta', values.so_dt);
+		formData.append('ten_quyen', values.ten_quyen);
+		formData.append('ten_ghi_tat', values.ten_ghi_tat);
+		formData.append('mo_ta', values.mo_ta);
 		router.post('/tao-phan-quyen', formData);
 		// Log form data
 		// console.log(selectedFile);

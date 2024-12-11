@@ -8,9 +8,7 @@ use App\Http\Controllers\PhongBanController;
 use App\Http\Controllers\NguoiDungController;
 use App\Http\Controllers\CoQuanController;
 use App\Http\Controllers\PhanQuyenController;
-use App\Http\Controllers\QuanLyCQController;
-use App\Models\Congvan;
-use App\Models\Coquan;
+
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
@@ -55,12 +53,13 @@ Route::post('/sua-nguoi-dung/{id}', [NguoiDungController::class, 'suaNguoiDung']
 Route::patch('/cap-nhat-nguoi-dung/{id}', [NguoiDungController::class, 'capNhatNguoiDung'])->name('cap-nhat-nguoi-dung');
 Route::delete('/xoa-nguoi-dung/{id}', [NguoiDungController::class, 'xoaNguoiDung'])->name('xoa-nguoi-dung');
 
+//them phan quyen
 Route::get('/phanquyen', [PhanQuyenController::class, 'giaoDienPhanQuyen'])->middleware(['auth', 'verified'])->name('phanquyen');
-	Route::get('/them-phan-quyen', [PhanQuyenController::class, 'themPhanQuyen'])->middleware(['auth', 'verified'])->name('them-phan-quyen');
-	Route::post('/tao-phan-quyen', [PhanQuyenController::class, 'taoPhanQuyen'])->name('tao-phan-quyen');
-	Route::get('/sua-phan-quyen/{id}', [PhanQuyenController::class, 'suaPhanQuyen'])->name('sua-phan-quyen');
-	Route::put('/cap-nhat-phan-quyen/{id}', [PhanQuyenController::class, 'capNhatPhanQuyen'])->name('cap-nhat-phan-quyen');
-	Route::delete('/xoa-phan-quyen/{id}', [PhanQuyenController::class, 'xoaPhanQuyen'])->name('xoa-phan-quyen');
+Route::get('/them-phan-quyen', [PhanQuyenController::class, 'themPhanQuyen'])->middleware(['auth', 'verified'])->name('them-phan-quyen');
+Route::post('/tao-phan-quyen', [PhanQuyenController::class, 'taoPhanQuyen'])->name('tao-phan-quyen');
+Route::get('/sua-phan-quyen/{id}', [PhanQuyenController::class, 'suaPhanQuyen'])->name('sua-phan-quyen');
+Route::patch('/cap-nhat-phan-quyen/{id}', [PhanQuyenController::class, 'capNhatPhanQuyen'])->name('cap-nhat-phan-quyen');
+Route::delete('/xoa-phan-quyen/{id}', [PhanQuyenController::class, 'xoaPhanQuyen'])->name('xoa-phan-quyen');
 
 // dashboard
 Route::get('/dashboard', [PageController::class, 'dashBoard'])->middleware(['auth', 'verified'])->name('dashboard');

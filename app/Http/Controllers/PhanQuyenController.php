@@ -14,7 +14,6 @@ class PhanQuyenController extends Controller
     public function themPhanQuyen(Request $request): Response
     {
         return Inertia::render('ThemPhanQuyen', [
-            'status' => session('status'),
         ]);
     }
 
@@ -23,8 +22,7 @@ class PhanQuyenController extends Controller
 		$dsphanquyen = $this->layTatCaPhanQuyen(); //gan ds co quan
 		return Inertia::render('PhanQuyen', ['dsphanquyen'=>$dsphanquyen]);
 	}
-    // Thêm quyền
-     // Thêm phân quyền
+
      public function taoPhanQuyen(Request $request)
      {
          $request->validate([
@@ -72,7 +70,7 @@ class PhanQuyenController extends Controller
      // Cập nhật phân quyền
      public function capNhatPhanQuyen(Request $request, $id)
      {
-        dd($request->all());
+        // dd($request->all());
          $request->validate([
              'ten_quyen' => ['required', 'string', 'max:255'],
              'ten_ghi_tat' => ['required', 'string', 'max:50'],
