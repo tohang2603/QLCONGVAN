@@ -1,11 +1,10 @@
 <?php
-
+use App\Http\Controllers\TimKiemController;
 use App\Http\Controllers\CongVanController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuanlyController;
 use App\Http\Controllers\PhongBanController;
-use App\Http\Controllers\NguoiDungController;
 use App\Http\Controllers\CoQuanController;
 use App\Http\Controllers\PhanQuyenController;
 
@@ -17,6 +16,8 @@ Route::get('/', function () {
 	return redirect()->route('login');
 });
 
+Route::get('/tim-kiem', [TimKiemController::class, 'giaoDienTimKiem'])->name('tim-kiem');
+Route::post('/tim-kiem-cong-van', [TimKiemController::class, 'timKiemCongVan'])->name('tim-kiem-cong-van');
 //duong dan
 Route::middleware(['auth', 'actived'])->group(function () {
 	// Thêm công văn
@@ -68,5 +69,9 @@ Route::middleware('auth')->group(function () {
 	Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 });
+
+
+
+
 
 require __DIR__ . '/auth.php';

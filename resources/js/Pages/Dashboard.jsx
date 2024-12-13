@@ -1,13 +1,14 @@
 import ButtonLink from '@/Components/ButtonLink';
+import ButtonSearch from '@/Components/ButtonSearch';
+import { Head, Link, usePage } from '@inertiajs/react';
 import ListCongVan from '@/Components/ListCongVan';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import { Head, Link, usePage } from '@inertiajs/react';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 
 export default function Dashboard({ dscongvan }) {
 	const { errors, flash } = usePage().props;
-	//	Toast
+	//	Toast thông báo thành công và lỗi
 	useEffect(() => {
 		// Success
 		if (flash.success) {
@@ -34,6 +35,12 @@ export default function Dashboard({ dscongvan }) {
 			});
 		}
 	}, [flash]);
+
+	//Hàm xử lý tìm kiếm
+    const handleSearch = (searchKeyword) => {
+        router.get(route('tim-kiem-tat-ca', { search: searchKeyword }));
+    };
+
 	return (
 		<AuthenticatedLayout
 			header={<h2 className='text-xl font-semibold leading-tight text-gray-800'>Quản lý công văn</h2>}
@@ -49,6 +56,7 @@ export default function Dashboard({ dscongvan }) {
 						<ButtonLink className='mb-4 bg-green-500' href={route('them-cong-van')}>
 							Thêm công văn
 						</ButtonLink>
+						<ButtonSearch onSearch={handleSearch} />
 						<div>
 							<div className='grid grid-cols-5 content-center justify-items-center rounded-t-lg bg-sky-400 py-1 text-white'>
 								<div>
