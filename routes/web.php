@@ -7,7 +7,6 @@ use App\Http\Controllers\QuanlyController;
 use App\Http\Controllers\PhongBanController;
 use App\Http\Controllers\CoQuanController;
 use App\Http\Controllers\PhanQuyenController;
-
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
@@ -16,10 +15,12 @@ Route::get('/', function () {
 	return redirect()->route('login');
 });
 
-Route::get('/tim-kiem', [TimKiemController::class, 'giaoDienTimKiem'])->name('tim-kiem');
-Route::post('/tim-kiem-cong-van', [TimKiemController::class, 'timKiemCongVan'])->name('tim-kiem-cong-van');
 //duong dan
 Route::middleware(['auth', 'actived'])->group(function () {
+	// Tìm kiếm
+	Route::get('/tim-kiem', [TimKiemController::class, 'giaoDienTimKiem'])->name('tim-kiem');
+	Route::get('/tim-kiem-cong-van', [TimKiemController::class, 'timKiemCongVan'])->name('tim-kiem-cong-van');
+
 	// Thêm công văn
 	Route::post('/tao-cong-van', [CongVanController::class, 'taoCongVan'])->name('tao-cong-van');
 	Route::get('/them-cong-van', [CongVanController::class, 'themCongVan'])->name('them-cong-van');

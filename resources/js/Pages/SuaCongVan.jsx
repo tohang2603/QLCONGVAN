@@ -7,7 +7,6 @@ import { router, usePage } from '@inertiajs/react';
 import { useState } from 'react';
 
 export default function SuaCongVan({cv}){
-	console.log(cv)
 	const { errors } = usePage().props;
 	const [selectedFile, setSelectedFile] = useState(null);
 	const [values, setValues] = useState({
