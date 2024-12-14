@@ -12,7 +12,12 @@ use Storage;
 
 class CongVanController extends Controller
 {
+	protected $LichSuController;
 
+	public function __construct(LichSuController $LichSuController)
+	{
+		$this->LichSuController = $LichSuController;
+	}
 
 	// Giao dien them cong van
 	public function themCongVan(Request $request): Response
@@ -64,6 +69,9 @@ class CongVanController extends Controller
 		// dd($newSlug);
 		$congvan->slug = $newSlug;
 		$congvan->save();
+
+		// Ghi lịch sử
+		$this->LichSuController->ThemLichSu($congvan->nguoi_tao, $congvan->id, 'Tạo mới công văn');
 		return redirect()->route('dashboard')->with('success', 'Thêm công văn thành công.');
 	}
 
@@ -137,6 +145,9 @@ class CongVanController extends Controller
 			$newSlug = $congvan->id . '-' . Str::of($congvan->tieu_de)->slug('-');
 			$congvan->slug = $newSlug;
 			$congvan->save();
+
+			// Ghi lịch sử
+			$this->LichSuController->ThemLichSu($congvan->id, $congvan->nguoi_tao, 'Cập nhật công văn');
 		}
 		return redirect()->route('dashboard')->with('success', 'Cập nhật công văn thành công.');
 	}

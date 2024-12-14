@@ -38,9 +38,6 @@ export default function AuthenticatedLayout({ header, children }) {
 									PHÒNG BAN
 								</NavLink>
 								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
-									LỊCH SỬ 
-								</NavLink>
-								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
 									PHÂN LOẠI
 								</NavLink>
 							</div>
