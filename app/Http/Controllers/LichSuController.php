@@ -16,4 +16,11 @@ class LichSuController extends Controller
 			'trang_thai' => $trangthai,
 		]);
 	}
+
+	// Xoá lịch sử
+	public function XoaLichSu($id)
+	{
+		$ls = LichSu::find($id);
+		$ls->delete();
+	}
 }

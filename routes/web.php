@@ -26,7 +26,7 @@ Route::middleware(['auth', 'actived'])->group(function () {
 	Route::get('/them-cong-van', [CongVanController::class, 'themCongVan'])->name('them-cong-van');
 	Route::get('/sua-cong-van/{id}', [CongVanController::class, 'suaCongVan'])->name('sua-cong-van');
 	Route::post('/cap-nhat-cong-van/{id}', [CongVanController::class, 'capNhatCongVan'])->name('cap-nhat-cong-van'); // Để cập nhật
-	Route::delete('/xoa-cong-van/{id}', [CongVanController::class, 'xoaCongVan'])->name('xoa-cong-van');
+	Route::delete('/xoa-cong-van/{id}', [CongVanController::class, 'xoaCongVan'])->middleware(['admin'])->name('xoa-cong-van');
 
 	//thêm phòng ban
 	Route::get('/phongban', [PhongBanController::class, 'giaoDienPhongBan'])->name('phongban');
