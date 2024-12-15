@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function AuthenticatedLayout({ header, children }) {
 	const user = usePage().props.auth.user;
+	console.log(user)
 	const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 	return (
 		<div className='min-h-screen bg-gray-100'>

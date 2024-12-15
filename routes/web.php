@@ -16,7 +16,7 @@ Route::get('/', function () {
 });
 
 //duong dan
-Route::middleware(['auth', 'actived'])->group(function () {
+Route::middleware(['auth', 'actived', 'checkrole'])->group(function () {
 	// Tìm kiếm
 	Route::get('/tim-kiem', [TimKiemController::class, 'giaoDienTimKiem'])->name('tim-kiem');
 	Route::get('/tim-kiem-cong-van', [TimKiemController::class, 'timKiemCongVan'])->name('tim-kiem-cong-van');
@@ -57,7 +57,7 @@ Route::middleware(['auth', 'actived'])->group(function () {
 });
 
 // dashboard
-Route::get('/dashboard', [PageController::class, 'dashBoard'])->middleware(['auth', 'actived'])->name('dashboard');
+Route::get('/dashboard', [PageController::class, 'dashBoard'])->middleware(['auth', 'actived', 'checkrole'])->name('dashboard');
 Route::get('/actived', [PageController::class, 'activedPage'])->middleware(['auth'])->name('actived');
 Route::get('/none-role', [PageController::class, 'noneRole'])->middleware(['auth'])->name('none-role');
 

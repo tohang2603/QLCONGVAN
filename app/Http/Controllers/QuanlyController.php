@@ -10,14 +10,17 @@ class QuanlyController extends Controller
 {
 	// Khai báo
 	protected $CongvanController;
-	public function __construct(CongvanController $CongvanController)
+	protected $NhanSuController;
+	public function __construct(CongvanController $CongvanController, NhanSuController $NhanSuController)
 	{
 		$this->CongvanController = $CongvanController;
+		$this->NhanSuController = $NhanSuController;
 	}
 
 	// Quản lý nhân sự
 	public function nhanSu(): Response
 	{
-		return Inertia::render('NhanSu');
+		$nhanSu = $this->NhanSuController->layTatCaNhanSu();
+		return Inertia::render('NhanSu', ['nhanSu' => $nhanSu]);
 	}
 }
