@@ -7,7 +7,6 @@ use App\Http\Controllers\QuanlyController;
 use App\Http\Controllers\PhongBanController;
 use App\Http\Controllers\CoQuanController;
 use App\Http\Controllers\PhanQuyenController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 
 // Home

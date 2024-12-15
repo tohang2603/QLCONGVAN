@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Inertia\Inertia;
 use Symfony\Component\HttpFoundation\Response;
 
 class CheckRole
@@ -12,9 +13,8 @@ class CheckRole
 	{
 		$user = auth()->user();
 		if ($user && $user->phanQuyen->ten_ghi_tat === "admin") {
-			$response = $next($request);
-			$response->setContent($response->getContent() . 'X_00034');
-			return $response;
+			Inertia::share('role', fn() => $user->phanQuyen->ten_ghi_tat === "admin" ? '0x3782' : 'null');
+			return $next($request);
 		} else {
 			return $next($request);
 		}
