@@ -20,7 +20,11 @@ class LichSuController extends Controller
 	// Xoá lịch sử
 	public function XoaLichSu($id)
 	{
-		$ls = LichSu::find($id);
-		$ls->delete();
+		// Tìm lịch sử theo id congvăn
+		$ls = LichSu::where('id_cong_van', $id)->get();
+		// Xoá lịch sử
+		foreach ($ls as $item) {
+			$item->delete();
+		}
 	}
 }
