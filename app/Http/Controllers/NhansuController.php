@@ -11,7 +11,15 @@ class NhansuController extends Controller
     // Lấy tất cả nhân sự
     public function layTatCaNhanSu()
     {
-        $nhanSu = User::select(['name', 'address', 'phone', 'id_ma_quyen'])->get();  // Lấy tất cả nhân sự
+        $nhanSu = User::select(['id', 'name', 'email', 'address', 'phone', 'id_ma_quyen'])->where('actived', 'true')->get();  // Lấy tất cả nhân sự
+        $nhanSu->load('phanQuyen');
+        return $nhanSu;
+    }
+
+    // Lấy nhân sự theo chưa kích hoạt
+    public function layNhanSuChuaKichHoat()
+    {
+        $nhanSu = User::select(['id', 'name', 'email', 'address', 'phone', 'id_ma_quyen'])->where('actived', 'false')->get();  // Lấy nhân sự chưa kích hoạt
         $nhanSu->load('phanQuyen');
         return $nhanSu;
     }

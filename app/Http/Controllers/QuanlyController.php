@@ -21,6 +21,7 @@ class QuanlyController extends Controller
 	public function nhanSu(): Response
 	{
 		$nhanSu = $this->NhanSuController->layTatCaNhanSu();
-		return Inertia::render('NhanSu', ['nhanSu' => $nhanSu]);
+		$nhanSuChuaKichHoat = $this->NhanSuController->layNhanSuChuaKichHoat();
+		return Inertia::render('NhanSu', ['nhanSu' => ['tatCa' => $nhanSu, 'chuaKichHoat' => $nhanSuChuaKichHoat]]);
 	}
 }
