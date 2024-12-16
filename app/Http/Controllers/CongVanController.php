@@ -153,8 +153,9 @@ class CongVanController extends Controller
 			$congvan->save();
 
 			// Ghi lịch sử
-			$this->LichSuController->ThemLichSu($congvan->id, $congvan->nguoi_tao, 'Cập nhật công văn');
+			
 		}
+		$this->LichSuController->ThemLichSu(auth()->user()->id, $congvan->id, 'Cập nhật công văn');
 		return redirect()->route('dashboard')->with('success', 'Cập nhật công văn thành công.');
 	}
 	// Xóa công văn

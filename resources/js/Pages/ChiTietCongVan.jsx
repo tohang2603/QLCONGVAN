@@ -24,7 +24,7 @@ const ChiTietCongVan = ({ congvan }) => {
               <div className="px-3 py-2 text-center">{congvan.so_cong_van}</div>
               <div className="px-3 py-2 text-center">{congvan.tieu_de}</div>
               <div className="px-3 py-2 text-center">{congvan.mo_ta}</div>
-              <div className="px-3 py-2 text-center">{congvan.nguoi_tao}</div>
+              <div className="px-3 py-2 text-center">{congvan.nguoidung.name}</div>
               <div className="px-3">
                 <ul className="list-none">
                   {congvan.lichsu.map((ls) => (
