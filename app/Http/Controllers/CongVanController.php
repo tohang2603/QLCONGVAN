@@ -18,6 +18,12 @@ class CongVanController extends Controller
 	{
 		$this->LichSuController = $LichSuController;
 	}
+	public function chiTietCongVan(Request $request, $id)
+    {
+		$congvan = Congvan::with(['nguoidung', 'lichsu.nguoidung'])
+		->find($id);
+		return Inertia::render('ChiTietCongVan', ['congvan'=>$congvan]);			
+    }
 
 	// Giao dien them cong van
 	public function themCongVan(Request $request): Response
