@@ -8,17 +8,22 @@ use App\Http\Controllers\PhongBanController;
 use App\Http\Controllers\CoQuanController;
 use App\Http\Controllers\PhanQuyenController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Congvan;
+
 
 // Home
 Route::get('/', function () {
 	return redirect()->route('login');
 });
 
+//check quyền middleware rồi mới vào routes.
+//auth: đăng nhập ( xác thực ng dùng) và active: kích hoạt ( đã kích hoạt tk hay chưa)
 //duong dan
 Route::middleware(['auth', 'actived', 'checkrole'])->group(function () {
 	// Tìm kiếm
 	Route::get('/tim-kiem', [TimKiemController::class, 'giaoDienTimKiem'])->name('tim-kiem');
 	Route::get('/tim-kiem-cong-van', [TimKiemController::class, 'timKiemCongVan'])->name('tim-kiem-cong-van');
+	Route::get('/chi-tiet-cong-van/{id}', [CongVanController::class, 'chiTietCongVan'])->name('chi-tiet-cong-van');
 
 	// Thêm công văn
 	Route::post('/tao-cong-van', [CongVanController::class, 'taoCongVan'])->name('tao-cong-van');

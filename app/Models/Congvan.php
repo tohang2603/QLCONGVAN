@@ -26,4 +26,9 @@ class Congvan extends Model
 	{
 		return $this->belongsTo(User::class, 'nguoi_tao', 'id');
 	}
+	public function lichsu()
+	{
+    return $this->hasMany(LichSu::class, 'id_cong_van');
+	}
+
 }
