@@ -9,6 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 
 export default function AuthenticatedLayout({ header, children }) {
 	const user = usePage().props.auth.user;
+	const { role } = usePage().props;
 	const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 	return (
 		<div className='min-h-screen bg-gray-100'>
@@ -28,7 +29,7 @@ export default function AuthenticatedLayout({ header, children }) {
 								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
 									CÔNG VĂN
 								</NavLink>
-								{user.id_ma_quyen === 1 && (<NavLink href={route('nhansu')} active={route().current('nhansu')}>
+								{role && (<NavLink href={route('nhansu')} active={route().current('nhansu')}>
 									NHÂN SỰ
 								</NavLink>)}
 								<NavLink href={route('coquan')} active={route().current('coquan')}>

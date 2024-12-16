@@ -7,7 +7,6 @@ use App\Http\Controllers\QuanlyController;
 use App\Http\Controllers\PhongBanController;
 use App\Http\Controllers\CoQuanController;
 use App\Http\Controllers\PhanQuyenController;
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use App\Models\Congvan;
 
@@ -20,7 +19,7 @@ Route::get('/', function () {
 //check quyền middleware rồi mới vào routes.
 //auth: đăng nhập ( xác thực ng dùng) và active: kích hoạt ( đã kích hoạt tk hay chưa)
 //duong dan
-Route::middleware(['auth', 'actived'])->group(function () {
+Route::middleware(['auth', 'actived', 'checkrole'])->group(function () {
 	// Tìm kiếm
 	Route::get('/tim-kiem', [TimKiemController::class, 'giaoDienTimKiem'])->name('tim-kiem');
 	Route::get('/tim-kiem-cong-van', [TimKiemController::class, 'timKiemCongVan'])->name('tim-kiem-cong-van');
@@ -31,7 +30,7 @@ Route::middleware(['auth', 'actived'])->group(function () {
 	Route::get('/them-cong-van', [CongVanController::class, 'themCongVan'])->name('them-cong-van');
 	Route::get('/sua-cong-van/{id}', [CongVanController::class, 'suaCongVan'])->name('sua-cong-van');
 	Route::post('/cap-nhat-cong-van/{id}', [CongVanController::class, 'capNhatCongVan'])->name('cap-nhat-cong-van'); // Để cập nhật
-	Route::delete('/xoa-cong-van/{id}', [CongVanController::class, 'xoaCongVan'])->name('xoa-cong-van');
+	Route::delete('/xoa-cong-van/{id}', [CongVanController::class, 'xoaCongVan'])->middleware(['admin'])->name('xoa-cong-van');
 
 	//thêm phòng ban
 	Route::get('/phongban', [PhongBanController::class, 'giaoDienPhongBan'])->name('phongban');
@@ -62,7 +61,7 @@ Route::middleware(['auth', 'actived'])->group(function () {
 });
 
 // dashboard
-Route::get('/dashboard', [PageController::class, 'dashBoard'])->middleware(['auth', 'actived'])->name('dashboard');
+Route::get('/dashboard', [PageController::class, 'dashBoard'])->middleware(['auth', 'actived', 'checkrole'])->name('dashboard');
 Route::get('/actived', [PageController::class, 'activedPage'])->middleware(['auth'])->name('actived');
 Route::get('/none-role', [PageController::class, 'noneRole'])->middleware(['auth'])->name('none-role');
 

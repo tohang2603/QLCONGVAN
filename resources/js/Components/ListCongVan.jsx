@@ -3,6 +3,8 @@ import ButtonIcon from './ButtonIcon';
 import { router, Link } from '@inertiajs/react';
 
 export default function ListCongVan({ className = '', cv, index }) {
+	// Get user
+	const user = usePage().props.auth.user;
 	return (
 		<div
 			className={
@@ -22,16 +24,18 @@ export default function ListCongVan({ className = '', cv, index }) {
 			<div className='grid content-center justify-items-center'>
 				<p>{cv.nguoidung.name}</p>
 			</div>
-			<div className='grid grid-cols-3 content-center justify-items-center gap-2'>
-				<ButtonIcon onClick={()=>router.get(`/sua-cong-van/${cv.id}`)} className='hover:bg-green-500'>
+			<div className={`grid grid-cols-2 content-center justify-items-center gap-2 ${user.id_ma_quyen == 1 ? 'grid-cols-3' : ''}`}>
+				<ButtonIcon onClick={() => router.get(`/sua-cong-van/${cv.id}`)} className='hover:bg-green-500'>
 					<ion-icon name='create-outline'></ion-icon>
 				</ButtonIcon>
-				<ButtonIcon onClick={()=>{const fileUrl = cv.file; window.open(fileUrl, '_blank')}} className='hover:bg-slate-300'>
-					<ion-icon name="eye-outline"></ion-icon>					
+				<ButtonIcon onClick={() => { const fileUrl = cv.file; window.open(fileUrl, '_blank') }} className='hover:bg-slate-300'>
+					<ion-icon name="eye-outline"></ion-icon>
 				</ButtonIcon>
-				<ButtonIcon onClick={()=>{document.getElementById(`btn_delete_${index}`).showModal()}} className='hover:bg-red-500 '>
-					<ion-icon name='trash-outline'></ion-icon>					
-				</ButtonIcon>
+				{user.id_ma_quyen === 1 && (
+					<ButtonIcon onClick={() => { document.getElementById(`btn_delete_${index}`).showModal() }} className='hover:bg-red-500 '>
+						<ion-icon name='trash-outline'></ion-icon>
+					</ButtonIcon>
+				)}
 			</div>
 			{/* Dialog Xoá*/}
 			<DialogDlt index={index} cv={cv} />

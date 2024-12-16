@@ -162,10 +162,11 @@ class CongVanController extends Controller
 	public function xoaCongVan($id)
 	{
 		$congvan = Congvan::findOrFail($id); // Tìm công văn theo ID
-		// Xoá file 
-		Storage::delete($congvan->file);
-		// Xóa công văn
-		if ($congvan->delete()) {
+		if (Storage::disk('public')->delete($congvan->file)) {
+			// Xoá lịch sử
+			$this->LichSuController->XoaLichSu($congvan->id);
+			// Xoá công văn
+			$congvan->delete();
 			return redirect()->route('dashboard')->with('success', 'Xóa công văn thành công.');
 		}
 		return redirect()->route('dashboard')->with('error', 'Xóa công văn không thành công.');

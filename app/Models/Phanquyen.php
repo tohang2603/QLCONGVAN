@@ -14,4 +14,9 @@ class Phanquyen extends Model
         'ten_ghi_tat',
         'mo_ta',
     ];
+
+    protected $hidden = [
+        'id',
+        'ten_ghi_tat',
+    ];
 }
