@@ -1,6 +1,6 @@
 import DialogDlt from '@/Components/DialogDlt';
 import ButtonIcon from './ButtonIcon';
-import { router } from '@inertiajs/react';
+import { router, Link } from '@inertiajs/react';
 
 export default function ListCongVan({ className = '', cv, index }) {
 	return (
@@ -14,7 +14,7 @@ export default function ListCongVan({ className = '', cv, index }) {
 				<p>{cv.so_cong_van}</p>
 			</div>
 			<div className='grid content-center justify-items-center'>
-				<p className='hover:text-red-500'>{cv.tieu_de}</p>
+				<Link href={`/chi-tiet-cong-van/${cv.id}`} className='hover:text-red-500 text-green-700'>{cv.tieu_de}</Link>
 			</div>
 			<div className='grid content-center justify-items-center'>
 				<p>{cv.mo_ta}</p>

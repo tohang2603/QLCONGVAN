@@ -48,10 +48,12 @@ export default function Dashboard({ dscongvan }) {
 						<div className='p-6 text-gray-900'>You're logged in!</div>
 					</div> */}
 					<div>
+						<h2>Tìm kiếm công văn</h2>
+						<ButtonSearch />
 						<ButtonLink className='mb-4 bg-green-500' href={route('them-cong-van')}>
 							Thêm công văn
 						</ButtonLink>
-						<ButtonSearch />
+						
 						<div>
 							<div className='grid grid-cols-5 content-center justify-items-center rounded-t-lg bg-sky-400 py-1 text-white'>
 								<div>
