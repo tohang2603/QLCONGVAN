@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Models\User;
 use Inertia\Response;
 use Inertia\Inertia;
+use Illuminate\Http\Request;
 class QuanlyController extends Controller
 {
 	// Khai báo
@@ -23,5 +24,16 @@ class QuanlyController extends Controller
 		$nhanSu = $this->NhanSuController->layTatCaNhanSu();
 		$nhanSuChuaKichHoat = $this->NhanSuController->layNhanSuChuaKichHoat();
 		return Inertia::render('NhanSu', ['nhanSu' => ['tatCa' => $nhanSu, 'chuaKichHoat' => $nhanSuChuaKichHoat]]);
+	}
+
+	public function kichHoat( $id)
+	{
+		
+		 $user=User::find($id);
+		 if ($user) {
+		 $user->update(['actived' => 'true']);
+		 return redirect()->route('dashboard')->with('success', 'Kích hoạt thành công.');	
+		}
+		return redirect()->route('dashboard')->with('error', 'Kích hoạt thất bại.');
 	}
 }

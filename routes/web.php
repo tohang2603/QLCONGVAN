@@ -58,6 +58,7 @@ Route::middleware(['auth', 'actived', 'checkrole'])->group(function () {
 
 	// Nhân sự
 	Route::get('/nhansu', [QuanlyController::class, 'nhanSu'])->middleware(['admin'])->name('nhansu');
+	Route::get('/kich-hoat/{id}', [QuanlyController::class,'kichHoat'])->middleware(['admin'])->name('kich-hoat');                                                                                       
 });
 
 // dashboard
