@@ -5,19 +5,19 @@ const ButtonSearch = () => {
   const [searchKeyword, setSearchKeyword] = useState('');
 
   return (
-    <div className="flex items-center justify-center w-full max-w-sm mb-8">
+    <div> {/* Thêm container với các class Tailwind */}
       <input
         type="text"
-        className="p-2 border rounded-lg w-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition duration-150 ease-in-out"
-        placeholder="Nhập số công văn, mô tả hoặc tiêu đề..."
+        className="p-2 border border-gray-300 rounded-lg w-5/6 focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out text-gray-800 placeholder-gray-400"
+        placeholder="Tìm kiếm số công văn, mô tả, hoặc tiêu đề..."
         value={searchKeyword}
         onChange={(e) => setSearchKeyword(e.target.value)}
       />
       <ButtonLink
-        className=" px-2 py-2 ml-6 bg-blue-500 text-white rounded-lg transition duration-150 ease-in-out hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 font-size:14px" // Adjust font-size if needed
+        className=" ml-6 px1 py-0 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-md transition duration-150 ease-in-out hover:from-indigo-600 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
         href={`tim-kiem-cong-van?search=${searchKeyword}`}
       >
-        Tìm kiếm
+        <span className="text-base">Tìm kiếm</span>
       </ButtonLink>
     </div>
   );

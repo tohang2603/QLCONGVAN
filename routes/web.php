@@ -7,10 +7,8 @@ use App\Http\Controllers\QuanlyController;
 use App\Http\Controllers\PhongBanController;
 use App\Http\Controllers\CoQuanController;
 use App\Http\Controllers\PhanQuyenController;
+use App\Http\Controllers\TrangChuController;
 use Illuminate\Support\Facades\Route;
-use App\Models\Congvan;
-
-
 // Home
 Route::get('/', function () {
 	return redirect()->route('login');
@@ -56,6 +54,8 @@ Route::middleware(['auth', 'actived', 'checkrole'])->group(function () {
 	Route::patch('/cap-nhat-phan-quyen/{id}', [PhanQuyenController::class, 'capNhatPhanQuyen'])->name('cap-nhat-phan-quyen');
 	Route::delete('/xoa-phan-quyen/{id}', [PhanQuyenController::class, 'xoaPhanQuyen'])->name('xoa-phan-quyen');
 
+	//Trang chủ
+	Route::get('/trangchu', [TrangChuController::class, 'giaoDienTrangChu'])->name('trangchu');
 	// Nhân sự
 	Route::get('/nhansu', [QuanlyController::class, 'nhanSu'])->middleware(['admin'])->name('nhansu');
 	Route::get('/kich-hoat/{id}', [QuanlyController::class,'kichHoat'])->middleware(['admin'])->name('kich-hoat');                                                                                       

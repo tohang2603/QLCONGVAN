@@ -40,56 +40,75 @@ export default function ThemCongVan() {
 	// Log
 	return (
 		<AuthenticatedLayout
-			header={<h2 className='text-xl font-semibold leading-tight text-gray-800'>Quản lý</h2>}
+			header={<h2 className='text-xl font-semibold leading-tight text-black'>Thêm công văn</h2>}
 		>
-			<Head title='Thêm công văn' />
-
 			<div className='py-12'>
-				<div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>
-					{/* <div className='overflow-hidden bg-white shadow-sm sm:rounded-lg'>
-            <div className='p-6 text-gray-900'>You're logged in!</div>
-          </div> */}
-					<div>Thêm Công Văn</div>
-					{/* Số công văn */}
-					<form onSubmit={handleSubmit} encType='multipart/form-data'>
-						<div className='gird gap-2'>
-							{/* Số công văn */}
-							<div>
-								<InputLabelV1 className='mb-1' value={'Số công văn'} />
-								<TextInputV1 id='socongvan' type='text' value={values.socongvan} onChange={handleChange} />
-								{errors && errors.socongvan && (
-									<p className='text-sm italic text-red-500'>{errors.socongvan}</p>
-								)}
-							</div>
-							{/* Tiêu đề */}
-							<div>
-								<InputLabelV1 className='mb-1' value={'Tiêu đề'} />
-								<TextInputV1 id='tieude' type='text' value={values.tieude} onChange={handleChange} />
-								{errors && errors.tieude && <p className='text-sm italic text-red-500'>{errors.tieude}</p>}
-							</div>
-						</div>
-						<div>
-							{/* Mô tả */}
-							<InputLabelV1 className='mb-1' value={'Mô tả'} />
-							<TextInputV1 id='mota' type='text' value={values.mota} onChange={handleChange} />
-							{errors && errors.mota && <p className='text-sm italic text-red-500'>{errors.mota}</p>}
-						</div>
-						{/* Tệp */}
-						<div>
-							<InputLabelV1 className='mb-1' value={'Tệp'} />
-							<input
-								type='file'
-								className='file-input file-input-bordered mt-1 w-full max-w-xs'
-								onChange={(e) => setSelectedFile(e.target.files[0])}
-							/>
-							{errors && errors.file && <p className='text-sm italic text-red-500'>{errors.file}</p>}
-						</div>
-						<Button className='mt-3' type='submit'>
-							Thêm
-						</Button>
-					</form>
+	<div className='max-w-7xl sm:px-6 lg:px-8'>
+		<form onSubmit={handleSubmit} encType='multipart/form-data'>
+			<div className='grid gap-6 mb-6'>
+				{/* Số công văn */}
+				<div>
+					<InputLabelV1 className='mb-1' value={'Số công văn'} />
+					<TextInputV1
+						id='socongvan'
+						type='text'
+						value={values.socongvan}
+						onChange={handleChange}
+						className='p-2 border border-gray-300 rounded-lg w-1/4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out'
+					/>
+					{errors && errors.socongvan && (
+						<p className='text-sm italic text-red-500'>{errors.socongvan}</p>
+					)}
+				</div>
+				{/* Tiêu đề */}
+				<div>
+					<InputLabelV1 className='mb-1' value={'Tiêu đề'} />
+					<TextInputV1
+						id='tieude'
+						type='text'
+						value={values.tieude}
+						onChange={handleChange}
+						className='p-2 border border-gray-300 rounded-lg w-1/4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out'
+					/>
+					{errors && errors.tieude && (
+						<p className='text-sm italic text-red-500'>{errors.tieude}</p>
+					)}
 				</div>
 			</div>
+
+			{/* Mô tả */}
+			<div className='mb-4'>
+				<InputLabelV1 className='mb-1' value={'Mô tả'} />
+				<TextInputV1
+					id='mota'
+					type='text'
+					value={values.mota}
+					onChange={handleChange}
+					className='p-2 border border-gray-300 rounded-lg w-1/4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out'
+				/>
+				{errors && errors.mota && <p className='text-sm italic text-red-500'>{errors.mota}</p>}
+			</div>
+
+			{/* Tệp */}
+			<div className='mb-4 rounded w-1/4'>
+				<InputLabelV1 className='mb-2' value={'Tệp'} />
+				<input
+					type='file'
+					className='file-input file-input-bordered mt-1 w-full max-w-xs p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out'
+					onChange={(e) => setSelectedFile(e.target.files[0])}
+				/>
+				{errors && errors.file && <p className='text-sm italic text-red-500'>{errors.file}</p>}
+			</div>
+
+			<Button
+				className='mt-3 py-2 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow-md transition duration-150 ease-in-out'
+				type='submit'
+			>
+				Thêm công văn
+			</Button>
+		</form>
+	</div>
+	</div>
 		</AuthenticatedLayout>
 	);
 }

@@ -9,7 +9,7 @@ export default function ListCongVan({ className = '', cv, index }) {
 	return (
 		<div
 			className={
-				`${index % 2 === 0 ? 'bg-slate-200 ' : 'bg-slate-100'} grid grid-cols-5 content-center justify-items-center divide-orange-500 py-2` +
+				`${index % 2 === 0 ? 'bg-white': 'bg-white '} grid grid-cols-5 content-center border-b border-gray-300 justify-items-center divide-orange-500 py-2` +
 				className
 			}
 		>
@@ -17,7 +17,7 @@ export default function ListCongVan({ className = '', cv, index }) {
 				<p>{cv.so_cong_van}</p>
 			</div>
 			<div className='grid content-center justify-items-center'>
-				<Link href={`/chi-tiet-cong-van/${cv.id}`} className='hover:text-red-500 text-green-700'>{cv.tieu_de}</Link>
+				<Link href={`/chi-tiet-cong-van/${cv.id}`} className='hover:text-red-500 text-green-500'>{cv.tieu_de}</Link>
 			</div>
 			<div className='grid content-center justify-items-center'>
 				<p>{cv.mo_ta}</p>

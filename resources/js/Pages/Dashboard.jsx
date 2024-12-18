@@ -8,9 +8,9 @@ import { useEffect } from 'react';
 
 export default function Dashboard({ dscongvan }) {
 	const { errors, flash } = usePage().props;
-	//	Toast thông báo thành công và lỗi
+
+	// Toast thông báo thành công và lỗi
 	useEffect(() => {
-		// Success
 		if (flash.success) {
 			toast.success(flash.success, {
 				position: 'top-right',
@@ -22,7 +22,6 @@ export default function Dashboard({ dscongvan }) {
 				progress: undefined,
 			});
 		}
-		// Error
 		if (flash.error) {
 			toast.error(flash.error, {
 				position: 'top-right',
@@ -38,49 +37,58 @@ export default function Dashboard({ dscongvan }) {
 
 	return (
 		<AuthenticatedLayout
-			header={<h2 className='text-xl font-semibold leading-tight text-gray-800'>Quản lý công văn</h2>}
+			header={<h2 className='text-2xl font-bold leading-tight text-gray-800'>Quản lý công văn</h2>}
 		>
 			<Head title='Dashboard' />
 
-			<div className='py-12'>
-				<div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>
-					{/* <div className='overflow-hidden bg-white shadow-sm sm:rounded-lg'>
-						<div className='p-6 text-gray-900'>You're logged in!</div>
-					</div> */}
-					<div>
-						<h2>Tìm kiếm công văn</h2>
-						<ButtonSearch />
-						<ButtonLink className='mb-4 bg-green-500' href={route('them-cong-van')}>
+			<div className='py-12 w-full bg-gradient-to-r from-blue-400 to-blue-200'>
+				<div className='mx-auto max-w-7x1 sm:px-6 lg:px-8'>
+					<div className='overflow-hidden bg-white shadow-lg sm:rounded-lg'>
+						<div className='p-6 text-gray-900'>
+							<ButtonSearch />
+						</div>
+						<ButtonLink
+							className='py-2 px-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow mx-6
+						 transition duration-150 ease-in-out'
+							href={route('them-cong-van')}
+						>
 							Thêm công văn
 						</ButtonLink>
-						
-						<div>
-							<div className='grid grid-cols-5 content-center justify-items-center rounded-t-lg bg-sky-400 py-1 text-white'>
-								<div>
-									<p>Số công văn</p>
+						<div className='overflow-hidden bg-white shadow-lg rounded-lg'>
+							<div className='p-6'>
+								<div className='grid grid-cols-5 gap-4 content-center justify-items-center bg-blue-600 py-2 text-white font-medium'>
+									<div>
+										<p>Số công văn</p>
+									</div>
+									<div>
+										<p>Tiêu đề</p>
+									</div>
+									<div>
+										<p>Mô tả</p>
+									</div>
+									<div>
+										<p>Người tạo</p>
+									</div>
+									<div>
+										<p>Thao tác</p>
+									</div>
 								</div>
-								<div>
-									<p>Tiêu đề</p>
-								</div>
-								<div>
-									<p>Mô tả</p>
-								</div>
-								<div>
-									<p>Người tạo</p>
-								</div>
-								<div>
-									<p>Thao tác</p>
-								</div>
+								{dscongvan.length === 0 ? (
+									<div className='text-center mt-4 text-gray-500'>Không có công văn nào</div>
+								) : (
+									dscongvan.map((cv, index) => (
+										<ListCongVan
+											index={index}
+											key={cv.id}
+											cv={cv}
+											className='hover:bg-yellow-50'
+										/>
+									))
+								)}
 							</div>
-							{dscongvan.length === 0 ? (
-								<div className='text-center mt-3'>Không có công văn nào</div>
-							) : (
-								dscongvan.map((cv, index) => (
-									<ListCongVan index={index} key={cv.id} cv={cv} />
-								))
-							)}
 						</div>
 					</div>
+				
 				</div>
 			</div>
 		</AuthenticatedLayout>
