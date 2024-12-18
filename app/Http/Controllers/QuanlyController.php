@@ -26,13 +26,12 @@ class QuanlyController extends Controller
 		return Inertia::render('NhanSu', ['nhanSu' => ['tatCa' => $nhanSu, 'chuaKichHoat' => $nhanSuChuaKichHoat]]);
 	}
 
-	public function kichHoat( $id)
+	public function kichHoat($id)
 	{
-		
-		 $user=User::find($id);
-		 if ($user) {
-		 $user->update(['actived' => 'true']);
-		 return redirect()->route('dashboard')->with('success', 'Kích hoạt thành công.');	
+		$user = User::find($id);
+		if ($user) {
+			$user->update(['actived' => 'true']);
+			return redirect()->route('dashboard')->with('success', 'Kích hoạt thành công.');
 		}
 		return redirect()->route('dashboard')->with('error', 'Kích hoạt thất bại.');
 	}

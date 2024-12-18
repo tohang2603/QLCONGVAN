@@ -23,6 +23,7 @@ class User extends Authenticatable
 		'email',
 		'address',
 		'phone',
+		'actived',
 		'password',
 		'id_ma_quyen',
 	];

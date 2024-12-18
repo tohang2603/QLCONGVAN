@@ -58,7 +58,7 @@ Route::middleware(['auth', 'actived', 'checkrole'])->group(function () {
 	Route::get('/trangchu', [TrangChuController::class, 'giaoDienTrangChu'])->name('trangchu');
 	// Nhân sự
 	Route::get('/nhansu', [QuanlyController::class, 'nhanSu'])->middleware(['admin'])->name('nhansu');
-	Route::get('/kich-hoat/{id}', [QuanlyController::class,'kichHoat'])->middleware(['admin'])->name('kich-hoat');                                                                                       
+	Route::put('/kich-hoat/{id}', [QuanlyController::class, 'kichHoat'])->middleware(['admin'])->name('kich-hoat');
 });
 
 // dashboard
