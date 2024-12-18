@@ -14,8 +14,6 @@ class LichSuController extends Controller
 			'id_nguoi_thao_tac' => $user,
 			'trang_thai' => $trangthai,
 		]);
-	}public function SuaLichSu($id)
-	{
 	}
 	// Xoá lịch sử
 	public function XoaLichSu($id)
