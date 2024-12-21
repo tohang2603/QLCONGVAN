@@ -36,44 +36,46 @@ export default function PhongBan({ dsphongban }) {
 
     return (
         <AuthenticatedLayout
-            header={<h2 className="text-xl font-semibold leading-tight text-gray-800">Quản lý phòng ban</h2>}
+            header={<h2 className="text-xl font-normal leading-4 text-black">QUẢN LÝ PHÒNG BAN</h2>}
         >
-            <Head title="Manage Departments" />
+            <Head title="Quản lý phòng ban" />
 
-            <div className="py-12">
+            <div className="py-12 w-full bg-gradient-to-r from-blue-400 to-blue-200">
                 <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                    <div>
-                        <ButtonLink className="mb-4 bg-green-500" href={route('them-phong-ban')}>
-                            Thêm phòng ban
-                        </ButtonLink>
+                    <div className="overflow-hidden bg-white shadow-lg sm:rounded-lg">
                         <div>
-                            <div className="grid grid-cols-6 content-center justify-items-center rounded-t-lg bg-sky-400 py-1 text-white">
-                                <div>
-                                    <p>Tên phòng ban</p>
+                            <ButtonLink className="mt-6 ml-6 px-4 py-3 col-span-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-md transition duration-150 ease-in-out hover:from-indigo-600 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600" href={route('them-phong-ban')}>
+                                Thêm phòng ban
+                            </ButtonLink>
+                            <div className="p-6">
+                                <div className="grid grid-cols-6 content-center justify-items-center bg-blue-600 py-2 text-white font-medium rounded-t-lg">
+                                    <div>
+                                        <p>Tên phòng ban</p>
+                                    </div>
+                                    <div>
+                                        <p>Mô tả</p>
+                                    </div>
+                                    <div>
+                                        <p>Người quản lý</p>
+                                    </div>
+                                    <div>
+                                        <p>Địa chỉ</p>
+                                    </div>
+                                    <div>
+                                        <p>Số điện thoại</p>
+                                    </div>
+                                    <div>
+                                        <p>Thao tác</p>
+                                    </div>
                                 </div>
-                                <div>
-                                    <p>Mô tả</p>
-                                </div>
-                                <div>
-                                    <p>Người quản lý</p>
-                                </div>
-                                <div>
-                                    <p>Địa chỉ</p>
-                                </div>
-                                <div>
-                                    <p>Số điện thoại</p>
-                                </div>
-                                <div>
-                                    <p>Thao tác</p>
-                                </div>
+                                {dsphongban.length === 0 ? (
+                                    <div className="text-center mt-3">Không có phòng ban nào.</div>
+                                ) : (
+                                    dsphongban.map((pb, index) => (
+                                        <ListPhongBan index={index} key={pb.id} pb={pb} />
+                                    ))
+                                )}
                             </div>
-                            {dsphongban.length === 0 ? (
-                                <div className="text-center mt-3">Không có phòng ban nào.</div>
-                            ) : (
-                                dsphongban.map((pb, index) => (
-                                    <ListPhongBan index={index} key={pb.id} pb={pb} />
-                                ))
-                            )}
                         </div>
                     </div>
                 </div>

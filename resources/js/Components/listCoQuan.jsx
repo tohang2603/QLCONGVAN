@@ -6,7 +6,7 @@ export default function ListCoQuan({ className = '', cq, index }) {
 	return (
 		<div
 			className={
-				`${index % 2 === 0 ? 'bg-slate-200 ' : 'bg-slate-100'} grid grid-cols-4 content-center justify-items-center divide-orange-500 py-2` +
+				`${index % 2 === 0 ? 'bg-white ' : 'bg-white'} grid grid-cols-4 content-center justify-items-center border-b border-gray-300 divide-orange-500 py-2` +
 				className
 			}
 		>

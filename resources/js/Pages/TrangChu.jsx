@@ -20,7 +20,7 @@ export default function TrangChu({ auth }) {
                     className="py-10 px-4 flex flex-wrap justify-center items-center min-h-screen bg-cover bg-center relative" // Thêm relative
                     style={{ backgroundImage: `url('/images/hinhnen3.jpg')` }}> 
                     <div className="w-full md:w-1/2 p-10 relative z-10 text-white ">
-                        <h1 className="text-2xl font-normal text-white mb-4 transition duration-300 hover:text-blue-500">Giới thiệu</h1>
+                    <h1 className="  text-3xl font-thin text-white bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-purple-500 mb-6 transition duration-300 hover:scale-105 hover:text-white drop-shadow-lg">Giới thiệu</h1>
                         <p className="text-white font-normal mb-6 transition duration-300 bg-opacity-70">
                             Trường Đại học Quy Nhơn, tiền thân là Trường Đại học Sư phạm Quy Nhơn (thành lập từ năm 1977),
                             tọa lạc tại trung tâm thành phố Quy Nhơn, gần bờ biển, đã vươn lên trở thành một trong những

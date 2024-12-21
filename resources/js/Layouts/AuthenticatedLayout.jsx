@@ -12,7 +12,7 @@ export default function AuthenticatedLayout({ header, children }) {
 	const { role } = usePage().props;
 	const [showingNavigationDropdown, setShowingNavigationDropdown] = useState(false);
 	return (
-		<div className='min-h-screen bg-gray-100'>
+		<div className='min-h-screen bg-blue-50'>
 			{/* Toast */}
 			<ToastContainer />
 			<nav className='border-b border-gray-100 bg-white'>

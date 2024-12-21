@@ -37,18 +37,19 @@ export default function CoQuan({ dscoquan }) {
 	}, [flash]);
 	return (
 		<AuthenticatedLayout
-			header={<h2 className='text-xl font-semibold leading-tight text-gray-800'>Quản lý cơ quan</h2>}
+			header={<h2 className='text-xl font-normal leading-4 text-black'>QUẢN LÝ CƠ QUAN</h2>}
 		>
-			<Head title='Manage Organizations' />
-
-			<div className='py-12'>
-				<div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>
+			<Head title='Quản lý cơ quan' />
+			<div className='py-12 w-full bg-gradient-to-r from-blue-400 to-blue-200'>
+				<div className=' mx-auto max-w-7x1 sm:px-6 lg:px-8'>
+					<div className=' overflow-hidden bg-white shadow-lg sm:rounded-lg'>
 					<div>
-						<ButtonLink className='mb-4 bg-green-500' href={route('them-co-quan')}>
+						<ButtonLink className=' mt-6 ml-6 px-4 py-3 col-span-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-md transition duration-150 ease-in-out hover:from-indigo-600 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600' 
+						href={route('them-co-quan')}>
 							Thêm cơ quan
 						</ButtonLink>
-						<div>
-							<div className='grid grid-cols-4 content-center justify-items-center rounded-t-lg bg-sky-400 py-1 text-white'>
+						<div className='p-6'>
+							<div className='grid grid-cols-4 content-center justify-items-center  bg-blue-600 py-2 text-white font-medium rounded-t-lg'>
 								<div>
 									<p>Tên cơ quan</p>
 								</div>
@@ -73,6 +74,7 @@ export default function CoQuan({ dscoquan }) {
 					</div>
 				</div>
 			</div>
+		</div>
 		</AuthenticatedLayout>
 	);
 }
