@@ -41,12 +41,12 @@ export default function AuthenticatedLayout({ header, children }) {
 								<NavLink href={route('phongban')} active={route().current('phongban')}>
 									PHÒNG BAN
 								</NavLink>
-								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
+								{/* <NavLink href={route('dashboard')} active={route().current('dashboard')}>
 									PHÂN LOẠI
 								</NavLink>
 								<NavLink href={route('dashboard')} active={route().current('dashboard')}>
 									TÌM KIẾM NÂNG CAO
-								</NavLink>
+								</NavLink> */}
 							</div>
 						</div>
 

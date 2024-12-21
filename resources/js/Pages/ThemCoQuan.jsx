@@ -52,9 +52,9 @@ export default function ThemCoQuan() {
 								<div>
 									<InputLabelV1 className='mb-2' value={'Tên cơ quan'} />
 									<TextInputV1 id='ten_co_quan' type='text'
-									 value={values.ten_co_quan} onChange={handleChange} 
-									className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Nhập số công văn"/>
+										value={values.ten_co_quan} onChange={handleChange}
+										className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+										placeholder="Nhập tên cơ quan" />
 									{errors && errors.ten_co_quan && (
 										<p className='text-sm italic text-red-500'>{errors.ten_co_quan}</p>
 									)}
@@ -63,23 +63,23 @@ export default function ThemCoQuan() {
 								<div>
 									<InputLabelV1 className='mb-2' value={'Địa chỉ'} />
 									<TextInputV1 id='dia_chi' type='text' value={values.dia_chi} onChange={handleChange}
-									className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Nhập số công văn"/>
+										className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+										placeholder="Nhập địa chỉ" />
 									{errors && errors.dia_chi && <p className='text-sm italic text-red-500'>{errors.dia_chi}</p>}
 								</div>
 								{/* Số điện thoại */}
 								<div>
 									<InputLabelV1 className='mb-2' value={'Số điện thoại'} />
 									<TextInputV1 id='so_dt' type='text' value={values.so_dt} onChange={handleChange}
-									className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                                    placeholder="Nhập số công văn"/>
+										className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+										placeholder="Nhập số điện thoại" />
 									{errors && errors.so_dt && <p className='text-sm italic text-red-500'>{errors.so_dt}</p>}
 								</div>
 							</div>
-						<div className='flex justify-end'>
-							<Button className='px-4 py-3 col-span-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-md transition duration-150 ease-in-out hover:from-indigo-600 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600'>
-								Thêm
-							</Button>
+							<div className='flex justify-end'>
+								<Button className='px-4 py-3 col-span-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-md transition duration-150 ease-in-out hover:from-indigo-600 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600'>
+									Thêm
+								</Button>
 							</div>
 						</form>
 					</div>

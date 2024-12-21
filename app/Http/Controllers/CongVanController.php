@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Congvan;
+use App\Models\Cvdenvadi;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Inertia\Inertia;
@@ -13,23 +14,30 @@ use Storage;
 class CongVanController extends Controller
 {
 	protected $LichSuController;
+	protected $CoquanController;
+	protected $PhongBanController;
 
-	public function __construct(LichSuController $LichSuController)
+	public function __construct(LichSuController $LichSuController, CoQuanController $CoquanController, PhongBanController $PhongBanController)
 	{
 		$this->LichSuController = $LichSuController;
+		$this->CoquanController = $CoquanController;
+		$this->PhongBanController = $PhongBanController;
 	}
 	public function chiTietCongVan(Request $request, $id)
-    {
+	{
 		$congvan = Congvan::with(['nguoidung', 'lichsu.nguoidung'])
-		->find($id);
-		return Inertia::render('ChiTietCongVan', ['congvan'=>$congvan]);			
-    }
+			->find($id);
+		return Inertia::render('ChiTietCongVan', ['congvan' => $congvan]);
+	}
 
 	// Giao dien them cong van
 	public function themCongVan(Request $request): Response
 	{
+		$coquan = $this->CoquanController->layTatCaCoQuan();
+		$phongban = $this->PhongBanController->layTatCaPhongBan();
 		return Inertia::render('ThemCongVan', [
-			'status' => session('status'),
+			'coquan' => $coquan,
+			'phongban' => $phongban
 		]);
 	}
 
@@ -40,6 +48,9 @@ class CongVanController extends Controller
 			'socongvan' => ['required', 'string'],
 			'tieude' => ['required', 'string', 'max: 255'],
 			'mota' => ['required', 'string', 'max: 255'],
+			'trangthai' => ['required', 'numeric'],
+			'coquan' => ['required'],
+			'phongban' => ['required'],
 			'file' => ['required', 'mimes:pdf'],
 		], [
 			'socongvan.required' => 'Không được bỏ trống số công văn.',
@@ -52,6 +63,7 @@ class CongVanController extends Controller
 			'mota.max' => 'Mô tả không được vượt quá 255 ký tự.',
 			'file.required' => 'Không được bỏ trống file.',
 			'file.mimes' => 'File phải là định dạng pdf.',
+			'trangthai.numeric' => 'Không được bỏ trống trạng thái.',
 		]);
 
 		// Đường dẫn lưu file
@@ -76,6 +88,13 @@ class CongVanController extends Controller
 		$congvan->slug = $newSlug;
 		$congvan->save();
 
+		// Tạo dữ liệu CV Đến và Đi
+		$cvDenvaDi = Cvdenvadi::create([
+			'id_cong_van' => $congvan->id,
+			'id_co_quan' => $request->coquan,
+			'id_phong_ban' => $request->phongban,
+			'trang_thai' => $request->trangthai,
+		]);
 		// Ghi lịch sử
 		$this->LichSuController->ThemLichSu($congvan->nguoi_tao, $congvan->id, 'Tạo mới công văn');
 		return redirect()->route('dashboard')->with('success', 'Thêm công văn thành công.');
@@ -153,7 +172,7 @@ class CongVanController extends Controller
 			$congvan->save();
 
 			// Ghi lịch sử
-			
+
 		}
 		$this->LichSuController->ThemLichSu(auth()->user()->id, $congvan->id, 'Cập nhật công văn');
 		return redirect()->route('dashboard')->with('success', 'Cập nhật công văn thành công.');
