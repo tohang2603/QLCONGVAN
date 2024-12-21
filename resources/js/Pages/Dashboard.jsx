@@ -37,10 +37,9 @@ export default function Dashboard({ dscongvan }) {
 
 	return (
 		<AuthenticatedLayout
-			header={<h2 className='text-2xl font-bold leading-tight text-gray-800'>Quản lý công văn</h2>}
+			header={<h2 className='text-xl font-normal leading-4 text-black'>QUẢN LÝ CÔNG VĂN</h2>}
 		>
-			<Head title='Dashboard' />
-
+			<Head title='Quản lý công văn' />
 			<div className='py-12 w-full bg-gradient-to-r from-blue-400 to-blue-200'>
 				<div className='mx-auto max-w-7x1 sm:px-6 lg:px-8'>
 					<div className='overflow-hidden bg-white shadow-lg sm:rounded-lg'>
@@ -48,15 +47,14 @@ export default function Dashboard({ dscongvan }) {
 							<ButtonSearch />
 						</div>
 						<ButtonLink
-							className='py-2 px-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white shadow mx-6
-						 transition duration-150 ease-in-out'
+							className=" ml-6 px-4 py-3 col-span-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-md transition duration-150 ease-in-out hover:from-indigo-600 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
 							href={route('them-cong-van')}
 						>
 							Thêm công văn
 						</ButtonLink>
 						<div className='overflow-hidden bg-white shadow-lg rounded-lg'>
 							<div className='p-6'>
-								<div className='grid grid-cols-5 gap-4 content-center justify-items-center bg-blue-600 py-2 text-white font-medium'>
+								<div className='grid grid-cols-5 gap-4 content-center justify-items-center bg-blue-600 py-2 text-white font-medium rounded-t-lg'> 
 									<div>
 										<p>Số công văn</p>
 									</div>

@@ -23,7 +23,7 @@ export default function NhanSu({ nhanSu }) {
 
     return (
         <AuthenticatedLayout
-            header={<h2 className="text-xl font-normal leading-4 text-black">Quản lý nhân sự</h2>}
+            header={<h2 className="text-xl font-normal leading-4 text-black">QUẢN LÝ NHÂN SỰ</h2>}
         >
             <Head title="Quản lí nhân sự" />
             <div className='py-12 w-full bg-gradient-to-r from-blue-400 to-blue-200'>
@@ -33,7 +33,7 @@ export default function NhanSu({ nhanSu }) {
                             <div className="mx-auto max-w-7xl sm:px-6 lg:px-8">
                                 <h3 className="text-lg font-semibold">Tài khoản cần kích hoạt</h3>
                                 <div className="overflow-hidden bg-white shadow-sm sm:rounded-lg mt-4">
-                                    <div className="grid grid-cols-[auto_1fr_1fr_1fr_1fr_1fr] content-center justify-items-center bg-sky-400 py-2 text-white font-medium">
+                                    <div className="grid grid-cols-[auto_1fr_1fr_1fr_1fr_1fr] content-center justify-items-center bg-blue-600 py-2 text-white font-medium">
                                         <div className="px-2">ID</div>
                                         <div className="px-2">Họ và tên</div>
                                         <div className="px-2">Email</div>

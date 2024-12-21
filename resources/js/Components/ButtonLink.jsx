@@ -5,8 +5,8 @@ export default function Button({ className = '', disabled, children, ...props })
 		<Link
 			{...props}
 			className={
-				`inline-flex items-center rounded-md border border-transparent px-2 py-0.5 mb-4 text-xs bg-green-500 font-semibold uppercase tracking-widest text-white transition duration-150 ease-in-out hover:bg-gray-700 focus:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 active:bg-gray-900 ${
-					disabled && 'opacity-25'
+				`inline-flex items-center rounded-md border border-blue-500 px-4 py-2 mb-4 text-sm font-semibold uppercase tracking-widest text-white transition duration-300 ease-in-out bg-transparent backdrop-blur-sm hover:bg-blue-500 hover:text-white focus:bg-blue-500 focus:text-white focus:outline-none focus:ring-2 focus:ring-blue-300 focus:ring-offset-2 active:bg-blue-600 ${
+					disabled && 'opacity-50 cursor-not-allowed'
 				} ` + className
 			}
 			disabled={disabled}

@@ -8,7 +8,6 @@ import { useState } from 'react';
 export default function ThemCoQuan() {
 	// Error
 	const { errors } = usePage().props;
-	// console.log(errors);
 	const [values, setValues] = useState({
 		ten_co_quan: '',
 		dia_chi: '',
@@ -33,51 +32,57 @@ export default function ThemCoQuan() {
 		formData.append('dia_chi', values.dia_chi);
 		formData.append('so_dt', values.so_dt);
 		router.post('/tao-co-quan', formData);
-		// Log form data
-		// console.log(selectedFile);
 	};
 
 	// Log
 	return (
 		<AuthenticatedLayout
-			header={<h2 className='text-xl font-semibold leading-tight text-gray-800'>Quản lý cơ quan</h2>}
+			header={<h2 className='text-xl font-normal leading-4 text-black'>THÊM CƠ QUAN</h2>}
 		>
 			<Head title='Thêm cơ quan' />
 
-			<div className='py-12'>
-				<div className='mx-auto max-w-7xl sm:px-6 lg:px-8'>
-					{/* <div className='overflow-hidden bg-white shadow-sm sm:rounded-lg'>
-            <div className='p-6 text-gray-900'>You're logged in!</div>
-          </div> */}
-					<div>Thêm Cơ Quan</div>
-					{/* Tên cơ quan */}
-					<form onSubmit={handleSubmit}>
-						<div className='gird gap-2'>
-							{/* Tên cơ quan */}
-							<div>
-								<InputLabelV1 className='mb-1' value={'Tên cơ quan'} />
-								<TextInputV1 id='ten_co_quan' type='text' value={values.ten_co_quan} onChange={handleChange} />
-								{errors && errors.ten_co_quan && (
-									<p className='text-sm italic text-red-500'>{errors.ten_co_quan}</p>
-								)}
+			<div className='py-12 w-full bg-gradient-to-r from-blue-500 to-blue-300'>
+				<div className='mx-auto max-w-4xl sm:px-6 lg:px-8'>
+					<div className='bg-white p-8 rounded-lg shadow-md'>
+						<h3 className='text-lg font-semibold mb-4'>Nhập thông tin cơ quan</h3>
+						{/* Tên cơ quan */}
+						<form onSubmit={handleSubmit}>
+							<div className='grid gap-8 mb-6'>
+								{/* Tên cơ quan */}
+								<div>
+									<InputLabelV1 className='mb-2' value={'Tên cơ quan'} />
+									<TextInputV1 id='ten_co_quan' type='text'
+									 value={values.ten_co_quan} onChange={handleChange} 
+									className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Nhập số công văn"/>
+									{errors && errors.ten_co_quan && (
+										<p className='text-sm italic text-red-500'>{errors.ten_co_quan}</p>
+									)}
+								</div>
+								{/* Địa chỉ */}
+								<div>
+									<InputLabelV1 className='mb-2' value={'Địa chỉ'} />
+									<TextInputV1 id='dia_chi' type='text' value={values.dia_chi} onChange={handleChange}
+									className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Nhập số công văn"/>
+									{errors && errors.dia_chi && <p className='text-sm italic text-red-500'>{errors.dia_chi}</p>}
+								</div>
+								{/* Số điện thoại */}
+								<div>
+									<InputLabelV1 className='mb-2' value={'Số điện thoại'} />
+									<TextInputV1 id='so_dt' type='text' value={values.so_dt} onChange={handleChange}
+									className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Nhập số công văn"/>
+									{errors && errors.so_dt && <p className='text-sm italic text-red-500'>{errors.so_dt}</p>}
+								</div>
 							</div>
-							{/* Địa chỉ */}
-							<div>
-								<InputLabelV1 className='mb-1' value={'Địa chỉ'} />
-								<TextInputV1 id='dia_chi' type='text' value={values.dia_chi} onChange={handleChange} />
-								{errors && errors.dia_chi && <p className='text-sm italic text-red-500'>{errors.dia_chi}</p>}
+						<div className='flex justify-end'>
+							<Button className='px-4 py-3 col-span-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-md transition duration-150 ease-in-out hover:from-indigo-600 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600'>
+								Thêm
+							</Button>
 							</div>
-							{/* Số điện thoại */}
-							<div>
-								<InputLabelV1 className='mb-1' value={'Số điện thoại'} />
-								<TextInputV1 id='so_dt' type='text' value={values.so_dt} onChange={handleChange} />
-								{errors && errors.so_dt && <p className='text-sm italic text-red-500'>{errors.so_dt}</p>}
-							</div>
-						</div>
-						<Button className='mt-3' type='submit'>
-							Thêm
-						</Button>
-					</form>
+						</form>
+					</div>
 				</div>
 			</div>
 		</AuthenticatedLayout>

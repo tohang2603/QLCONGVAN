@@ -1,114 +1,151 @@
-import InputLabelV1 from '@/Components/InputLabelV1';
-import TextInputV1 from '@/Components/TextInputV1';
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
-import Button from '@/Components/Button';
-import { Head, router, usePage } from '@inertiajs/react';
-import { useState } from 'react';
+import InputLabelV1 from "@/Components/InputLabelV1";
+import TextInputV1 from "@/Components/TextInputV1";
+import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
+import Button from "@/Components/Button";
+import { Head, router, usePage } from "@inertiajs/react";
+import { useState } from "react";
 
 export default function ThemCongVan() {
-	// Error
-	const { errors } = usePage().props;
-	// console.log(errors);
-	const [values, setValues] = useState({
-		socongvan: '',
-		tieude: '',
-		mota: '',
-	});
+    const { errors } = usePage().props;
+    const [values, setValues] = useState({
+        socongvan: "",
+        tieude: "",
+        mota: "",
+    });
 
-	// Handle change input
-	const handleChange = (e) => {
-		const key = e.target.id;
-		const value = e.target.value;
-		setValues((values) => ({
-			...values,
-			[key]: value,
-		}));
-	};
-	const [selectedFile, setSelectedFile] = useState(null);
-	// Handle submit
-	const handleSubmit = (e) => {
-		e.preventDefault();
-		const formData = new FormData();
-		formData.append('socongvan', values.socongvan);
-		formData.append('tieude', values.tieude);
-		formData.append('mota', values.mota);
-		formData.append('file', selectedFile);
-		router.post('/tao-cong-van', formData);
-		// Log form data
-		// console.log(selectedFile);
-	};
-	// Log
-	return (
-		<AuthenticatedLayout
-			header={<h2 className='text-xl font-semibold leading-tight text-black'>Thêm công văn</h2>}
-		>
-			<div className='py-12'>
-	<div className='max-w-7xl sm:px-6 lg:px-8'>
-		<form onSubmit={handleSubmit} encType='multipart/form-data'>
-			<div className='grid gap-6 mb-6'>
-				{/* Số công văn */}
-				<div>
-					<InputLabelV1 className='mb-1' value={'Số công văn'} />
-					<TextInputV1
-						id='socongvan'
-						type='text'
-						value={values.socongvan}
-						onChange={handleChange}
-						className='p-2 border border-gray-300 rounded-lg w-1/4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out'
-					/>
-					{errors && errors.socongvan && (
-						<p className='text-sm italic text-red-500'>{errors.socongvan}</p>
-					)}
-				</div>
-				{/* Tiêu đề */}
-				<div>
-					<InputLabelV1 className='mb-1' value={'Tiêu đề'} />
-					<TextInputV1
-						id='tieude'
-						type='text'
-						value={values.tieude}
-						onChange={handleChange}
-						className='p-2 border border-gray-300 rounded-lg w-1/4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out'
-					/>
-					{errors && errors.tieude && (
-						<p className='text-sm italic text-red-500'>{errors.tieude}</p>
-					)}
-				</div>
-			</div>
+    const handleChange = (e) => {
+        const key = e.target.id;
+        const value = e.target.value;
+        setValues((values) => ({
+            ...values,
+            [key]: value,
+        }));
+    };
 
-			{/* Mô tả */}
-			<div className='mb-4'>
-				<InputLabelV1 className='mb-1' value={'Mô tả'} />
-				<TextInputV1
-					id='mota'
-					type='text'
-					value={values.mota}
-					onChange={handleChange}
-					className='p-2 border border-gray-300 rounded-lg w-1/4 focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out'
-				/>
-				{errors && errors.mota && <p className='text-sm italic text-red-500'>{errors.mota}</p>}
-			</div>
+    const [selectedFile, setSelectedFile] = useState(null);
 
-			{/* Tệp */}
-			<div className='mb-4 rounded w-1/4'>
-				<InputLabelV1 className='mb-2' value={'Tệp'} />
-				<input
-					type='file'
-					className='file-input file-input-bordered mt-1 w-full max-w-xs p-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600 transition duration-150 ease-in-out'
-					onChange={(e) => setSelectedFile(e.target.files[0])}
-				/>
-				{errors && errors.file && <p className='text-sm italic text-red-500'>{errors.file}</p>}
-			</div>
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        const formData = new FormData();
+        formData.append("socongvan", values.socongvan);
+        formData.append("tieude", values.tieude);
+        formData.append("mota", values.mota);
+        formData.append("file", selectedFile);
+        router.post("/tao-cong-van", formData);
+    };
 
-			<Button
-				className='mt-3 py-2 px-4 bg-green-600 hover:bg-green-700 text-white rounded-lg shadow-md transition duration-150 ease-in-out'
-				type='submit'
-			>
-				Thêm công văn
-			</Button>
-		</form>
-	</div>
-	</div>
-		</AuthenticatedLayout>
-	);
+    return (
+        <AuthenticatedLayout
+            header={
+                <h2 className="text-xl font-normal transition duration-300 hover:text-blue-700 text-black">THÊM CÔNG VĂN</h2>
+            }
+        >
+            <div className="py-12 w-full bg-gradient-to-r from-blue-400 to-blue-200">
+                <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
+                    <form
+                        onSubmit={handleSubmit}
+                        encType="multipart/form-data"
+                        className="bg-white shadow-md rounded-lg p-6"
+                    >
+                        <h3 className="text-lg font-semibold mb-6 text-gray-700">
+                            Nhập thông tin công văn
+                        </h3>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                            {/* Số công văn */}
+                            <div>
+                                <InputLabelV1
+                                    className="mb-2 text-gray-600 font-medium"
+                                    value={"Số công văn"}
+                                />
+                                <TextInputV1
+                                    id="socongvan"
+                                    type="text"
+                                    value={values.socongvan}
+                                    onChange={handleChange}
+                                    className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Nhập số công văn"
+                                />
+                                {errors && errors.socongvan && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.socongvan}
+                                    </p>
+                                )}
+                            </div>
+
+                            {/* Tiêu đề */}
+                            <div>
+                                <InputLabelV1
+                                    className="mb-2 text-gray-600 font-medium"
+                                    value={"Tiêu đề"}
+                                />
+                                <TextInputV1
+                                    id="tieude"
+                                    type="text"
+                                    value={values.tieude}
+                                    onChange={handleChange}
+                                    className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                    placeholder="Nhập tiêu đề"
+                                />
+                                {errors && errors.tieude && (
+                                    <p className="text-red-500 text-sm mt-1">
+                                        {errors.tieude}
+                                    </p>
+                                )}
+                            </div>
+                        </div>
+
+                        {/* Mô tả */}
+                        <div className="mb-6">
+                            <InputLabelV1
+                                className="mb-2 text-gray-600 font-medium"
+                                value={"Mô tả"}
+                            />
+                            <textarea
+                                id="mota"
+                                value={values.mota}
+                                onChange={handleChange}
+                                className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                placeholder="Nhập mô tả chi tiết"
+                                rows="4"
+                            />
+                            {errors && errors.mota && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {errors.mota}
+                                </p>
+                            )}
+                        </div>
+
+                        {/* Tệp đính kèm */}
+                        <div className="mb-6">
+                            <InputLabelV1
+                                className="mb-2 text-gray-600 font-medium"
+                                value={"Tệp đính kèm"}
+                            />
+                            <input
+                                type="file"
+                                className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                onChange={(e) => setSelectedFile(e.target.files[0])}
+                            />
+                            {errors && errors.file && (
+                                <p className="text-red-500 text-sm mt-1">
+                                    {errors.file}
+                                </p>
+                            )}
+                        </div>
+
+                        {/* Nút gửi */}
+                        <div className="flex justify-end">
+                            <Button
+                                className="ml-6 px-4 py-3 col-span-1 bg-gradient-to-r from-blue-500 to-indigo-600 text-white font-medium rounded-lg shadow-md transition duration-150 ease-in-out hover:from-indigo-600 hover:to-blue-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
+                                type="submit"
+                            >
+                                Thêm
+                            </Button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </AuthenticatedLayout>
+    );
 }

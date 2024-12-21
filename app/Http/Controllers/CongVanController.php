@@ -171,4 +171,5 @@ class CongVanController extends Controller
 		}
 		return redirect()->route('dashboard')->with('error', 'Xóa công văn không thành công.');
 	}
+
 }
