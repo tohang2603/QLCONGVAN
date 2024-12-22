@@ -57,9 +57,9 @@ export default function ThemCongVan({ coquan, phongban }) {
 		formData.append('tieude', values.tieude);
 		formData.append('mota', values.mota);
 		formData.append('file', selectedFile);
-		formData.append('trangthai', selectedOption ? selectedOption.value : null);
-		formData.append('coquan', selectedOptionCQ ? selectedOptionCQ.value : null);
-		formData.append('phongban', selectedOptionPB ? selectedOptionPB.value : null);
+		formData.append('trangthai', selectedOption.value == 'null' ? null : selectedOption.value);
+		formData.append('coquan', selectedOptionCQ.value == 'null'? null : selectedOptionCQ.value);
+		formData.append('phongban', selectedOptionPB.value == 'null' ? null : selectedOptionPB.value);
 		router.post('/tao-cong-van', formData);
 		// Log form data
 		// console.log(selectedFile);

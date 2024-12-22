@@ -44,6 +44,7 @@ class CongVanController extends Controller
 	// Thêm công văn
 	public function taoCongVan(Request $request)
 	{
+		dd($request->all());
 		$request->validate([
 			'socongvan' => ['required', 'string'],
 			'tieude' => ['required', 'string', 'max: 255'],

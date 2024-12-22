@@ -37,13 +37,14 @@ return new class extends Migration {
 			$table->string('file');
 			$table->string('slug', 255)->nullable()->unique();
 			$table->foreign('nguoi_tao')->references('id')->on('users');
+			$table->timestamps();
 		});
 		// Nơi Nhận
 		Schema::create('cvdenvadi', function (Blueprint $table) {
 			$table->bigIncrements('id');
 			$table->unsignedBigInteger('id_cong_van');
 			$table->unsignedBigInteger('id_co_quan')->nullable();
-			$table->unsignedBigInteger('id_phong_ban');
+			$table->unsignedBigInteger('id_phong_ban')->nullable();
 			$table->string('trang_thai', 5);
 			$table->timestamps();
 		});
