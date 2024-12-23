@@ -53,8 +53,10 @@ Route::middleware(['auth', 'actived', 'checkrole'])->group(function () {
 	Route::get('/sua-phan-quyen/{id}', [PhanQuyenController::class, 'suaPhanQuyen'])->name('sua-phan-quyen');
 	Route::patch('/cap-nhat-phan-quyen/{id}', [PhanQuyenController::class, 'capNhatPhanQuyen'])->name('cap-nhat-phan-quyen');
 	Route::delete('/xoa-phan-quyen/{id}', [PhanQuyenController::class, 'xoaPhanQuyen'])->name('xoa-phan-quyen');
-
-	//Trang chủ
+	
+	Route::get('/tim-kiem-nang-cao', [CongVanController::class, 'timKiemNangCao'])->name('tim-kiem-nang-cao');
+	Route::get('/nangcao', [TrangChuController::class, 'giaoDienTimKiemNangCao'])->name('nangcao');
+	
 	Route::get('/trangchu', [TrangChuController::class, 'giaoDienTrangChu'])->name('trangchu');
 	// Nhân sự
 	Route::get('/nhansu', [QuanlyController::class, 'nhanSu'])->middleware(['admin'])->name('nhansu');
