@@ -8,15 +8,20 @@ import Select from 'react-select'
 
 export default function ThemCongVan({ coquan, phongban }) {
 	const { errors } = usePage().props;
+	// Trạng thái select
+	const [isClearable, setIsClearable] = useState(true);
+	const [isSearchable, setIsSearchable] = useState(true);
+	// -----------------------------------------------------
 	const [values, setValues] = useState({
 		socongvan: "",
 		tieude: "",
 		mota: "",
 	});
+	const [selectedFile, setSelectedFile] = useState(null);
 	// Select
 	const [selectedOption, setSelectedOption] = useState(null);
-	const [selectedOptionCQ, setSelectedOptionCQ] = useState(null);
-	const [selectedOptionPB, setSelectedOptionPB] = useState(null);
+	const [selectedOptionCQ, setSelectedOptionCQ] = useState([]);
+	const [selectedOptionPB, setSelectedOptionPB] = useState([]);
 	const handleChangeSelect = (selectedOption) => {
 		setSelectedOption(selectedOption);
 	};
@@ -26,17 +31,19 @@ export default function ThemCongVan({ coquan, phongban }) {
 	const handleChangeSelectPB = (selectedOptionPB) => {
 		setSelectedOptionPB(selectedOptionPB);
 	}
+	console.log(selectedOptionCQ);
+	console.log(selectedOptionPB);
 	// Options 
 	const options = [
 		{ value: '1', label: 'Gửi' },
 		{ value: '2', label: 'Nhận' },
 	]
 	const optionsCQ = coquan.map(item => ({
-		value: item.id.toString(), // Chuyển id sang string
+		value: item.id.toString(),
 		label: item.ten_co_quan
 	}));
 	const optionsPB = phongban.map(item => ({
-		value: item.id.toString(), // Chuyển id sang string
+		value: item.id.toString(),
 		label: item.ten_phong_ban
 	}));
 	// Handle change input
@@ -48,7 +55,7 @@ export default function ThemCongVan({ coquan, phongban }) {
 			[key]: value,
 		}));
 	};
-	const [selectedFile, setSelectedFile] = useState(null);
+
 	// Handle submit
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -57,9 +64,9 @@ export default function ThemCongVan({ coquan, phongban }) {
 		formData.append('tieude', values.tieude);
 		formData.append('mota', values.mota);
 		formData.append('file', selectedFile);
-		formData.append('trangthai', selectedOption.value == 'null' ? null : selectedOption.value);
-		formData.append('coquan', selectedOptionCQ.value == 'null'? null : selectedOptionCQ.value);
-		formData.append('phongban', selectedOptionPB.value == 'null' ? null : selectedOptionPB.value);
+		formData.append('trangthai', selectedOption.value);
+		formData.append('coquan', JSON.stringify(selectedOptionCQ));
+		formData.append('phongban', JSON.stringify(selectedOptionPB));
 		router.post('/tao-cong-van', formData);
 		// Log form data
 		// console.log(selectedFile);
@@ -134,6 +141,8 @@ export default function ThemCongVan({ coquan, phongban }) {
 								<InputLabelV1 className='mb-1' value={'Trạng thái'} />
 								<Select
 									onChange={handleChangeSelect}
+									isClearable={isClearable}
+									isSearchable={isSearchable}
 									options={options} />
 								{errors && errors.trangthai && (
 									<p className='text-sm italic text-red-500'>{errors.trangthai}</p>
@@ -143,12 +152,18 @@ export default function ThemCongVan({ coquan, phongban }) {
 								<InputLabelV1 className='mb-1' value={'Cơ quan'} />
 								<Select
 									onChange={handleChangeSelectCQ}
+									isClearable={isClearable}
+									isSearchable={isSearchable}
+									isMulti
 									options={optionsCQ} />
 							</div>
 							<div className="mb-4">
 								<InputLabelV1 className='mb-1' value={'Phòng ban'} />
 								<Select
 									onChange={handleChangeSelectPB}
+									isClearable={isClearable}
+									isSearchable={isSearchable}
+									isMulti
 									options={optionsPB} />
 							</div>
 						</div>
