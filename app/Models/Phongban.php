@@ -18,4 +18,8 @@ class Phongban extends Model
         'so_dt',
     ];
     public $timestamps = false;
+    public function cvdenvadi()
+    {
+        return $this->belongsTo(Cvdenvadi::class, 'id_phong_ban','id'); // Đã thêm relationship cvdenvadi
+    }
 }

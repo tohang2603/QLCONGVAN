@@ -20,7 +20,7 @@ export default function SuaCoQuan({ coquan }) {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-normal text-black">SỬA CƠ QUAN</h2>
+                <h2 className="text-xl font-normal text-black  hover:text-blue-700">SỬA CƠ QUAN</h2>
             }
         >
             <Head title="Sửa cơ quan" />

@@ -1,6 +1,7 @@
 import React from 'react';
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import ButtonLink from '@/Components/ButtonLink';
+import { Link } from '@inertiajs/react'; // Import Link
 
 export default function TrangChu({ auth }) {
     return (
@@ -20,7 +21,9 @@ export default function TrangChu({ auth }) {
                     className="py-10 px-4 flex flex-wrap justify-center items-center min-h-screen bg-cover bg-center relative" // Thêm relative
                     style={{ backgroundImage: `url('/images/hinhnen3.jpg')` }}> 
                     <div className="w-full md:w-1/2 p-10 relative z-10 text-white ">
-                    <h1 className="  text-3xl font-thin text-white bg-clip-text bg-gradient-to-r from-blue-400 via-blue-500 to-purple-500 mb-6 transition duration-300 hover:scale-105 hover:text-white drop-shadow-lg">Giới thiệu</h1>
+                    <h1 className="text-3xl font-normal text-white mb-6">
+                        GIỚI THIỆU
+                    </h1>
                         <p className="text-white font-normal mb-6 transition duration-300 bg-opacity-70">
                             Trường Đại học Quy Nhơn, tiền thân là Trường Đại học Sư phạm Quy Nhơn (thành lập từ năm 1977),
                             tọa lạc tại trung tâm thành phố Quy Nhơn, gần bờ biển, đã vươn lên trở thành một trong những
@@ -34,9 +37,9 @@ export default function TrangChu({ auth }) {
                             tín và chất lượng giáo dục của trường.
                         </p>
 
-                        <ButtonLink className="mt-3">
+                        <Link href={route('dashboard')} className="mt-3 inline-block px-6 py-3 text-white border-2 border-blue-600 rounded-lg hover:bg-blue-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-300 uppercase"> {/* Sử dụng route('dashboard') */}
                             Xem thông tin công văn
-                        </ButtonLink>
+                        </Link>
                     </div>
 
                     <div className="w-full md:w-1/2 p-4 flex justify-center items-center">

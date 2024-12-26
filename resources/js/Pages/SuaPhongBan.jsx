@@ -22,7 +22,7 @@ export default function SuaPhongBan({ phongban }) {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-normal text-black">
+                <h2 className="text-xl font-normal  hover:text-blue-700 text-black">
                     SỬA PHÒNG BAN
                 </h2>
             }

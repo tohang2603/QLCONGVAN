@@ -46,6 +46,8 @@ Route::middleware(['auth', 'actived', 'checkrole'])->group(function () {
 	Route::patch('/cap-nhat-co-quan/{id}', [CoQuanController::class, 'capNhatCoQuan'])->name('cap-nhat-co-quan');
 	Route::delete('/xoa-co-quan/{id}', [CoQuanController::class, 'xoaCoQuan'])->name('xoa-co-quan');
 
+	//phantrang
+	Route::post('/phantrang',[CongVanController::class,'phanTrang'])->name('phan-trang');
 	//them phan quyen
 	Route::get('/phanquyen', [PhanQuyenController::class, 'giaoDienPhanQuyen'])->middleware(['admin'])->name('phanquyen');
 	Route::get('/them-phan-quyen', [PhanQuyenController::class, 'themPhanQuyen'])->name('them-phan-quyen');
@@ -53,10 +55,7 @@ Route::middleware(['auth', 'actived', 'checkrole'])->group(function () {
 	Route::get('/sua-phan-quyen/{id}', [PhanQuyenController::class, 'suaPhanQuyen'])->name('sua-phan-quyen');
 	Route::patch('/cap-nhat-phan-quyen/{id}', [PhanQuyenController::class, 'capNhatPhanQuyen'])->name('cap-nhat-phan-quyen');
 	Route::delete('/xoa-phan-quyen/{id}', [PhanQuyenController::class, 'xoaPhanQuyen'])->name('xoa-phan-quyen');
-	
-	Route::get('/tim-kiem-nang-cao', [CongVanController::class, 'timKiemNangCao'])->name('tim-kiem-nang-cao');
-	Route::get('/nangcao', [TrangChuController::class, 'giaoDienTimKiemNangCao'])->name('nangcao');
-	
+	//trang chu
 	Route::get('/trangchu', [TrangChuController::class, 'giaoDienTrangChu'])->name('trangchu');
 	// Nhân sự
 	Route::get('/nhansu', [QuanlyController::class, 'nhanSu'])->middleware(['admin'])->name('nhansu');

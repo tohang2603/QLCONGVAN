@@ -38,7 +38,7 @@ export default function SuaCongVan({ cv }) {
     return (
         <AuthenticatedLayout
             header={
-                <h2 className="text-xl font-normal text-black">SỬA CÔNG VĂN</h2>
+                <h2 className="text-xl font-normal text-black  hover:text-blue-700">SỬA CÔNG VĂN</h2>
             }
         >
             <Head title="Sửa công văn" />
@@ -121,12 +121,12 @@ export default function SuaCongVan({ cv }) {
                         {/* Tệp đính kèm */}
                         <div className="mb-6">
                             <InputLabelV1
-                                className="mb-2 text-gray-600 font-medium"
+                                className="mb-1"
                                 value={"Tệp đính kèm"}
                             />
                             <input
                                 type="file"
-                                className="block w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                                className="w-full file-input mt-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
                                 onChange={(e) => setSelectedFile(e.target.files[0])}
                             />
                             {errors && errors.file && (

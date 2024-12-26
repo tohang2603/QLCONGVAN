@@ -37,7 +37,7 @@ export default function ThemCoQuan() {
 	// Log
 	return (
 		<AuthenticatedLayout
-			header={<h2 className='text-xl font-normal leading-4 text-black'>THÊM CƠ QUAN</h2>}
+			header={<h2 className='text-xl font-normal text-black  hover:text-blue-700'>THÊM CƠ QUAN</h2>}
 		>
 			<Head title='Thêm cơ quan' />
 

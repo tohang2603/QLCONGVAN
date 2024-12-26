@@ -27,8 +27,12 @@ class CongVanController extends Controller
 	public function chiTietCongVan(Request $request, $id)
 	{
 		$congvan = Congvan::with(['nguoidung', 'lichsu.nguoidung'])
-			->find($id);
-		return Inertia::render('ChiTietCongVan', ['congvan' => $congvan]);
+		->find($id);
+		$cvdenvadi = Cvdenvadi::where('id_cong_van',$id)->with(['coquan','phongban'])->get();
+	return Inertia::render('ChiTietCongVan', [
+		'congvan' => $congvan,
+		'cvdenvadi' => $cvdenvadi
+	]);
 	}
 
 	public function themCongVan(Request $request): Response
@@ -221,4 +225,14 @@ class CongVanController extends Controller
 		}
 		return redirect()->route('dashboard')->with('error', 'Xóa công văn không thành công.');
 	}
+	public function phanTrang(Request $request)
+    {
+        $perPage = $request->input('per_page', 10);
+
+        $congvan = CongVan::paginate($perPage)->appends($request->query());
+
+        return Inertia::render('themCongVan', [
+            'congvan' => $congvan,
+        ]);
+    }
 }

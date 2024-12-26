@@ -40,7 +40,7 @@ export default function ThemPhanQuyen() {
 	// Log
 	return (
 		<AuthenticatedLayout
-			header={<h2 className='text-xl font-semibold leading-tight text-gray-800'>Quản lý phân quyền</h2>}
+			header={<h2 className='text-xl font-normal  text-black  hover:text-blue-700'>Quản lý phân quyền</h2>}
 		>
 			<Head title='Thêm phân quyền' />
 

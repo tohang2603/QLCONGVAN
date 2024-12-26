@@ -17,4 +17,8 @@ class Coquan extends Model
 
 	// Không lấy thời gian tạo, sửa
 	public $timestamps = false;
+	public function cvdenvadi()
+    {
+        return $this->belongsTo(Cvdenvadi::class, 'id_co_quan','id'); // Đã thêm relationship cvdenvadi
+    }
 }

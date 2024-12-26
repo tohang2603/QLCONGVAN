@@ -36,7 +36,7 @@ export default function PhongBan({ dsphongban }) {
 
     return (
         <AuthenticatedLayout
-            header={<h2 className="text-xl font-normal leading-4 text-black">QUẢN LÝ PHÒNG BAN</h2>}
+            header={<h2 className="text-xl font-normal leading-4 text-black  hover:text-blue-700">QUẢN LÝ PHÒNG BAN</h2>}
         >
             <Head title="Quản lý phòng ban" />
 

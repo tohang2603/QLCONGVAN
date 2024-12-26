@@ -30,5 +30,8 @@ class Congvan extends Model
 	{
     return $this->hasMany(LichSu::class, 'id_cong_van');
 	}
-
+	public function cvdenvadi()
+    {
+        return $this->belongsTo(Cvdenvadi::class, 'id_cong_van','id'); // Đã thêm relationship cvdenvadi
+    }
 }

@@ -37,8 +37,8 @@ export default function Dashboard({ dscongvan }) {
 
 	return (
 		<AuthenticatedLayout
-			header={<h2 className='text-xl font-normal leading-4 text-black'>QUẢN LÝ CÔNG VĂN</h2>}
-		>
+   			header={<h2 className="text-xl font-normal text-black  hover:text-blue-700">QUẢN LÝ CÔNG VĂN</h2>}
+			>
 			<Head title='Quản lý công văn' />
 			<div className='py-12 w-full bg-gradient-to-r from-blue-400 to-blue-200'>
 				<div className='mx-auto max-w-7x1 sm:px-6 lg:px-8'>

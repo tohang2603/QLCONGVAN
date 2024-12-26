@@ -16,6 +16,8 @@ export default function UpdateProfileInformation({
         useForm({
             name: user.name,
             email: user.email,
+            address: user.address,
+            phone: user.phone,
         });
 
     const submit = (e) => {
@@ -28,17 +30,13 @@ export default function UpdateProfileInformation({
         <section className={className}>
             <header>
                 <h2 className="text-lg font-medium text-gray-900">
-                    Profile Information
+                    Thông tin cá nhân
                 </h2>
-
-                <p className="mt-1 text-sm text-gray-600">
-                    Update your account's profile information and email address.
-                </p>
             </header>
 
             <form onSubmit={submit} className="mt-6 space-y-6">
                 <div>
-                    <InputLabel htmlFor="name" value="Name" />
+                    <InputLabel htmlFor="name" value="Họ và tên" />
 
                     <TextInput
                         id="name"
@@ -52,7 +50,6 @@ export default function UpdateProfileInformation({
 
                     <InputError className="mt-2" message={errors.name} />
                 </div>
-
                 <div>
                     <InputLabel htmlFor="email" value="Email" />
 
@@ -69,10 +66,38 @@ export default function UpdateProfileInformation({
                     <InputError className="mt-2" message={errors.email} />
                 </div>
 
+                <div>
+                    <InputLabel htmlFor="address" value="Địa chỉ" />
+
+                    <TextInput
+                        id="address"
+                        className="mt-1 block w-full"
+                        value={data.address}
+                        onChange={(e) => setData('address', e.target.value)}
+                        required
+                        isFocused
+                        autoComplete="address"
+                    />
+                    <InputError className="mt-2" message={errors.name} />
+                </div>   
+                <div>
+                    <InputLabel htmlFor="phone" value="Số điện thoại" />
+
+                    <TextInput
+                        id="phone"
+                        className="mt-1 block w-full"
+                        value={data.phone}
+                        onChange={(e) => setData('phone', e.target.value)}
+                        required
+                        isFocused
+                        autoComplete="phone"
+                    />
+                    <InputError className="mt-2" message={errors.name} />
+                </div>   
                 {mustVerifyEmail && user.email_verified_at === null && (
                     <div>
                         <p className="mt-2 text-sm text-gray-800">
-                            Your email address is unverified.
+                            Email của bạn không chính xác.
                             <Link
                                 href={route('verification.send')}
                                 method="post"

@@ -37,7 +37,7 @@ export default function CoQuan({ dscoquan }) {
 	}, [flash]);
 	return (
 		<AuthenticatedLayout
-			header={<h2 className='text-xl font-normal leading-4 text-black'>QUẢN LÝ CƠ QUAN</h2>}
+			header={<h2 className='text-xl font-normal leading-4 text-black  hover:text-blue-700'>QUẢN LÝ CƠ QUAN</h2>}
 		>
 			<Head title='Quản lý cơ quan' />
 			<div className='py-12 w-full bg-gradient-to-r from-blue-400 to-blue-200'>
