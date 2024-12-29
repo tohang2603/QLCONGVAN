@@ -64,8 +64,14 @@ class CoQuanController extends Controller
 		$coquan = Coquan::find($id);
 		return $coquan;
 	}
+	// Lấy thông tin nhiều cơ quan theo ID
+	public function layThongTinCacCoQuan($coquan)
+	{
+		dd($coquan);
+		return $coquan;
+	}
+
 	// Cập nhật thông tin cơ quan
-	//sua co quan
 	public function capNhatCoQuan(Request $request, $id)
 	{
 		// dd($request->all());
