@@ -28,12 +28,10 @@ class CongVanController extends Controller
 	{
 		$congvan = Congvan::with(['nguoidung', 'lichsu.nguoidung'])
 			->find($id);
-		$cvdenvadi = Cvdenvadi::where('id_cong_van', $id)->with(['coquan', 'phongban'])->get();
-
-		// dd($coquan, $phongban);
+		$cvdenvadi = Cvdenvadi::where('id_cong_van', $id)->with(['coquan', 'phongban'])->distinct()->get()->toArray();
 		return Inertia::render('ChiTietCongVan', [
 			'congvan' => $congvan,
-			'cvdenvadi' => 'test'
+			'cvdenvadi' => $cvdenvadi
 		]);
 	}
 
@@ -152,8 +150,14 @@ class CongVanController extends Controller
 	//trả về giao diện
 	public function suaCongVan($id): Response
 	{
+		$coquan = $this->CoquanController->layTatCaCoQuan();
+		$phongban = $this->PhongBanController->layTatCaPhongBan();
+		$cvdenvadi = Cvdenvadi::where('id_cong_van', $id)->with(['coquan', 'phongban'])->distinct()->get()->toArray();
 		return Inertia::render('SuaCongVan', [
 			'cv' => $this->LayThongTinCongVan($id),
+			'coquan' => $coquan,
+			'phongban' => $phongban,
+			'cvdenvadi' => $cvdenvadi
 		]);
 	}
 
