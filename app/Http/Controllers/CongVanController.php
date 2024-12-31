@@ -141,6 +141,7 @@ class CongVanController extends Controller
 	// Hiện dữ liệu công văn
 	public function layTatCaCongVan()
 	{
+		
 		$dsCongVan = Congvan::with('nguoidung')->orderBy('created_at', 'desc')->get()->map(function ($congvan) {
 			$congvan->file = Storage::url($congvan->file);
 			return $congvan;
@@ -225,14 +226,5 @@ class CongVanController extends Controller
 		}
 		return redirect()->route('dashboard')->with('error', 'Xóa công văn không thành công.');
 	}
-	public function phanTrang(Request $request)
-    {
-        $perPage = $request->input('per_page', 10);
 
-        $congvan = CongVan::paginate($perPage)->appends($request->query());
-
-        return Inertia::render('themCongVan', [
-            'congvan' => $congvan,
-        ]);
-    }
 }

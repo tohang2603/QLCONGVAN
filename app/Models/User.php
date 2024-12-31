@@ -26,6 +26,7 @@ class User extends Authenticatable
 		'actived',
 		'password',
 		'id_ma_quyen',
+		'avatar'
 	];
 
 	/**
