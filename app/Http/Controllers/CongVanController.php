@@ -27,12 +27,12 @@ class CongVanController extends Controller
 	public function chiTietCongVan(Request $request, $id)
 	{
 		$congvan = Congvan::with(['nguoidung', 'lichsu.nguoidung'])
-		->find($id);
-		$cvdenvadi = Cvdenvadi::where('id_cong_van',$id)->with(['coquan','phongban'])->get();
-	return Inertia::render('ChiTietCongVan', [
-		'congvan' => $congvan,
-		'cvdenvadi' => $cvdenvadi
-	]);
+			->find($id);
+		$cvdenvadi = Cvdenvadi::where('id_cong_van', $id)->with(['coquan', 'phongban'])->distinct()->get()->toArray();
+		return Inertia::render('ChiTietCongVan', [
+			'congvan' => $congvan,
+			'cvdenvadi' => $cvdenvadi
+		]);
 	}
 
 	public function themCongVan(Request $request): Response
@@ -150,8 +150,14 @@ class CongVanController extends Controller
 	//trả về giao diện
 	public function suaCongVan($id): Response
 	{
+		$coquan = $this->CoquanController->layTatCaCoQuan();
+		$phongban = $this->PhongBanController->layTatCaPhongBan();
+		$cvdenvadi = Cvdenvadi::where('id_cong_van', $id)->with(['coquan', 'phongban'])->distinct()->get()->toArray();
 		return Inertia::render('SuaCongVan', [
 			'cv' => $this->LayThongTinCongVan($id),
+			'coquan' => $coquan,
+			'phongban' => $phongban,
+			'cvdenvadi' => $cvdenvadi
 		]);
 	}
 
@@ -224,5 +230,15 @@ class CongVanController extends Controller
 			return redirect()->route('dashboard')->with('success', 'Xóa công văn thành công.');
 		}
 		return redirect()->route('dashboard')->with('error', 'Xóa công văn không thành công.');
+	}
+	public function phanTrang(Request $request)
+	{
+		$perPage = $request->input('per_page', 10);
+
+		$congvan = CongVan::paginate($perPage)->appends($request->query());
+
+		return Inertia::render('themCongVan', [
+			'congvan' => $congvan,
+		]);
 	}
 }
