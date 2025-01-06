@@ -1,7 +1,7 @@
 import AuthenticatedLayout from "@/Layouts/AuthenticatedLayout";
 import { Head } from '@inertiajs/react';
 
-const ChiTietCongVan = ({ congvan, cvdenvadi }) => {
+const ChiTietCongVan = ({ congvan, coquan, phongban }) => {
   // Chuyển đổi thời gian từ định dạng ISO sang thời gian Việt Nam
   congvan.lichsu.forEach(ls => {
     const date = new Date(ls.created_at);
@@ -31,20 +31,20 @@ const ChiTietCongVan = ({ congvan, cvdenvadi }) => {
               <div className="px-3 py-2 text-center border-b">{congvan.tieu_de}</div>
               <div className="px-3 py-2 text-center border-b">{congvan.mo_ta}</div>
               <div className="px-3 py-2 text-center border-b">{congvan.nguoidung.name}</div>
-              {/* Vòng lặp cvdenvadi */}
+              {/* Vòng lặp cơ quan  phòng ban */}
               <div className="px-3 py-2 text-center border-b">
-                {cvdenvadi && cvdenvadi.every(cq => cq.coquan) && cvdenvadi.map((cq, index) => (
+                {coquan && coquan.every(cq => cq.coquan) && coquan.map((cq, index) => (
                   <p key={index} className="px-3 py-2 text-center border-b">{cq.coquan.ten_co_quan}</p>
                 ))}
-                {cvdenvadi && !cvdenvadi.every(cq => cq.coquan) && <p className="px-3 py-2 text-center">Không có</p>}
+                {coquan && !coquan.every(cq => cq.coquan) && <p className="px-3 py-2 text-center">Không có</p>}
               </div>
               <div className="px-3 py-2 text-center border-b">
-                {cvdenvadi && cvdenvadi.every(pb => pb.phongban) && cvdenvadi.map((pb, index) => (
+                {phongban && phongban.every(pb => pb.phongban) && phongban.map((pb, index) => (
                   <p key={index} className="px-3 py-2 text-center border-b">{pb.phongban.ten_phong_ban}</p>
                 ))}
-                {cvdenvadi && !cvdenvadi.every(pb => pb.phongban) && <p className="px-3 py-2 text-center">Không có</p>}
+                {phongban && !phongban.every(pb => pb.phongban) && <p className="px-3 py-2 text-center">Không có</p>}
               </div>
-              <div className="px-3 py-2 text-center border-b">{cvdenvadi[0].trang_thai === '1' ? 'Gửi' : 'Nhận'}</div>
+              <div className="px-3 py-2 text-center border-b">{congvan.trang_thai === '1' ? 'Gửi' : 'Nhận'}</div>
             </div>
           </div>
           {/* Table 2: Lịch sử thao tác */}

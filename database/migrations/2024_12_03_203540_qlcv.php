@@ -34,19 +34,30 @@ return new class extends Migration {
 			$table->string('tieu_de', 255);
 			$table->string('mo_ta', 255);
 			$table->unsignedBigInteger('nguoi_tao');
+			$table->string('trang_thai', 5);
 			$table->string('file');
 			$table->string('slug', 255)->nullable()->unique();
+			// Foreign Keys
 			$table->foreign('nguoi_tao')->references('id')->on('users');
 			$table->timestamps();
 		});
-		// Nơi Nhận
-		Schema::create('cvdenvadi', function (Blueprint $table) {
+		// Công văn - Phòng ban
+		Schema::create('cv-pb', function (Blueprint $table) {
 			$table->bigIncrements('id');
 			$table->unsignedBigInteger('id_cong_van');
-			$table->unsignedBigInteger('id_co_quan')->nullable();
-			$table->unsignedBigInteger('id_phong_ban')->nullable();
-			$table->string('trang_thai', 5);
-			$table->timestamps();
+			$table->unsignedBigInteger('id_phong_ban');
+			// Foreign Keys
+			$table->foreign('id_cong_van')->references('id')->on('congvan');
+			$table->foreign('id_phong_ban')->references('id')->on('phongban');
+		});
+		// Công văn - Cơ quan
+		Schema::create('cv-cq', function (Blueprint $table) {
+			$table->bigIncrements(column: 'id');
+			$table->unsignedBigInteger('id_cong_van');
+			$table->unsignedBigInteger('id_co_quan');
+			// Foreign Keys
+			$table->foreign('id_cong_van')->references('id')->on('congvan');
+			$table->foreign('id_co_quan')->references('id')->on('coquan');
 		});
 		// 
 		Schema::create('lichsucongvan', function (Blueprint $table) {

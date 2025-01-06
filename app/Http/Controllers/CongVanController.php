@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Congvan;
+use App\Models\CongvanCQ;
+use App\Models\CongvanPB;
 use App\Models\Cvdenvadi;
 use Illuminate\Http\Request;
 use Inertia\Response;
@@ -28,10 +30,12 @@ class CongVanController extends Controller
 	{
 		$congvan = Congvan::with(['nguoidung', 'lichsu.nguoidung'])
 			->find($id);
-		$cvdenvadi = Cvdenvadi::where('id_cong_van', $id)->with(['coquan', 'phongban'])->distinct()->get()->toArray();
+		$coquan = CongvanCQ::where('id_cong_van', $id)->with('coquan')->get();
+		$phongban = CongvanPB::where('id_cong_van', $id)->with('phongban')->get();
 		return Inertia::render('ChiTietCongVan', [
 			'congvan' => $congvan,
-			'cvdenvadi' => $cvdenvadi
+			'coquan' => $coquan,
+			'phongban' => $phongban
 		]);
 	}
 
@@ -80,6 +84,7 @@ class CongVanController extends Controller
 			'tieu_de' => $request->tieude,
 			'mo_ta' => $request->mota,
 			'nguoi_tao' => auth()->user()->id,
+			'trang_thai' => $request->trangthai,
 			'file' => $file,
 		]);
 
@@ -91,48 +96,26 @@ class CongVanController extends Controller
 		$coquan = json_decode($request->coquan, associative: true); // Chuyển chuỗi JSON thành mảng
 		$phongban = json_decode($request->phongban, associative: true);
 		// Nếu id co quan là một mảng thì lặp qua từng phần tử
-		if (!empty($coquan) && !empty($phongban)) {
-			if (is_array($coquan) && is_array($phongban)) {
-				foreach ($coquan as $coquanId) {
-					foreach ($phongban as $phongbanId) {
-						Cvdenvadi::create([
-							'id_cong_van' => $congvan->id,
-							'id_co_quan' => $coquanId['value'],
-							'id_phong_ban' => $phongbanId['value'],
-							'trang_thai' => $request->trangthai,
-						]);
-					}
-				}
-			}
-		} else if (!empty($coquan)) {
+		if (!empty($coquan)) {
 			if (is_array($coquan)) {
 				foreach ($coquan as $coquanId) {
-					Cvdenvadi::create([
+					CongvanCQ::create([
 						'id_cong_van' => $congvan->id,
 						'id_co_quan' => $coquanId['value'],
-						'id_phong_ban' => null,
-						'trang_thai' => $request->trangthai,
 					]);
 				}
 			}
-		} else if (!empty($phongban)) {
+		}
+		// Nếu id phong ban là một mảng thì lặp qua từng phần tử
+		if (!empty($phongban)) {
 			if (is_array($phongban)) {
 				foreach ($phongban as $phongbanId) {
-					Cvdenvadi::create([
+					CongvanPB::create([
 						'id_cong_van' => $congvan->id,
-						'id_co_quan' => null,
 						'id_phong_ban' => $phongbanId['value'],
-						'trang_thai' => $request->trangthai,
 					]);
 				}
 			}
-		} else {
-			Cvdenvadi::create([
-				'id_cong_van' => $congvan->id,
-				'id_co_quan' => null,
-				'id_phong_ban' => null,
-				'trang_thai' => $request->trangthai,
-			]);
 		}
 		// 
 		$this->LichSuController->ThemLichSu($congvan->nguoi_tao, $congvan->id, 'Tạo mới công văn');
@@ -152,12 +135,14 @@ class CongVanController extends Controller
 	{
 		$coquan = $this->CoquanController->layTatCaCoQuan();
 		$phongban = $this->PhongBanController->layTatCaPhongBan();
-		$cvdenvadi = Cvdenvadi::where('id_cong_van', $id)->with(['coquan', 'phongban'])->distinct()->get()->toArray();
+		$cvCQ = CongvanCQ::where('id_cong_van', $id)->with('coquan')->get();
+		$cvPB = CongvanPB::where('id_cong_van', $id)->with('phongban')->get();
 		return Inertia::render('SuaCongVan', [
 			'cv' => $this->LayThongTinCongVan($id),
 			'coquan' => $coquan,
 			'phongban' => $phongban,
-			'cvdenvadi' => $cvdenvadi
+			'cvCQ' => $cvCQ,
+			'cvPB' => $cvPB
 		]);
 	}
 
@@ -175,6 +160,7 @@ class CongVanController extends Controller
 			'socongvan' => ['required', 'string'],
 			'tieude' => ['required', 'string', 'max: 255'],
 			'mota' => ['required', 'string', 'max: 255'],
+			'trangthai' => ['required', 'numeric'],
 			'file' => ['mimes:pdf'],
 		], [
 			'socongvan.required' => 'Không được bỏ trống số công văn.',
@@ -186,12 +172,14 @@ class CongVanController extends Controller
 			'mota.string' => 'Mô tả phải là một chuỗi.',
 			'mota.max' => 'Mô tả không được vượt quá 255 ký tự.',
 			'file.mimes' => 'File phải là định dạng pdf.',
+			'trangthai.required' => 'Không được bỏ trống trạng thái.',
 		]);
 
 		$congvan->update([
 			'so_cong_van' => $request->socongvan,
 			'tieu_de' => $request->tieude,
 			'mo_ta' => $request->mota,
+			'trang_thai' => $request->trangthai,
 		]);
 		// Nếu có file mới thì xử lý
 		if ($request->hasFile('file')) {
@@ -211,10 +199,10 @@ class CongVanController extends Controller
 			$newSlug = $congvan->id . '-' . Str::of($congvan->tieu_de)->slug('-');
 			$congvan->slug = $newSlug;
 			$congvan->save();
-
-			// Ghi lịch sử
 		}
-
+		// Gọi hàm cập nhật cơ quan & phòng ban
+		$this->capNhatCoQuanPhongBan($request->coquan, $request->phongban, $id);
+		// Ghi lịch sử
 		$this->LichSuController->ThemLichSu(auth()->user()->id, $congvan->id, 'Cập nhật công văn');
 		return redirect()->route('dashboard')->with('success', 'Cập nhật công văn thành công.');
 	}
@@ -225,6 +213,9 @@ class CongVanController extends Controller
 		if (Storage::disk('public')->delete($congvan->file)) {
 			// Xoá lịch sử
 			$this->LichSuController->XoaLichSu($congvan->id);
+			// Xoá cơ quan & phòng ban
+			CongvanCQ::where('id_cong_van', $id)->delete();
+			CongvanPB::where('id_cong_van', $id)->delete();
 			// Xoá công văn
 			$congvan->delete();
 			return redirect()->route('dashboard')->with('success', 'Xóa công văn thành công.');
@@ -240,5 +231,50 @@ class CongVanController extends Controller
 		return Inertia::render('themCongVan', [
 			'congvan' => $congvan,
 		]);
+	}
+
+	// Xử lý cập nhật cơ quan & phòng ban
+	public function capNhatCoQuanPhongBan($coquan, $phongban, $id)
+	{
+		// Xử lý dữ liệu
+		$coquan = json_decode($coquan, associative: true); // Chuyển chuỗi JSON thành mảng
+		$phongban = json_decode($phongban, associative: true);
+		// Nếu id co quan là một mảng thì lặp qua từng phần tử
+		if (is_array($coquan) && is_array($phongban)) {
+			CongvanCQ::where('id_cong_van', $id)->delete();
+			CongvanPB::where('id_cong_van', $id)->delete();
+			foreach ($coquan as $coquanId) {
+				foreach ($phongban as $phongbanId) {
+					CongvanCQ::updateOrCreate([
+						'id_cong_van' => $id,
+						'id_co_quan' => $coquanId['value'],
+					]);
+					CongvanPB::updateOrCreate([
+						'id_cong_van' => $id,
+						'id_phong_ban' => $phongbanId['value'],
+					]);
+				}
+			}
+		}
+		// Nếu id co quan là một mảng thì lặp qua từng phần tử
+		else if (is_array($coquan)) {
+			CongvanCQ::where('id_cong_van', $id)->delete();
+			foreach ($coquan as $coquanId) {
+				CongvanCQ::updateOrCreate([
+					'id_cong_van' => $id,
+					'id_co_quan' => $coquanId['value'],
+				]);
+			}
+		}
+		// Nếu id phong ban là một mảng thì lặp qua từng phần tử
+		else if (is_array($phongban)) {
+			CongvanPB::where('id_cong_van', $id)->delete();
+			foreach ($phongban as $phongbanId) {
+				CongvanPB::updateOrCreate([
+					'id_cong_van' => $id,
+					'id_phong_ban' => $phongbanId['value'],
+				]);
+			}
+		}
 	}
 }
