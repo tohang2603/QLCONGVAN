@@ -14,6 +14,7 @@ class Congvan extends Model
 		'tieu_de',
 		'mo_ta',
 		'nguoi_tao',
+		'trang_thai',
 		'file',
 	];
 
@@ -28,10 +29,14 @@ class Congvan extends Model
 	}
 	public function lichsu()
 	{
-    return $this->hasMany(LichSu::class, 'id_cong_van');
+		return $this->hasMany(LichSu::class, 'id_cong_van');
 	}
-	public function cvdenvadi()
-    {
-        return $this->belongsTo(Cvdenvadi::class, 'id_cong_van','id'); // Đã thêm relationship cvdenvadi
-    }
+	public function coquan()
+	{
+		return $this->belongsToMany(Coquan::class, 'cv-cq', 'id_cong_van', 'id_co_quan');
+	}
+	public function phongban()
+	{
+		return $this->belongsToMany(Phongban::class, 'cv-pb', 'id_cong_van', 'id_phong_ban');
+	}
 }

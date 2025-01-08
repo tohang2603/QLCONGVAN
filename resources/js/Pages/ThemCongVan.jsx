@@ -50,7 +50,7 @@ export default function ThemCongVan({ coquan, phongban }) {
         formData.append('tieude', values.tieude);
         formData.append('mota', values.mota);
         formData.append('file', selectedFile);
-        formData.append('trangthai', selectedOption?.value || ''); // Xử lý trường hợp null
+        formData.append('trangthai', selectedOption ? selectedOption.value : null);
         formData.append('coquan', JSON.stringify(selectedOptionCQ));
         formData.append('phongban', JSON.stringify(selectedOptionPB));
         router.post('/tao-cong-van', formData);
@@ -78,7 +78,9 @@ export default function ThemCongVan({ coquan, phongban }) {
                                         onChange={handleChange}
                                         className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
                                     />
-                                    {errors.socongvan && <p className="text-sm text-red-500">{errors.socongvan}</p>}
+                                    {errors && errors.socongvan && (
+                                        <p className="text-sm italic text-red-500">{errors.socongvan}</p>
+                                    )}
                                 </div>
                                 <div>
                                     <InputLabelV1 className="mb-1" value="Tiêu đề" />
@@ -89,7 +91,9 @@ export default function ThemCongVan({ coquan, phongban }) {
                                         onChange={handleChange}
                                         className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
                                     />
-                                    {errors.tieude && <p className="text-sm text-red-500">{errors.tieude}</p>}
+                                    {errors && errors.tieude && (
+                                        <p className="text-sm italic text-red-500">{errors.tieude}</p>
+                                    )}
                                 </div>
                                 <div>
                                     <InputLabelV1 className="mb-1" value="Mô tả" />
@@ -100,7 +104,9 @@ export default function ThemCongVan({ coquan, phongban }) {
                                         onChange={handleChange}
                                         className="w-full p-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
                                     />
-                                    {errors.mota && <p className="text-sm text-red-500">{errors.mota}</p>}
+                                    {errors && errors.mota && (
+                                        <p className="text-sm italic text-red-500">{errors.mota}</p>
+                                    )}
                                 </div>
                                 <div>
                                     <InputLabelV1 className="mb-1" value="Tệp" />
@@ -109,7 +115,9 @@ export default function ThemCongVan({ coquan, phongban }) {
                                         className="w-full file-input mt-1 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-600"
                                         onChange={(e) => setSelectedFile(e.target.files[0])}
                                     />
-                                    {errors.file && <p className="text-sm text-red-500">{errors.file}</p>}
+                                    {errors && errors.file && (
+                                        <p className="text-sm italic text-red-500">{errors.file}</p>
+                                    )}
                                 </div>
                                 <div>
                                     <InputLabelV1 className="mb-1" value="Trạng thái" />
@@ -119,7 +127,9 @@ export default function ThemCongVan({ coquan, phongban }) {
                                         isClearable
                                         className="rounded-lg focus:ring-2 focus:ring-blue-600"
                                     />
-                                    {errors.trangthai && <p className="text-sm text-red-500">{errors.trangthai}</p>}
+                                    {errors && errors.trangthai && (
+                                        <p className="text-sm italic text-red-500">{errors.trangthai}</p>
+                                    )}
                                 </div>
                                 <div>
                                     <InputLabelV1 className="mb-1" value="Cơ quan" />

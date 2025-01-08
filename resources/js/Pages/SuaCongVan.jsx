@@ -6,7 +6,7 @@ import { Head, router, usePage } from "@inertiajs/react";
 import { useState, useEffect } from "react";
 import Select from 'react-select';
 
-export default function SuaCongVan({ cv, coquan, phongban, cvdenvadi }) {
+export default function SuaCongVan({ cv, coquan, phongban, cvCQ, cvPB }) {
 	const { errors } = usePage().props;
 	const [values, setValues] = useState({
 		socongvan: cv.so_cong_van,
@@ -15,31 +15,10 @@ export default function SuaCongVan({ cv, coquan, phongban, cvdenvadi }) {
 	});
 	//
 	const [selectedFile, setSelectedFile] = useState(null);
-	const [selectedOption, setSelectedOption] = useState(cvdenvadi[0].trang_thai === '1' ? { value: '1', label: 'Công văn đến' } : { value: '2', label: 'Công văn đi' });
+	const [selectedOption, setSelectedOption] = useState(cv.trang_thai === '1' ? { value: '1', label: 'Gửi' } : { value: '2', label: 'Nhận' });
 	const [selectedOptionCQ, setSelectedOptionCQ] = useState([]);
 	const [selectedOptionPB, setSelectedOptionPB] = useState([]);
 	//
-	useEffect(() => {
-		const opCoquan = () => {
-			cvdenvadi.map((cq) => {
-				setSelectedOptionCQ((selectedOptionCQ) => [...selectedOptionCQ, { value: cq.coquan.id.toString(), label: cq.coquan.ten_co_quan }]);
-			});
-		}
-		const opPhongban = () => {
-			cvdenvadi.map((pb) => {
-				setSelectedOptionPB((selectedOptionPB) => [...selectedOptionPB, { value: pb.phongban.id.toString(), label: pb.phongban.ten_phong_ban }]);
-			})
-		};
-	}, [selectedOptionCQ, selectedOptionPB]);
-	const handleChange = (e) => {
-		const key = e.target.id;
-		const value = e.target.value;
-		setValues((values) => ({
-			...values,
-			[key]: value,
-		}));
-	};
-	console.log(selectedOptionCQ);
 	// Options select
 	const options = [
 		{ value: '1', label: 'Công văn đến' },
@@ -55,7 +34,30 @@ export default function SuaCongVan({ cv, coquan, phongban, cvdenvadi }) {
 		value: item.id.toString(),
 		label: item.ten_phong_ban
 	}));
-	// End options select
+	//
+	useEffect(() => {
+		if (cvCQ && cvCQ.length > 0) {
+			const defaultCQ = optionsCQ.filter(item =>
+				cvCQ.some(cq => cq.coquan && cq.coquan.id.toString() === item.value)
+			);
+			setSelectedOptionCQ(defaultCQ);
+		}
+		if (cvPB && cvPB.length > 0) {
+			const defaultPB = optionsPB.filter(item =>
+				cvPB.some(pb => pb.phongban && pb.phongban.id.toString() === item.value)
+			);
+			setSelectedOptionPB(defaultPB);
+		}
+	}, [JSON.stringify(cvPB), JSON.stringify(optionsPB), JSON.stringify(cvCQ), JSON.stringify(optionsCQ)]);
+	//
+	const handleChange = (e) => {
+		const key = e.target.id;
+		const value = e.target.value;
+		setValues((values) => ({
+			...values,
+			[key]: value,
+		}));
+	};
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -69,6 +71,8 @@ export default function SuaCongVan({ cv, coquan, phongban, cvdenvadi }) {
 		formData.append('trangthai', selectedOption.value);
 		formData.append('coquan', JSON.stringify(selectedOptionCQ));
 		formData.append('phongban', JSON.stringify(selectedOptionPB));
+		console.log(selectedOptionCQ);
+		console.log(selectedOptionPB);
 		router.post(`/cap-nhat-cong-van/${cv.id}`, formData);
 	};
 
@@ -135,10 +139,9 @@ export default function SuaCongVan({ cv, coquan, phongban, cvdenvadi }) {
 							<div>
 								<InputLabelV1 className="mb-1" value="Trạng thái" />
 								<Select
-									defaultValue={options.find(option => option.value === cvdenvadi[0].trang_thai)}
+									defaultValue={options.find(option => option.value === cv.trang_thai)}
 									onChange={setSelectedOption}
 									options={options}
-									isClearable
 									className="rounded-lg focus:ring-2 focus:ring-blue-600"
 								/>
 								{errors && errors.trangthai && (
@@ -148,7 +151,7 @@ export default function SuaCongVan({ cv, coquan, phongban, cvdenvadi }) {
 							<div>
 								<InputLabelV1 className="mb-1" value="Cơ quan" />
 								<Select
-									defaultValue={optionsCQ.filter(item => cvdenvadi.every(cq => cq.coquan) && cvdenvadi.map(cq => cq.coquan.id.toString()).includes(item.value))}
+									value={selectedOptionCQ}
 									onChange={setSelectedOptionCQ}
 									options={optionsCQ}
 									isMulti
@@ -158,8 +161,8 @@ export default function SuaCongVan({ cv, coquan, phongban, cvdenvadi }) {
 							<div>
 								<InputLabelV1 className="mb-1" value="Phòng ban" />
 								<Select
-									defaultValue={optionsPB.filter(item => cvdenvadi.every(pb => pb.phongban) && cvdenvadi.map(pb => pb.phongban.id.toString()).includes(item.value))}
-									onChange={setSelectedOptionPB}
+									value={selectedOptionPB}
+									onChange={(selected) => setSelectedOptionPB(selected)}
 									options={optionsPB}
 									isMulti
 									className="rounded-lg focus:ring-2 focus:ring-blue-600"
