@@ -35,7 +35,7 @@ Route::middleware(['auth', 'actived', 'checkrole'])->group(function () {
 	Route::post('/tao-phong-ban', [PhongBanController::class, 'taoPhongBan'])->name('tao-phong-ban');
 	Route::get('/sua-phong-ban/{id}', [PhongBanController::class, 'suaPhongBan'])->name('sua-phong-ban');
 	Route::patch('/cap-nhat-phong-ban/{id}', [PhongBanController::class, 'capNhatPhongBan'])->name('cap-nhat-phong-ban');
-	Route::delete('/xoa-phong-ban/{id}', [PhongBanController::class, 'xoaPhongBan'])->name('xoa-phong-ban');
+	Route::delete('/xoa-phong-ban/{id}', [PhongBanController::class, 'xoaPhongBan'])->middleware(['admin'])->name('xoa-phong-ban');
 
 	//thêm cơ quan
 	Route::get('/coquan', [CoQuanController::class, 'giaoDienCoQuan'])->name('coquan');
@@ -43,7 +43,7 @@ Route::middleware(['auth', 'actived', 'checkrole'])->group(function () {
 	Route::post('/tao-co-quan', [CoQuanController::class, 'taoCoQuan'])->name('tao-co-quan');
 	Route::get('/sua-co-quan/{id}', [CoQuanController::class, 'suaCoQuan'])->name('sua-co-quan');
 	Route::patch('/cap-nhat-co-quan/{id}', [CoQuanController::class, 'capNhatCoQuan'])->name('cap-nhat-co-quan');
-	Route::delete('/xoa-co-quan/{id}', [CoQuanController::class, 'xoaCoQuan'])->name('xoa-co-quan');
+	Route::delete('/xoa-co-quan/{id}', [CoQuanController::class, 'xoaCoQuan'])->middleware(['admin'])->name('xoa-co-quan');
 
 	//phantrang
 	Route::post('/phantrang',[CongVanController::class,'phanTrang'])->name('phan-trang');
