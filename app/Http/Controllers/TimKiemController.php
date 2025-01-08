@@ -6,6 +6,8 @@ use App\Models\Congvan;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Storage;
+use Carbon\Carbon;
+
 
 class TimKiemController extends Controller
 {
@@ -18,56 +20,62 @@ class TimKiemController extends Controller
 
 	public function giaoDienTimKiem(Request $request)
 	{
-		// Validate the search input
-		$request->validate([
-			'search' => ['nullable', 'string', 'max:255'],
-		], [
-			'search.string' => 'Từ khóa tìm kiếm phải là chuỗi.',
-			'search.max' => 'Từ khóa không được vượt quá 255 ký tự.',
-		]);
+		$search = $request->input('search');//lay tu khoa tim kiem tu yeu cau
+        $startDate = $request->input('startDate');// lay ngay bat dau
+        $endDate = $request->input('endDate'); // lay ngay ket thuc
 
-		// Get the search term from the request
-		$search = $request->input('search');
-
-		// Query the Congvan model
-		$results = Congvan::query()
-			->when($search, function ($query, $search) {
-				$query->where('so_cong_van', 'like', "%{$search}%")
-					->orWhere('tieu_de', 'like', "%{$search}%")
-					->orWhere('mo_ta', 'like', "%{$search}%");
-			})
-			->orderBy('created_at', 'desc')
-			->get();
-
-		// Return results to the React component
-		return Inertia::render('TimKiem', [
-			'cv' => $results,
-			'search' => $search, // Pass the search term to the frontend if needed
-		]);
-	}
+        $results = Congvan::query() // tao dieu kien tìm kiem voi so cv, tieu de, mota
+            ->when($search, function ($query, $search) {
+                $query->where(function ($q) use ($search) {
+                    $q->where('so_cong_van', 'like', "%{$search}%")
+                        ->orWhere('tieu_de', 'like', "%{$search}%")
+                        ->orWhere('mo_ta', 'like', "%{$search}%");
+                });
+            })
+            ->when($startDate && $endDate, function ($query, $startDate, $endDate) {
+                $query->whereBetween('created_at', [Carbon::parse($startDate)->startOfDay(), Carbon::parse($endDate)->endOfDay()]);
+            })
+            ->orderBy('created_at', 'desc')
+            ->get();
+        return Inertia::render('TimKiem', [
+            'cv' => $results,
+            'search' => $search,
+            'startDate' => $startDate,
+            'endDate' => $endDate,
+        ]);
+    }
 
 	public function timKiemCongVan(Request $request)
 	{
-		// Lấy giá trị của query string 'query'
 		$search = $request->query('search');
-		// chuyển đổi search thành chuỗi
-		$search = (string) $search;
-		// Query the Congvan model
+		$startDate = $request->query('startDate');
+		$endDate = $request->query('endDate');
+	
 		$results = Congvan::query()
-			->when($search, function ($query, $search) {
-				$query->where('so_cong_van', 'like', "%{$search}%")
-					->orWhere('tieu_de', 'like', "%{$search}%")
-					->orWhere('mo_ta', 'like', "%{$search}%");
+			->when($search, function ($query) use ($search) {
+				$query->where(function ($q) use ($search) {
+					$q->where('so_cong_van', 'like', "%{$search}%")
+						->orWhere('tieu_de', 'like', "%{$search}%")
+						->orWhere('mo_ta', 'like', "%{$search}%");
+				});
+			})
+			->when($startDate && $endDate, function ($query) use ($startDate, $endDate) {
+				$query->whereBetween('created_at', [
+					Carbon::parse($startDate)->startOfDay(),
+					Carbon::parse($endDate)->endOfDay()
+				]);
 			})
 			->orderBy('created_at', 'desc')
 			->get()->map(function ($congvan) {
 				$congvan->file = Storage::url($congvan->file);
 				return $congvan;
 			});
-		// Return results to the React component
+	
 		return Inertia::render('TimKiem', [
 			'cv' => $results,
-			'search' => $search, // Pass the search term to the frontend if needed
+			'search' => $search,
+			'startDate' => $startDate,
+			'endDate' => $endDate,
 		]);
 	}
 }

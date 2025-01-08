@@ -17,10 +17,10 @@ export default function ListCongVan({ className = '', cv, index }) {
 				<p>{cv.so_cong_van}</p>
 			</div>
 			<div className='grid content-center justify-items-center'>
-				<Link href={`/chi-tiet-cong-van/${cv.id}`} className='hover:text-red-500 text-green-500'>{cv.tieu_de}</Link>
+				<Link href={`/chi-tiet-cong-van/${cv.id}`} className=' hover:text-red-500 line-clamp-2 mr-6 text-green-400'>{cv.tieu_de}</Link>
 			</div>
 			<div className='grid content-center justify-items-center'>
-				<p>{cv.mo_ta}</p>
+				<p className="line-clamp-2 leading-relaxed ml-6" >{cv.mo_ta}</p>
 			</div>
 			<div className='grid content-center justify-items-center'>
 				<p>{cv.nguoidung.name}</p>
@@ -32,7 +32,7 @@ export default function ListCongVan({ className = '', cv, index }) {
 				<ButtonIcon onClick={() => { const fileUrl = cv.file; window.open(fileUrl, '_blank') }} className='hover:bg-slate-300'>
 					<ion-icon name="eye-outline"></ion-icon>
 				</ButtonIcon>
-				{role && (
+				{role && ( //neu nguoi dung co quuyen role, nut xoa duoc hien thi
 					<ButtonIcon onClick={() => { document.getElementById(`btn_delete_${index}`).showModal() }} className='hover:bg-red-500 '>
 						<ion-icon name='trash-outline'></ion-icon>
 					</ButtonIcon>

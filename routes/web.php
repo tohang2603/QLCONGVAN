@@ -6,7 +6,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\QuanlyController;
 use App\Http\Controllers\PhongBanController;
 use App\Http\Controllers\CoQuanController;
-use App\Http\Controllers\PhanQuyenController;
 use App\Http\Controllers\TrangChuController;
 use Illuminate\Support\Facades\Route;
 // Home
@@ -48,28 +47,19 @@ Route::middleware(['auth', 'actived', 'checkrole'])->group(function () {
 
 	//phantrang
 	Route::post('/phantrang',[CongVanController::class,'phanTrang'])->name('phan-trang');
-	//them phan quyen
-	Route::get('/phanquyen', [PhanQuyenController::class, 'giaoDienPhanQuyen'])->middleware(['admin'])->name('phanquyen');
-	Route::get('/them-phan-quyen', [PhanQuyenController::class, 'themPhanQuyen'])->name('them-phan-quyen');
-	Route::post('/tao-phan-quyen', [PhanQuyenController::class, 'taoPhanQuyen'])->name('tao-phan-quyen');
-	Route::get('/sua-phan-quyen/{id}', [PhanQuyenController::class, 'suaPhanQuyen'])->name('sua-phan-quyen');
-	Route::patch('/cap-nhat-phan-quyen/{id}', [PhanQuyenController::class, 'capNhatPhanQuyen'])->name('cap-nhat-phan-quyen');
-	Route::delete('/xoa-phan-quyen/{id}', [PhanQuyenController::class, 'xoaPhanQuyen'])->name('xoa-phan-quyen');
-	//trang chu
+	
 	Route::get('/dashboard', [CongVanController::class, 'phanTrang'])->name('dashboard');
 	Route::get('/trangchu', [TrangChuController::class, 'giaoDienTrangChu'])->name('trangchu');
 	// Nhân sự
+	
 	Route::get('/nhansu', [QuanlyController::class, 'nhanSu'])->middleware(['admin'])->name('nhansu');
 	Route::put('/kich-hoat/{id}', [QuanlyController::class, 'kichHoat'])->middleware(['admin'])->name('kich-hoat');
 });
 
-// dashboard
-Route::get('/dashboard', [PageController::class, 'dashBoard'])->middleware(['auth', 'actived', 'checkrole'])->name('dashboard');
-Route::get('/actived', [PageController::class, 'activedPage'])->middleware(['auth'])->name('actived');
-Route::get('/none-role', [PageController::class, 'noneRole'])->middleware(['auth'])->name('none-role');
-
-// Cơ quan
-
+	// dashboard
+	Route::get('/dashboard', [PageController::class, 'dashBoard'])->middleware(['auth', 'actived', 'checkrole'])->name('dashboard');
+	Route::get('/actived', [PageController::class, 'activedPage'])->middleware(['auth'])->name('actived');
+	Route::get('/none-role', [PageController::class, 'noneRole'])->middleware(['auth'])->name('none-role');
 
 Route::middleware('auth')->group(function () {
 	Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -77,9 +67,5 @@ Route::middleware('auth')->group(function () {
 	Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
 });
-
-
-
-
 
 require __DIR__ . '/auth.php';

@@ -27,12 +27,12 @@ class CongVanController extends Controller
 	public function chiTietCongVan(Request $request, $id)
 	{
 		$congvan = Congvan::with(['nguoidung', 'lichsu.nguoidung'])
-		->find($id);
-		$cvdenvadi = Cvdenvadi::where('id_cong_van',$id)->with(['coquan','phongban'])->get();
-	return Inertia::render('ChiTietCongVan', [
-		'congvan' => $congvan,
-		'cvdenvadi' => $cvdenvadi
-	]);
+			->find($id);
+		$cvdenvadi = Cvdenvadi::where('id_cong_van', $id)->with(['coquan', 'phongban'])->distinct()->get()->toArray();
+		return Inertia::render('ChiTietCongVan', [
+			'congvan' => $congvan,
+			'cvdenvadi' => $cvdenvadi
+		]);
 	}
 
 	public function themCongVan(Request $request): Response
@@ -82,12 +82,12 @@ class CongVanController extends Controller
 			'nguoi_tao' => auth()->user()->id,
 			'file' => $file,
 		]);
-
+		// tao slug duy nhat cho cong văn
 		$newSlug = $congvan->id . '-' . Str::of($congvan->tieu_de)->slug('-');
 		$congvan->slug = $newSlug;
 		$congvan->save();
 
-		// Xử lý dữ liệu
+		// Xử lý dữ liệu 
 		$coquan = json_decode($request->coquan, associative: true); // Chuyển chuỗi JSON thành mảng
 		$phongban = json_decode($request->phongban, associative: true);
 		// Nếu id co quan là một mảng thì lặp qua từng phần tử
@@ -150,8 +150,14 @@ class CongVanController extends Controller
 	//trả về giao diện
 	public function suaCongVan($id): Response
 	{
+		$coquan = $this->CoquanController->layTatCaCoQuan();
+		$phongban = $this->PhongBanController->layTatCaPhongBan();
+		$cvdenvadi = Cvdenvadi::where('id_cong_van', $id)->with(['coquan', 'phongban'])->distinct()->get()->toArray();
 		return Inertia::render('SuaCongVan', [
 			'cv' => $this->LayThongTinCongVan($id),
+			'coquan' => $coquan,
+			'phongban' => $phongban,
+			'cvdenvadi' => $cvdenvadi
 		]);
 	}
 
@@ -223,6 +229,6 @@ class CongVanController extends Controller
 			$congvan->delete();
 			return redirect()->route('dashboard')->with('success', 'Xóa công văn thành công.');
 		}
-		return redirect()->route('dashboard')->with('error', 'Xóa công văn không thành công.');
-	}
+		return redirect()->route('dashboard')->with('error', 'Xóa công văn không thành công.');	
+    }
 }

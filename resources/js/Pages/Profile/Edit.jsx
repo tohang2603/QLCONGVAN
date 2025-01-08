@@ -15,22 +15,22 @@ export default function Edit({ mustVerifyEmail, status }) {
         >
             <Head title="Tài khoản" />
 
-            <div className="py-12 bg-gradient-to-r from-blue-400 to-blue-200">
-                <div className="mx-auto max-w-7xl space-y-6 sm:px-6 lg:px-8">
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
+            <div className="py-12 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-blue-300 via-blue-200 to-blue-100">
+                <div className="mx-auto max-w-md md:max-w-2xl lg:max-w-4xl space-y-8 md:space-y-12">
+                    <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
                         <UpdateProfileInformationForm
                             mustVerifyEmail={mustVerifyEmail}
                             status={status}
-                            className="max-w-xl"
+                            className="w-full" 
                         />
                     </div>
 
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                        <UpdatePasswordForm className="max-w-xl" />
+                    <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+                        <UpdatePasswordForm className="w-full" />
                     </div>
 
-                    <div className="bg-white p-4 shadow sm:rounded-lg sm:p-8">
-                        <DeleteUserForm className="max-w-xl" />
+                    <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-200">
+                        <DeleteUserForm className="w-full" />
                     </div>
                 </div>
             </div>

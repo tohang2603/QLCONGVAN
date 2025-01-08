@@ -3,7 +3,7 @@ import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout';
 import { Head, Link, usePage } from '@inertiajs/react';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
-import ListCoQuan from '@/Components/ListCoQuan';
+import ListCoQuan from '@/Components/listCoQuan';
 
 export default function CoQuan({ dscoquan }) {
     // console.log(dscoquan) //trave đúng dữ liệu mong muốn hay không

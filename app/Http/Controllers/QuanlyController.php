@@ -31,8 +31,8 @@ class QuanlyController extends Controller
 		$user = User::find($id);
 		if ($user) {
 			$user->update(['actived' => 'true']);
-			return redirect()->route('dashboard')->with('success', 'Kích hoạt thành công.');
+			return redirect()->route('kich-hoat/{id}')->with('success', 'Kích hoạt thành công.');
 		}
-		return redirect()->route('dashboard')->with('error', 'Kích hoạt thất bại.');
+		return redirect()->route('kich-hoat/{id}')->with('error', 'Kích hoạt thất bại.');
 	}
 }

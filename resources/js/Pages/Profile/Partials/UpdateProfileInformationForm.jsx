@@ -11,7 +11,6 @@ export default function UpdateProfileInformation({
     className = '',
 }) {
     const user = usePage().props.auth.user;
-
     const { data, setData, patch, errors, processing, recentlySuccessful } =
         useForm({
             name: user.name,
@@ -29,12 +28,12 @@ export default function UpdateProfileInformation({
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">
-                    Thông tin cá nhân
+                <h2 className="text-2xl font-normal text-gray-900 text-center">
+                    THÔNG TIN CÁ NHÂN
                 </h2>
             </header>
 
-            <form onSubmit={submit} className="mt-6 space-y-6">
+            <form onSubmit={submit} className="mt-6 space-y-6 ml-8 mr-8">
                 <div>
                     <InputLabel htmlFor="name" value="Họ và tên" />
 
@@ -117,21 +116,21 @@ export default function UpdateProfileInformation({
                     </div>
                 )}
 
-                <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
-
-                    <Transition
-                        show={recentlySuccessful}
-                        enter="transition ease-in-out"
-                        enterFrom="opacity-0"
-                        leave="transition ease-in-out"
-                        leaveTo="opacity-0"
-                    >
-                        <p className="text-sm text-gray-600">
-                            Saved.
-                        </p>
-                    </Transition>
-                </div>
+                    <div className="flex justify-end items-center gap-4">
+                        <Transition
+                            show={recentlySuccessful}
+                            enter="transition ease-in-out"
+                            enterFrom="opacity-0"
+                            leave="transition ease-in-out"
+                            leaveTo="opacity-0"
+                            className="order-1" // Đặt thông báo "Saved" sau nút "Save"
+                        >
+                            <p className="text-sm text-gray-600">
+                                Saved.
+                            </p>
+                        </Transition>
+                        <PrimaryButton disabled={processing} className="order-2">Save</PrimaryButton> {/* Đặt nút "Save" lên trước */}
+                    </div>
             </form>
         </section>
     );

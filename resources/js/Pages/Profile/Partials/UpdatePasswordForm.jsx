@@ -47,12 +47,12 @@ export default function UpdatePasswordForm({ className = '' }) {
     return (
         <section className={className}>
             <header>
-                <h2 className="text-lg font-medium text-gray-900">
-                    Thay đổi mật khẩu
+                <h2 className="text-xl text-center font-normal text-gray-900">
+                    THAY ĐỔI MẬT KHẨU
                 </h2>
             </header>
 
-            <form onSubmit={updatePassword} className="mt-6 space-y-6">
+            <form onSubmit={updatePassword} className="mt-6 space-y-6 ml-8 mr-8">
                 <div>
                     <InputLabel
                         htmlFor="current_password"
@@ -116,15 +116,16 @@ export default function UpdatePasswordForm({ className = '' }) {
                     />
                 </div>
 
-                <div className="flex items-center gap-4">
-                    <PrimaryButton disabled={processing}>Lưu</PrimaryButton>
+                <div className="flex justify-end items-center gap-4">
+                    <PrimaryButton disabled={processing}>Save</PrimaryButton>
 
                     <Transition
                         show={recentlySuccessful}
                         enter="transition ease-in-out"
-                        enterFrom="opacity-0"
-                        leave="transition ease-in-out"
-                        leaveTo="opacity-0"
+                            enterFrom="opacity-0"
+                            leave="transition ease-in-out"
+                            leaveTo="opacity-0"
+                            className="order-1" 
                     >
                         <p className="text-sm text-gray-600">
                             Saved.

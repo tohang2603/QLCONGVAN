@@ -46,15 +46,15 @@ export default function DeleteUserForm({ className = '' }) {
     };
 
     return (
-        <section className={`space-y-6 ${className}`}>
+        <section className={`space-y-6 text-center ${className}`}>
             <header>
                 <h2 className="text-lg font-medium text-gray-900">
-                    Xóa tài khoản
+                    XÓA TÀI KHOẢN
                 </h2>
             </header>
 
             <DangerButton onClick={confirmUserDeletion}>
-                Xóa
+                DELETE
             </DangerButton>
 
             <Modal show={confirmingUserDeletion} onClose={closeModal}>

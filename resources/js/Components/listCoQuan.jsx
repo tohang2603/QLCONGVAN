@@ -19,7 +19,7 @@ export default function ListCoQuan({ className = '', cq, index }) {
 			<div className='grid content-center justify-items-center'>
 				<p>{cq.so_dt}</p>
 			</div>
-			<div className='grid grid-cols-2 content-center justify-items-center gap-2'>
+			<div className='grid grid-cols-2 content-center justify-items-center'>
 				<ButtonIcon onClick={()=>router.get(`/sua-co-quan/${cq.id}`)} className='hover:bg-green-500'>
 					<ion-icon name='create-outline'></ion-icon>
 				</ButtonIcon>

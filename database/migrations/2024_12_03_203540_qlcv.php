@@ -35,7 +35,7 @@ return new class extends Migration {
 			$table->string('mo_ta', 255);
 			$table->unsignedBigInteger('nguoi_tao');
 			$table->string('file');
-			$table->string('slug', 255)->nullable()->unique();
+			$table->string('slug', 255)->nullable()->unique(); //: Chuỗi duy nhất (dùng để định danh công văn).
 			$table->foreign('nguoi_tao')->references('id')->on('users');
 			$table->timestamps();
 		});
